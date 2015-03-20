@@ -18,12 +18,8 @@
   <title>TwentyKnots SUP- ja Purjelautailuelämyksiä</title>
   <!-- Please don't add "maximum-scale=1" here. It's bad for accessibility. -->
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content="TwentyKnots tarjoaa purjelautailun alkeiskursseja, vuokrausta, ja kursseja ryhmille.">
-   <meta name="keywords" content="purjelautailu, tuulisurffaus, twentyknots, Helsinki, Espoo, Kirkkonummi, pääkaupunkiseutu, windsurfing, alkeiskurssi, kurssit, retket" />
-  <meta name="Author" content="Joel Mikkonen">
 
   <link rel="stylesheet" href="main.css">
-
   
 
   <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
@@ -36,7 +32,7 @@
   <![endif]-->
   
 </head>
-<img class="bg purjelauta" src="images/purjelauta3.jpg" alt="purjelautailun alkeiskurssi">
+<img class="bg ryhmat" src="images/bg_ryhmat.jpg" alt="yrityksen tiimipäivä purjelautailun ja sup-melonnan parissa.">
 <body> 
 
             <div class="sup-main main-navigation white">
@@ -45,7 +41,7 @@
                         <li class="closed">
                                 <img class="menu_logo" src="images/mobilelogos2015/activitylogo.png">
                                 <img class="dots_logo" src="images/mobilelogos2015/dotslogo.png">
-                                <h4 class="active">elämykset</h4>
+                                <h4>elämykset</h4>
                                 <ul class="submenu">
                                     <li><a class="page" href="purjelautailu.html"><h4>purjelautailu</h4></a></li>
                                     <li><a class="page" id="sup" href="sup.html"><h4>sup-melonta</h4></a></li>
@@ -56,7 +52,7 @@
                         </li>
                         <li>
                           <img class="menu_logo" src="images/mobilelogos2015/peoplelogo.png">
-                          <a href="ryhmat.html"><h4>Ryhmät</h4></a>
+                          <a href="ryhmat.html"><h4 class="active">Ryhmät</h4></a>
                         </li>
                         <li class="closed">
                                 <img class="menu_logo sijainti" src="images/mobilelogos2015/sijaintilogo.png">
@@ -98,7 +94,7 @@
                           <ul class="submenu">
                                  <li><a href="helsinki.html"><h4>helsinki</h4></a></li>
                                  <li><a href="kirkkonummi.html"><h4>kirkkonummi</h4></a></li>
-                                 <li><a href="naantali.html"><h4>naantali</h4></a></li>
+                                <li><a href="naantali.html"><h4>naantali</h4></a></li>
                           </ul>
 
                       </li>
@@ -106,78 +102,100 @@
                       <li class="clear last"><a href="twentyknots.html"><h4>TwentyKnots</h4></a></li>
                   </ul>
             </div>
-            <div class="sup page_title"></div>
-             <div class="sub-navigation">
-                        <h1 class="largeOnDesktop">PURJELAUTAILU</h1>
+            <div class="sup page_title white"></div>
+            
+            <div class="sub-navigation">
+                        <h1 class="semilargeOnDesktop center">YRITYKSET & RYHMÄT</h1>
                         <ul>
-                          <li class="kurssit">
-                            <img class="menu_logo" src="images/mobilelogos2015/peoplelogo.png">
-                            <h4 class="largeOnDesktop">kurssit</h4>
-                          </li>
-                          <li class="vuokraus">
-                            <img class="menu_logo" src="images/mobilelogos2015/sijaintilogo.png">
-                            <h4 class="largeOnDesktop">välinevuokraus</h4>
-                          </li>
-                           <li class="purjelautailu">
+                          <li class="tarjonta">
                             <img class="menu_logo" src="images/mobilelogos2015/infologo.png">
-                            <h4 class="largeOnDesktop">purjelautailu infoa</h4>
+                            <h4>Tarjontamme</h4>
                           </li>
+                          <li class="esimerkit">
+                            <img class="menu_logo" src="images/mobilelogos2015/peoplelogo.png">
+                            <h4>Esim. tapahtumia</h4>
+                          </li>
+                          <li class="tarjous">
+                            <img class="menu_logo" src="images/mobilelogos2015/sijaintilogo.png">
+                            <h4>Pyydä tarjous</h4>
+                          </li>
+                          
                         </ul>
-                         
                         <img class="arrow_logo sup" src="images/mobilelogos2015/arrowdownlogobw.png">
             </div>
-            <div class="content-wrapper content-page">
-                <img class="down_logo full" src="images/mobilelogos2015/arrowdownlogowhite.png">
-                        
-                        <h2 id="kurssit-anchor">PURJELAUTAILUN ALKEISKURSSI</h2>
-                        <P>Järjestämme purjelautailun alkeiskursseja viikottain Helsingissä. Ilmoittaudu mukaan ja tule ottamaan uusi laji haltuun! Purjelautailukurssilla (n. 3h) opitaan purjelautailun perusteet; purjeen nosto ja lasku, liikkeellelähtö, käännökset sekä käydään läpi turvallisuusohjeet. Kurssin hintaan sisältyvät kaikki tarvittavat varusteet (myös märkäpuku) sekä yksi 2 tunnin purjelautavuokraus kaudelle 2014.</P>
-                        <div class="contentimg-container">
-                              <img src="images/purjelauta/purjelautacontent1.jpg" alt="purjelautailu opetusta">
-                              <img src="images/purjelauta/purjelautacontent2.jpg" alt="purjelautailun perusteita maalla">
-                              <img src="images/purjelauta/purjelautacontent3.jpg" alt="purjelautailu">
-                        </div>
-                        <div class="course-wrapper-container">
+           
+          
+            <div id="tarjonta-anchor" class="content-wrapper content-page">
+                        <img class="down_logo full" src="images/mobilelogos2015/arrowdownlogowhite.png">
+                        <h2>YRITYKSET & RYHMÄT</h2>
+                        <P class="next_to_img">TwentyKnots on elämyspalveluyritys, joka tarjoaa uusia kokemuksia luonnon ja veden äärellä. Uskomme siihen, että yhdessä uuden oppimisella ja tarjoamalla jokaiselle jotakin extreme-lajeista rauhoittumiseen ja tietoiseen läsnäoloon luodaan hyvää oloa koko porukalle. Järjestämme toiminnallisia tiimipäiviä, kursseja ja tapahtumia yrityksille pienistä tempauksista suurempiin kokonaisuuksiin. </P>
+                        <img class="next_to_text" src="images/bg_supyoga.jpg" alt="sup-yogaa yritysryhmälle"> 
+                        <ul class="content-list">
+                          <h3>Esimerkki tilaisuuksia:</h3>
+                          <li>Tiimipäivät</li>
+                          <li>Yksityiskurssit</li>
+                          <li>Tyhy- ja tykypäivät</li>
+                          <li>Polttarit ja merkkipäivät</li>
+                          <li>Asiakastilaisuudet</li>
+                        </ul>
+                        <ul class="content-list">
+                          <h3>Lajitarjontamme:</h3>
+                          <li>Purjelautailu</li>
+                          <li>SUP-melonta</li>
+                          <li>SUP-Yoga</li>
+                          <li>Mindfulness ja meditaatio</li>
+                          <li>Bodyweight treenit</li>
+                        </ul>
+                        <ul class="content-list">
+                          <h3>Järjestämme myös:</h3>
+                          <li>Sauna- ja suihkutilat</li>
+                          <li>Eväät retkille</li>
+                          <li>Ruokatarjoilut ja ravintolapalvelut</li>
+                          <li>Kokous- ja majoitustilat</li>
+                          <li>Musiikkia</li>
+                          <li>Video- ja valokuvauspalvelun</li>
+                        </ul>
+                      <div class="contentimg-container">
+                              <img src="images/supalkeiskurssi-1.jpg" alt="sup-melontaa yrityksille">
+                              <img src="images/supalkeiskurssi-2.jpg" alt="sup & breakfast retki">
+                              <img src="images/supalkeiskurssi-3.jpg" alt="tiimipäivä sup-melonnan parissa">
+                      </div>
+                    <h2 id="esimerkit-anchor">ESIMERKKI TAPAHTUMIA</h2>
+                    <P>Heips! Tuomme teille pian lisää sisältöä :) <br><br>
+                    Ideoimme mielellään kanssanne tapahtumaa puhelimitse tai sähköpostitse.
+                    </P>
+                    <h2 id="tarjous-anchor">PYYDÄ TARJOUS</h2>
+                    <div class="course-wrapper-container">
                               <div class="course-wrapper left">
-                                    <p><span>Mitä tarvitsen?</span><br>
-                                    Pyyhe, juomapullo ja uima-asu märkäpuvun alle. Märkäpuku sisältyy kurssin hintaan.</p>
-                                    <p><span>Kesto:</span>
-                                    3 tuntia</p>
-                                    <p><span>Hinta:</span>
-                                    120€/hlö   (sis. kurssin lisäksi yhden 2 tunnin purjelautavuokrauksen kaudelle 2014)</p> 
-                                    <p><span>Maksu:</span>
-                                    Kurssimaksu hoidetaan paikan päällä. Meillä käyvät sekä kortti- että käteismaksut. (VISA, MasterCard, American Express, JCB)</p>
-                                    <p><span>Muuta huomioitavaa:</span>
-                                    Kursseillamme on säävaraus. Ilmoitamme edeltävänä päivänä mikäli kurssi joudutaan perumaan.</p>      
+                                    <p><span>1) Soita meille: 044 7688464</span><br><br>
+                                        TwentyKnotsin Joel tai Maria suunnittelee yhdessä kanssanne hauskan tapahtuman!  
+                                    </p>
+                                    <p><span>2) Lähetä sähköpostia: info@twentyknots.fi</span><br><br>
+                                        Pyrimme olemaan vikkeliä ja vastaamaan viestiisi viimeistään saman päivän aikana.<br><br>
+                                        Kerro meille toiveistasi, ryhmän koosta, tapahtuman sijainnista, lajeista sekä tapahtuman luonteesta niin ehdotamme teille hauskoja vaihtoehtoja! 
+                                    </p>     
                               </div>
                               <div class="course-wrapper right">
-                                    <p><span>Ilmoittautuminen ja tulevat kurssit:</span><br><br>
-                                    Kurssille ilmoittaudutaan varausjärjestelmästämme:</p>
-                                    <a class="varauslinkki" target="_blank" href="http://www.varaaheti.fi/twentyknots/">www.varaaheti.fi/twentyknots</a>
-                                     <p><span>Missä:</span></p>
-                                    <a class="varauslinkki" href="helsinki.html">TwentyKnots Helsinki toimipisteellä</a>
+                                    <p><span>Joel</span><br><br>
+                                    </p>
+                                    <img class="henkilokuva" src="images/joel.jpg" alt="Twentyknotsin Joel">
+
+                                    <p><span>Maria</span><br><br>
+                                    </p>
+                                    <img class="henkilokuva" src="images/maria.jpg" alt="Twentyknotsin Maria">
+                                     
                               </div>
                         </div>
-                        <h2 id="vuokraus-anchor">VÄLINEVUOKRAUS</h2>
-                        <P>TwentyKnots Helsinki pisteeltämme on alkeet osaavien purjelautailijoiden mahdollista vuokrata purjelautailu välineitä (lauta, riki (purje), märkäpuku ja pelastusliivit).</P>
-                        <a class="varauslinkki" target="_blank" href="http://www.varaaheti.fi/twentyknots/">www.varaaheti.fi/twentyknots</a>
-                        <div class="course-wrapper-container">
-                              <div class="course-wrapper left">
-                                    <p><span>Vuokraushinnat:</span><small>(sis. alv.)</small><br><br>
-                                    2 tuntia: 45€<br>
-                                    lisätunnit: 15€
-                                    </p>
-                                    <p><span>Sarjakortit:</span><small>(Sarjakortin käyttökerta on 2 tuntia. Kortit käyvät kaikissa Twentyknots pisteissä.)</small><br><br>
-                                    5-kerran kortti: 170€<br>
-                                    10-kerran kortti: 280€
-                                    </p>
-                                    <p><span>Kauden 2015 TwentyKnots-kausikortti:</span> 450€<br><br>
-                                    TwentyKnots kausikortti sisältää purjelautojen ja SUP-lautojen vuokraukset kaudelle 2014. Kausikortilla voit varata välineet varausjärjestelmästämme kerrallaan 2 tuntia per päivä. Päivän tilanteen mukaan on mahdollista varata lauta pidemmäksi aikaa. Tästä sovitaan puhelimitse aina erikseen. Kausikorttilaiset pääsevät myös retkillemme ja kursseillemme erikoishintaan.
-                                    </p>    
-                              </div>
-                        </div>
-                        <h2 id="purjelautailu-anchor">PURJELAUTAILU INFOA</h2>
-                        <P>Heips! Lisää sisältöä on tulossa pian.</P>
-                      
+                        
+            </div>
+</body>
+</html>
 
 
 
+
+
+
+
+
+                 

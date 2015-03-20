@@ -52,11 +52,6 @@ table {
 
 
 
-
-
-
-
-
 html,body { 
   	height: 100%;
 }
@@ -90,23 +85,41 @@ p {
  }
 
 
+/* Font sizes */
 
-/* Background image */
-/*
-.fullscreen.background {
-	background: url(images/SUPtwentyknots-12Crop.jpg) no-repeat center center fixed;
-  	-webkit-background-size: cover;
-  	-moz-background-size: cover;
-  	-o-background-size: cover;
-  	background-size: cover;
-	z-index: -100;
-	background-position: top;
-	width: 100%;
-	min-height: 100%;
-	position: fixed;
-	top: 0;
+body { font-size: 1em;}
+
+/*leipäteksti*/
+p { font-size: 1.15em; line-height: 1.2em;}
+
+/* otsikko */
+h2, h3, h4, h5, h6{
+	font-size: 1.2em;
 }
-*/
+
+.larger { font-size: 1.3em; } 
+
+
+
+/*small text*/
+small { font-size: 0.9em; }
+
+@media screen and (min-width: 641px){
+	h1.largeOnDesktop { font-size: 1.9em;}
+    h1.semilargeOnDesktop { font-size: 1.2em;}
+    h4.largeOnDesktop { font-size: 1.2em;}
+    h3.largeOnDesktop { font-size: 1.4em;}
+}
+
+@media screen and (max-width: 820px) {
+	body { font-size: 0.875em;}
+}
+
+
+
+
+
+/* background image */
 
 img.bg {
   /* Set rules to fill background */
@@ -155,110 +168,10 @@ html {
 
 
 
-/****** FRONT PAGE ******/
 
+/*********** LOGOS ***********/
 
-
-/* navigation */
-#main-wrapper {
-
-}
-
-.navigation-index {
-	margin-top: 60px;
-	margin-left: 14%;
-	margin-right: 6%;
-}
-
-.navigation-index ul {
-	margin: 0;
-	padding: 0;
-	width: 100%;
-	display: table;
-	border-collapse: collapse;
-	width: 100%;
-    table-layout: fixed;
-}
-
-.navigation-index div {
-	display: table-cell;
-	text-align: left;
-	list-style: none;
-	vertical-align: top;
-	position: relative;
-}
-
-.navigation-index h4 {
-	color: #505050;
-	text-align: ;
-	font-size: 1.2em;
-	text-align: left;
-	font-weight: 600;
-	text-transform: uppercase;
-}
-
-.white.navigation-index p,
-.white.navigation-index h4 {
-	color: #000;
-}
-
-.navigation-index p {
-	color: #505050;
-	margin-top: 10px;
-	font-size: 0.9em;
-	font-weight: 200;
-	width: 120px;
-}
-
-.navigation-index a {
-	color: black;
-	text-decoration: none;
-}
-
-.navigation-index ul.submenu {
-	display: none;
-	position: absolute;
-	top: 0;
-	left: 0;
-	padding-top: 4vw;
-	z-index: 100;
-}
-
-.navigation-index .submenu li {
-	display: block;
-	margin-bottom: 5px;
-}
-
-#logo {
-	background-image: url("images/twentyknotslogo2015.png");
-	background-size: 100%;
-	position: fixed;
-	width: 150px;
-	height: 150px;
-	left: 43%;
-	top: 50%;
-	margin: 0 auto;
-}
-
-#logo.sup {
-	width: 100px;
-	height: 100px;
-	top: 15px;
-	left: 15px;
-}
-
-.menu_logo {
-	display: none;
-	width: 20px;
-	position: absolute;
-	top: -33px;
-	left: 0;
-	margin: auto;
-}
-
-.dots_logo {
-	display: none;
-}
+/*  Nuoli logot  */
 
 img.arrow_logo {
 	width: 50px;
@@ -273,12 +186,12 @@ img.arrow_logo.sup {
 }
 
 img.down_logo {
-	display: inline-block;
 	position: absolute;
-	top: -75px;
-	width: 60px;
-	left: 50%;
-	margin-left: -30px;
+    top: -60px;
+    left: 50%;
+    margin-left: -25px;
+	width: 50px;
+	
 }
 
 
@@ -290,89 +203,72 @@ img.down_logo {
 
 
 
+/************************************************************/
+/************************************************************/
+/************************************************************/
+/************************************************************/   
+/******************     MAIN-NAVIGATION    ******************/
+/************************************************************/
+/************************************************************/
+/************************************************************/
+/************************************************************/
 
 
 
-/*    SUP-navigation    */
+/* icons/logos */
+#main-logo { width: 100px; }
 
-.main-navigation.navigation-sup {
-	margin-left: 14%;
+.menu_logo {
+	display: none;
+	width: 20px;
+	position: absolute;
+	top: -33px;
+	left: 0;
+	margin: auto;
 }
 
-.main-navigation.navigation-sup ul {
+.dots_logo {
+	display: none;
+}
+
+/* main navigation elements div -> ul -> li */
+.main-navigation { margin-left: 7.5%; }
+.main-navigation ul {
 	margin: 0;
 	padding: 0;
 	margin-top: 44px;
-	margin-left: 6%;
+	margin-left: 7%;
 	display: inline-block;
 	vertical-align: top;
-	width: 76%;
+	width: 81%;
 }
 
-#main-logo {
-	width: 100px;
-}
-
-.main-navigation.navigation-sup li {
+.main-navigation li {
 	display: inline-block;
 	text-align: left;
 	list-style: none;
 	vertical-align: top;
 	position: relative;
-	margin-right: 6%;
+	margin-right: 4%;
 }
-
-.main-navigation.navigation-sup li:hover { 
-	cursor: pointer;
-}
-
-.main-navigation.navigation-sup li h4:hover {
-	border-bottom: solid 4px;
-}
-
-.main-navigation.navigation-sup li h4.active {
-	border-bottom: solid 4px;
-}
-
-
-.main-navigation.navigation-sup li:last-child{
-	margin-right: 0;
-}
-
-.main-navigation.navigation-sup h4 {
+.main-navigation li:last-child{ margin-right: 0; }
+.main-navigation li:hover { cursor: pointer; }
+.main-navigation h4 {
 	color: #fff;
 	text-align: ;
-	font-size: 1.1em;
 	text-align: left;
 	font-weight: 200;
 	text-transform: uppercase;
-	padding-bottom: 5px;
 }
 
-.white.navigation-sup p,
-.white.navigation-sup h4 {
-	color: #fff;
-}
-
-.black.navigation-sup p,
-.black.navigation-sup h4 {
-	color: #000;
-}
-
-.main-navigation.navigation-sup p {
+.main-navigation p {
 	color: #505050;
 	margin-top: 10px;
-	font-size: 0.9em;
 	font-weight: 200;
 	width: 120px;
 }
-
-.main-navigation.navigation-sup a {
-	color: black;
-	text-decoration: none;
-}
-
-.main-navigation.navigation-sup ul.submenu {
+.main-navigation a { color: black; text-decoration: none; }
+.main-navigation ul.submenu {
 	display: none;
 	position: absolute;
 	top: 0;
@@ -383,89 +279,97 @@ img.down_logo {
 	width: auto;
 }
 
-.main-navigation.navigation-sup .submenu li {
+.main-navigation .submenu li {
 	display: block;
 	margin-bottom: 5px;
+	border-bottom: none;
+}
+
+
+/* Color changes */
+
+.white p,
+.white h4 {
+	color: #fff;
+}
+
+.black p,
+.black h4 {
+	color: #000;
+}
+
+
+
+
+/*   Only on desktop   */
+@media only screen and (min-width: 640px) {
+					.main-navigation li h4:hover { border-bottom: solid 4px; }
+					.main-navigation li h4.active { border-bottom: solid 4px; }
+					.main-navigation h4 { padding-bottom: 5px;}
+					.main-navigation .submenu li:first-child { margin-top: 5px;}
+
+}
+
+@media only screen and (min-width: 1050px) {
+                    .main-navigation  { margin-left: 10%; }
 }
 
 @media only screen and (max-width: 980px) {
-	.main-navigation.navigation-sup  {
-		margin-left: 5%;
-	}
-
-	.main-navigation.navigation-sup ul {
-		margin-top: 30px;
-	}
-
-	#main-logo {
-		width: 75px;
-	}
+					.main-navigation  { margin-left: 7.5%; }
+					.main-navigation ul { width: 86%; margin-top: 30px; margin-left: 4%;}
+                    .main-navigation li { margin-right: 4%; }
+					#main-logo { width: 75px; }
 }
 
 @media only screen and (max-width: 880px) {
-	.main-navigation.navigation-sup {
-		margin-left: 0;
-	}
-
-
-
-	.main-navigation.navigation-sup ul {
-		display: block;
-		width: 90%;
-		margin-left: 5%;
-	}
-
-	#main-logo {
-		margin-left: 43%;
-	}
+					.main-navigation { margin-left: 0; }
+					.main-navigation ul { display: block; width: 93%; margin-left: 7.5%; }
+                    .main-navigation li { margin-right: 3%; }
+					#main-logo { margin-left: 43%; }
 }
 
 
+/*  MOBILE VERSION OF MAIN NAVIGATION (only appearing on index.html at the moment)  */
+@media only screen and (max-width: 640px) {
+						.sup-main.main-navigation { display: none; }
+						.main-navigation {
+					 		margin: 0px;
+					 		width: 100%;
+					 		padding-top: 7px;
+					 		background-color: rgba(250, 250, 250, 0.7);
+					 		margin-top: 160px;
+					 	}
 
+					 	.main-navigation ul { margin: 0; width: 100%; }
+					 	.main-navigation li {
+					 		display: block;
+							text-align: left;
+							line-height: 47px;
+							border-bottom: 1px solid #ABABAB;
+							position: relative;
+							margin-right: 0;
+					 	}
 
+					 	.main-navigation li h4 { font-weight: 600; color: #272727;}
+					 	.main-navigation li:last-child { border-bottom: none; }
+					 	.main-navigation p { display: none; }
 
+					 	.main-navigation ul.submenu {
+					 		position: relative;
+					 		top: auto;
+					 		left: auto; 
+					 		padding-top: 0;
+					 		margin-bottom: 17px;
+					 	}
 
-
-
-
-.sup.page_title {
-	position: absolute;
-	font-size: 3em;
-	font-weight: 600;
-	color: #fff;
-	text-align: center;
-	width: 100%;
-	top: 190px;
-}
-
-.sup.navigation-sup.full {
-	margin: auto;
-	top: 250px;
-	left: 50%;
-	margin-left: -250px;
-	width: 550px;
-	position: absolute;
-
-}
-
-
-.sup.navigation-sup.full li {
-	display: inline-block;
-	margin-right: 18px;
-}
-
-.sup.navigation-sup.full li:last-child {
-	margin-right: 0px;
-}
-
-.sup.navigation-sup.full h4 {
-	display: inline-block;
-	font-size: 1.5em;
-	color: white;
-	line-height: 1.5em;
-	font-weight: 600;
-	text-transform: uppercase;
-
+					 	.main-navigation .submenu li { margin: 0; padding-left: 15px; }
+						.main-navigation .submenu li h4 { line-height: 29px; }
+					 	.main-navigation h4 {
+							margin-left: 90px;
+							text-align: left;
+							border-bottom: none;
+							margin-bottom: 0px;	
+					 	}
 }
 
 
@@ -478,22 +382,15 @@ img.down_logo {
 
 
 
+/***************************************/
+/***************************************/
+/************              **************/
+/************   CONTENT   	***********/
+/*************  index.html     *********/
+/***************************************/
+/***************************************/
 
-
-
-
-
-
-
-
-/* content */
-
-.content-wrapper {
-	position: absolute;
-	top: 0;
-}
-
-
+.content-wrapper { position: absolute; top: 0; }
 .sub-wrapper {
 	overflow: auto;
 	width: 60%;
@@ -505,7 +402,6 @@ img.down_logo {
 
 .sub-wrapper p.bread.index {
 	margin-top: 2em;
-	font-size: 1.1em;
 	line-height: 1.5em;
 	font-weight: 200;
 	text-align: center;
@@ -518,7 +414,6 @@ img.down_logo {
 }
 
 #sub-wrapper1 h3 {
-	font-size: 1.5em;
 }
 
 .sub-wrapper .infobox {
@@ -527,6 +422,11 @@ img.down_logo {
 	height: 100%;
 	text-align: center;
 	padding-bottom: 0;
+}
+
+.sub-wrapper .infobox.some a {
+    display: inline-block;
+    margin-left: 5px;
 }
 
 .sub-wrapper .imgbox {
@@ -541,7 +441,6 @@ img.down_logo {
 }
 
 .sub-wrapper h3 {
-	font-size: 1.1em;
 	font-weight: 600;
 	padding-bottom: 0.3em;
 	margin-bottom: 0.7em;
@@ -556,6 +455,40 @@ img.down_logo {
 	color: #4F709C;
 }
 
+.sub-wrapper .infobox.uutiskirje {
+    text-align: center;
+}
+
+#mc_embed_signup {
+                text-align: left;
+				clear:left; 
+			}
+
+#mc_embed_signup input.button {
+    display: inline-block
+    border: none;
+    font-size: 1em;
+    font-weight: 600;
+    color: #ffffff;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+}
+
+input.button:hover {
+    background-color: #5C5C5C;
+    cursor: pointer;
+}
+
+input.email {
+    display: inline-block;
+    padding: 1.5em;
+    padding-top: 0.35em;
+    padding-bottom: 0.35em;
+    margin-bottom: 0.5em;
+    font-size: 0.7em;
+}
+
+
 .sub-wrapper .imgbox img {
 	width: 50%;
 	display: inline-block;
@@ -569,203 +502,142 @@ img.down_logo {
 	padding-bottom: 3em;
 }
 
+@media only screen and (min-width: 1050px) { #mc_embed_signup { padding-left: 25%; } }
 
-
-
-
-
-/* responive*/
-
-
-@media only screen and (max-width: 720px) {
- 	body {
- 		font-size: 0.9em;
- 	}
-
- 	.navigation-index {
-		width: 90%;
-		margin-left: 5%;
-	}
-
- 	
-
- 	.sub-wrapper {
-		width: 80%;
-		padding-left: 10%;
-		padding-right: 10%;
-	}
+@media only screen and (min-width: 721px) {
+                         #mc_embed_signup { padding-left: 14%; }
 }
 
+@media only screen and (max-width: 720px) {
+					 	body {
+					 	}
 
-
-
+					 
+					 	.sub-wrapper {
+							width: 80%;
+							padding-left: 10%;
+							padding-right: 10%;
+						}
+    
+                         #mc_embed_signup { padding-left: 10%; }
+}
 
  @media only screen and (max-width: 640px) {
  	
- 	body {
- 		font-size: 0.8em;
- 	}
+					 	body {
+					 	}
 
- 	.fullscreen.background {
- 		/*background: url(images/supgradient2.jpg) no-repeat;*/
-		width: 100%;
-		height: 300px;
-		background-position: 0px 0px;
-		background-size: 100%;
-		position: fixed;
-		top: 0;
-		z-index: -100;
-	}
-	img.bg {
-		content:url("images/supgradient2.jpg");
-		width: 100%;
-		position: fixed;
-		top: 0;
-		left: 0px;
-		min-height: 0;
-		min-width: 0;
-		margin-left: 0;
-		z-index: -100;
-	}
+					 	.fullscreen.background {
+					 		/*background: url(images/supgradient2.jpg) no-repeat;*/
+							width: 100%;
+							height: 300px;
+							background-position: 0px 0px;
+							background-size: 100%;
+							position: fixed;
+							top: 0;
+							z-index: -100;
+						}
+						img.bg {
+							content:url("images/mobilebg/bg_home.jpg");
+							width: 100%;
+							position: fixed;
+							top: 0;
+							left: 0px;
+							min-height: 0;
+							min-width: 0;
+							margin-left: 0;
+							z-index: -100;
+						}
 
-	img.bg.sup {
-		content:url("images/suposio.jpg");
-	}
+						img.bg.sup { content:url("images/supmobile1.jpg");}
+						img.bg.purjelauta { content:url("images/purjelauta.jpg");}
+						img.bg.supyoga { content:url("images/mobilebg/bg_supyoga.jpg");}
+						img.bg.ryhmat { content:url("images/mobilebg/bg_ryhmat.jpg");}
+                        img.bg.retket { content:url("images/mobilebg/bg_retket.jpg");}
+                        img.bg.yhteystiedot { content:url("images/mobilebg/bg_yhteystiedot.jpg");}
+                        img.bg.twentyknots { content:url("images/mobilebg/bg_twentyknots.jpg");}
+						img.bg.helsinki { content:url("images/mobilebg/bg_helsinki.jpg");}
+                        img.bg.kirkkonummi { content:url("images/mobilebg/bg_kirkkonummi.jpg");}
 
-	.main-navigation.navigation-index {
-		display: none;
-	}
 
- 	.navigation-sup.mobile-also {
- 		margin: 0px;
- 		width: 100%;
- 		padding-top: 7px;
- 		background-color: rgba(250, 250, 250, 0.7);
- 		margin-top: 160px;
- 	}
+					 	#main-logo {
+					 		width: 70px;
+					 		height: 70px;
+					 		position: absolute;
+					 		top: 40px;
+					 	}
 
- 	.navigation-sup.mobile-also li {
- 		display: block;
-		text-align: left;
-		line-height: 47px;
-		border-bottom: 1px solid #ABABAB;
-		position: relative;
-		margin-right: 0;
- 	}
+					 	img.menu_logo {
+					 		display: inline-block;
+					 		position: absolute;
+							width: 15px;
+							top: 16px;
+							left: 27px;
+							margin-left: 0;
+					 	}
 
- 	.navigation-sup.mobile-also li h4 {
- 		font-weight: 600;
-		color: #272727;
-	}
+					 	.menu_logo.sijainti { width: 20px;}
 
- 	.navigation-sup.mobile-also li:last-child {
- 		border-bottom: none;
- 	}
+					 	img.dots_logo {
+					 		display: inline;
+					 		position: absolute;
+							width: 15px;
+							top: 22px;
+							right: 27px;
+					 	}
 
- 	.navigation-sup.mobile-also p {
- 		display: none;
- 	}
+					 	img.arrow_logo {
+					 		display: inline;
+							width: 5%;
+							margin: auto;
+							margin-top: 20px;
+							margin-left: 45%;
+							z-index: 1000;
+							position: static;
+					 	}
 
- 	.sub-wrapper {
-		width: auto;
-		text-align: left;
-		padding-top: 3em;
-		padding-bottom: 3em;
-		padding-left: 5px;
-		padding-right: 5px;
-	}
+						.sub-wrapper .infobox {
+							display: block;
+							width: 100%;
+							padding-bottom: 20px;
+						}
+     
+                        .sub-wrapper .infobox a {
+                            margin-bottom: 10px;
+                        }
+     
+                        .sub-wrapper .infobox.some a {
+							display: inline-block;
+                            margin: 10px
+						}
 
-	.sub-wrapper p.bread.index {
-		margin-top: 2em;
-		font-size: 1.2em;
-		line-height: 1.6em;
-		font-weight: 200;
-		text-align: left;
-		padding-left: 25px;
-		padding-right: 14px;
-	}
+						.sub-wrapper .imgbox img {
+							width: 30%;
+						}
 
- 	.navigation-sup.mobile-also ul {
- 		margin: 0;
- 		width: 100%;
- 	}
+						.content-wrapper {
+							position: relative;
+						}
 
- 	.navigation-sup.mobile-also ul.submenu {
- 		position: relative;
- 		top: auto;
- 		left: auto; 
- 		padding-top: 0;
- 		margin-bottom: 17px;
- 	}
+						.sub-wrapper {
+							width: auto;
+							text-align: left;
+							padding-top: 3em;
+							padding-bottom: 3em;
+							padding-left: 5px;
+							padding-right: 5px;
+						}
 
- 	.navigation-sup.mobile-also .submenu li {
-		margin: 0;
-		padding-left: 15px;
-	}
-
-	.navigation-sup.mobile-also .submenu li h4 {
-		line-height: 29px;
-	}
-
- 	.navigation-sup.mobile-also h4 {
- 		font-size: 1.2em;
-		margin-left: 90px;
-		text-align: left;
-		border-bottom: none;
-		margin-bottom: 0px;
-		
-			
- 	}
-
- 	#main-logo {
- 		width: 70px;
- 		height: 70px;
- 		position: absolute;
- 		top: 40px;
- 	}
-
- 	img.menu_logo {
- 		display: inline-block;
- 		position: absolute;
-		width: 15px;
-		top: 16px;
-		left: 27px;
-		margin-left: 0;
- 	}
-
- 	.menu_logo.sijainti { width: 20px;}
-
- 	img.dots_logo {
- 		display: inline;
- 		position: absolute;
-		width: 15px;
-		top: 22px;
-		right: 27px;
- 	}
-
- 	img.arrow_logo {
- 		display: inline;
-		width: 5%;
-		margin: auto;
-		margin-top: 20px;
-		margin-left: 45%;
-		z-index: 1000;
-		position: static;
- 	}
-
-	.sub-wrapper .infobox {
-		display: block;
-		width: 100%;
-		padding-bottom: 20px;
-	}
-
-	.sub-wrapper .imgbox img {
-		width: 30%;
-	}
-
-	.content-wrapper {
-		position: relative;
-	}
+						.sub-wrapper p.bread.index {
+							margin-top: 2em;
+							line-height: 1.6em;
+							font-weight: 200;
+							text-align: left;
+							padding-left: 25px;
+							padding-right: 14px;
+						}
+     
+                        #mc_embed_signup { padding-left: 30%; }
  }
 
 
@@ -773,9 +645,200 @@ img.down_logo {
 
 
 
-/****************   CONTENT PAGES    ******************/
 
-/* Mobile navigation */
+
+
+/************************************************************/
+/************************************************************/
+/************************************************************/
+/************************************************************/   
+/******************     SUB-NAVIGATION    *******************/
+/************************************************************/
+/************************************************************/
+/************************************************************/
+/************************************************************/
+
+
+
+.sub-navigation.full {
+    display: inline-block;
+    position: absolute;
+    left: 7.5%;
+    bottom: 50px;
+    margin-top: 50px;
+    z-index: 1000;
+}
+
+.sub-navigation.full li {
+    
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    color: white;
+    font-weight: 200;
+    border: solid 3px white;
+}
+
+.sub-navigation.full li:hover {
+    background-color: white;
+    color: black;
+    cursor:pointer;
+}
+
+.sub-navigation.full li:last-child { 
+    margin-bottom: none;
+}
+
+.sub-navigation.full h1 {
+	//background-color: white;
+    color: white;
+    font-weight: 600;
+    padding:0px;
+    margin-bottom: 20px
+}
+
+.sub-navigation.full h1.center { text-align: center;}
+
+.sub-navigation.full h4 {
+	text-transform: uppercase
+}
+
+.sub-navigation.full.change-to-black li,
+.sub-navigation.full.change-to-black h1 {
+    color: #373737;
+}
+
+.sub-navigation.black h1,
+.sub-navigation.black h4 {
+	color: #373737;
+}
+
+.sub-navigation.full.yhteystiedot li {
+    background-color: white;
+    color: black;
+}
+
+.sub-navigation.full.yhteystiedot li a { margin-right: 10px; }
+.sub-navigation.full.yhteystiedot li a:hover { cursor: pointer;}
+.sub-navigation.full.yhteystiedot li a img { width: 25px;}
+
+.sub-navigation.full.twentyknots p {
+    width: 300px;
+  background: white;
+  padding: 20px;
+    font-weight: 200;
+}
+
+@media only screen and (min-width: 1050px) {
+                    .sub-navigation.full {
+                        display: inline-block;
+                        position: fixed;
+                        left: 10%;
+                        bottom: 50px;
+                        margin-top: 50px;
+                    }
+}
+
+@media only screen and (max-width: 980px) {
+					.sub-navigation.full {
+						
+						
+					}
+}
+
+@media only screen and (max-width: 880px) {
+					.sub-navigation.full {
+						
+					}
+}
+
+
+@media only screen and (max-width: 640px) {
+
+				.sub-navigation h1 {
+					position: absolute;
+  					top: 12px;
+  					left: 25px;
+  					font-weight: 600;
+  				}
+
+				.sub-navigation {
+			 		margin: 0px;
+			 		padding-top: 7px;
+			 		background-color: rgba(250, 250, 250, 0.7);
+			 		margin-top: 200px;
+			 		padding-bottom: 20px;
+			 	}
+
+			 	.sub-navigation li {
+			 		display: block;
+					text-align: left;
+					line-height: 47px;
+					border-bottom: 1px solid #ABABAB;
+					position: relative;
+					
+			 	}
+			 	.sub-navigation li:hover { cursor: pointer;}
+			 	.sub-navigation li:last-child { border-bottom: none; }
+			 	.sub-navigation h4 {
+			 		color: #000;
+					margin-left: 90px;
+				    font-weight: 600;
+				    text-transform: uppercase;
+				}
+    
+                .sub-navigation.yhteystiedot img.menu_logo {
+                    display: none;
+                }
+    
+                .sub-navigation.yhteystiedot li {
+                    text-align: center;
+                    margin-top: 10px;
+                    border: none;
+                }
+    
+                 .sub-navigation.yhteystiedot ul {
+                    padding-bottom: 200px;
+                 }
+    
+                .sub-navigation.yhteystiedot h4 {
+                    margin-left: 0px;
+                }
+    
+                .sub-navigation.yhteystiedot a {
+                    margin: 20px;
+                }
+    
+                .sub-navigation.yhteystiedot img.arrow_logo {
+                    display: none;
+                }
+    
+                .sub-navigation.twentyknots p {
+                    width: 300px;
+                    padding: 20px;
+                    font-weight: 200;
+                }
+}
+
+
+
+
+
+
+
+
+
+
+
+/************************************************************/
+/************************************************************/
+/************************************************************/
+/************************************************************/   
+/******************   MOBILE NAVIGATION    ******************/
+/************************************************************/
+/************************************************************/
+/************************************************************/
+/************************************************************/
+
 
 .mobile-navigation-button {
 	display: none;
@@ -807,13 +870,16 @@ img.down_logo {
 
 .mobile-navigation li {
 	color: white;
-	font-size: 20px;
 	font-weight: 200;
 	width: 300px;
 	text-transform: uppercase;
 	margin: auto;
 	border-bottom: solid 1px white;
 	line-height: 60px;
+}
+
+.mobile-navigation li:hover {
+	cursor: pointer;
 }
 
 .mobile-navigation li.last {
@@ -839,7 +905,7 @@ img.down_logo {
 	text-align: left;
 }
 
-.mobile-navigation ul.submenu a {
+.mobile-navigation li a {
 	text-decoration: none;
 	color: #fff;
 }
@@ -861,85 +927,28 @@ img.mobile-nav-logo {
 
 
 
+/************************************************************/
+/************************************************************/
+/************************************************************/
+/************************************************************/   
+/****************   CONTENT PAGE CONTENT   ******************/
+/************************************************************/
+/************************************************************/
+/************************************************************/
+/************************************************************/
 
-
-
-.navigation-content {
-	width: 70%;
-	margin-left: 20%;
-	margin-top: 50px;
-	text-align: center;
-}
-
-.navigation-content h1 {
-	font-size: 50px;
+.sup.page_title {
+	position: absolute;
 	font-weight: 600;
-	color: white;
-	margin: 40px;
-}
-
-.navigation-content ul {
-	border-top: solid 1px white; 
-	padding-top: 20px;
-	width: 100%;
-	display: table;
-	width: 100%;
-    table-layout: fixed;
-}
-
-.navigation-content li {
-	display: table-cell;
+	color: #fff;
 	text-align: center;
-	vertical-align: middle;
-	color: white;
-	font-size: 26px;
-	font-weight: 600;
-}
-
-
-.navigation-sidebar {
-	position: fixed;
-	width: 10%;
-	top: 50px;
-	left: 0;
-	padding-left: 1em;
-	padding-top: 1em;
-	padding-right: 1em;
-	z-index: 15;
-}
-
-.navigation-sidebar img {
 	width: 100%;
-	margin-bottom: 1em;
+	top: 190px;
 }
 
-.navigation-sidebar li {
-	text-align: left;
-	color: #ffffff;
-	display: block;
-	font-size: 1em;
-	font-weight: 700;
-	margin-left: 0.7em;
-	margin-top: 0.8em;
+.sup.page_title.black h1 {
+	color: #373737;
 }
-
-.navigation-sidebar li.yhteystiedot {
-	margin-top: 0.3em;
-	margin-left: 0;
-}
-
-.navigation-sidebar h6 {
-	font-weight: 200;
-	font-size: 0.6em;
-}
-
-.navigation-sidebar ul.yhteystiedot {
-	margin-top: 1.3em;
-	padding-top: 0.7em;
-	margin-left: 0.7em;
-	border-top: solid 1px #ffffff;
-}
-
 
 .content-wrapper.content-page {
 	width: 70%;
@@ -949,30 +958,45 @@ img.mobile-nav-logo {
 	padding-top: 20px;
 	padding-bottom: 50px;
 	background-color: rgba(250, 250, 250, 0.9);
-	text-align: justify;
+	text-align: center;
 }
+
 
 .content-wrapper.content-page h2 {
 	text-align: center;
 	font-weight: 600;
-	font-size: 20px;
 	padding-bottom: 30px;
 	margin-bottom: 30px;
 	margin-top: 60px;
 	border-bottom: solid 1px;
 }
-
-.content-wrapper.content-page h3 {
-
+.content-wrapper.content-page .varauslinkki {	
+  display: inline-block;
+  color: black;
+  margin-top: 16px;
+  padding: 12px 22px;
+  border: solid;
+  font-weight: 600;
+  text-decoration: none;
 }
 
-.content-wrapper.content-page p {
-	font-weight: 200;
-}
-
+.content-wrapper.content-page .varauslinkki:hover { background-color: black; color: white;}
+.content-wrapper.content-page p { font-weight: 200; text-align: left; }
 .content-wrapper.content-page .contentimg-container {
 	margin-top: 20px;
 	overflow: auto;
+}
+
+.content-wrapper.content-page p.next_to_img {
+	display: inline-block;
+  	width: 54%;
+  	margin-right: 5%;
+  	vertical-align: top;
+}
+
+.content-wrapper.content-page img.next_to_text {
+	width: 40%;
+  	display: inline-block;
 }
 
 .content-wrapper.content-page .contentimg-container img {
@@ -997,7 +1021,7 @@ img.mobile-nav-logo {
 
 .content-wrapper.content-page .course-wrapper p {
 	margin-top: 10px;
-	font-size: 14px;
+	
 }
 
 .content-wrapper.content-page .course-wrapper span {
@@ -1006,125 +1030,141 @@ img.mobile-nav-logo {
 }
 
 .content-wrapper.content-page .course-wrapper small {
-	font-size: 12px;
+
+}
+
+.content-wrapper.content-page h3 {
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.content-wrapper.content-page ul.tarjonta li {
+    font-weight: 200;
+    margin-top: 15px;
+}
+
+.content-list {
+	display: inline-block;
+  	vertical-align: top;
+  	margin-top: 30px;
+  	margin-bottom: 30px;
+  	width: 31%;
+ 	margin-right: 1%;
+  	text-align: left;
+}
+
+.content-list ul:last-child {
+	margin-right: 0px;
+}
+
+.content-list li { margin-top: 5px; margin-bottom: 5px;}
+
+.content-list h3 { font-weight: 600; border-bottom: solid 1px; display: inline-block; margin-bottom: 10px; padding-bottom: 5px;}
+.content-list li { font-weight: 200;}
+
+.map {
+	margin-top: 30px;
+}
+
+.content-wrapper.content-page img.ohjaaja {
+    width: 250px
+}
+
+.content-wrapper.content-page p.caption {
+    text-align: center;
+    font-weight: 200;
+    margin-top: 10px;
+}
+
+.content-wrapper.content-page img.retket {
+    margin-top: 100px;
+    width: 70%;
+}
+
+.content-wrapper.content-page img.henkilokuva {
+    width: 70%;
 }
 
 
+@media only screen and (min-width: 1050px) {
+    .content-wrapper.content-page {
+        width: 50%;
+        padding-left: 25%;
+    }
+
+}
 
 @media only screen and (max-width: 720px) {
 
-	.navigation-content {
-		width: 90%;
-		margin-left: 5%;
-		margin-top: 70px;
-	}
+				
+					.mobile-navigation-button {
+						display: block;
+					}
 
-	.navigation-content h1 {
-		font-size: 40px;
-		margin: 30px;
-	}
+					.mobile-navigation-button img {
+						position: absolute;
+						right: 12px;
+						top: 2px;
+						width: 34px;
+					}
 
-	.navigation-content li {
-		display: table-row;
-		line-height: 40px;
-		text-align: left;
-		font-size: 30px;
-	}
-
-	.navigation-sidebar {
-		display: none;
-	}
-
-	.mobile-navigation-button {
-		display: block;
-	}
-
-	.mobile-navigation-button img {
-		position: absolute;
-		right: 12px;
-		top: 2px;
-		width: 34px;
-	}
-
-	.content-wrapper.content-page {
-		width: 85%;
-		margin-left: 0;
-		text-align: left;
-	}
+					.content-wrapper.content-page {
+						width: 85%;
+						margin-left: 0;
+						text-align: left;
+					}
+    
+                    .content-wrapper.content-page img.retket {
+                        margin-left: 15%;
+                    }
 }
 
 @media only screen and (max-width: 640px) {
 
-	.sup-main.navigation-sup {
-		display: none;
-	}
+					img.arrow_logo.sup {  display: inline-block; }
 
-	.sup.navigation-sup {
- 		margin: 0px;
- 		padding-top: 7px;
- 		background-color: rgba(250, 250, 250, 0.7);
- 		margin-top: 200px;
- 	}
+					img.down_logo { display: none; }
 
- 	.sup.navigation-sup li {
- 		display: block;
-		text-align: left;
-		line-height: 47px;
-		border-bottom: 1px solid #ABABAB;
-		position: relative;
-		
- 	}
+					.sup.page_title {
+						position: absolute;
+						font-weight: 600;
+						color: #000;
+						text-align: left;
+						height: 20px;
+						width: 96%;
+						background-color: rgba(250, 250, 250, 0.8);
+						top: 0px;
+						left: 0px;
+						padding: 10px 2%;
+					}
 
- 	.sup.navigation-sup li:last-child {
- 		border-bottom: none;
- 	}
+					.sup.page_title h1 {  }
 
- 	.sup.navigation-sup h4 {
- 		color: #000;
-	    font-size: 1.2em;
-		margin-left: 90px;
-	    font-weight: 600;
-	    text-transform: uppercase;
-	}
+					.content-wrapper.content-page .course-wrapper {
+						width: 80%;
+						float: left;
+						margin-right: 10%;
+						padding-top: 40px;
+						text-align: left;
+					}
+					.content-wrapper.content-page .course-wrapper.right { padding-top: 0; }
+                    .content-wrapper.content-page .course-wrapper.right.toimipisteet { padding-top: 10px;}
+					/* ryhmät sivun sisältöä*/
+					.content-wrapper.content-page p.next_to_img {
+						display: block;
+						width: 95%;
+						margin-right: 0%;
+					}
 
-	img.arrow_logo.sup {
-		display: inline-block;
-	}
+					.content-wrapper.content-page img.next_to_text {
+						margin-top: 30px;
+						margin-right: 10%;
+					    width: 40%;
+					}
 
-	img.down_logo {
-		display: none;
-	}
-
-	.sup.page_title {
-		position: absolute;
-		font-weight: 600;
-		font-size: 1.2em;
-		color: #000;
-		text-align: left;
-		width: auto;
-		width: 100%;
-		background-color: rgba(250, 250, 250, 0.8);
-		top: 0px;
-		left: 0px;
-		padding: 10px;
-	}
-
-	.sup.page_title h1 {
-		font-size: 1.1em;
-	}
-
-	.content-wrapper.content-page .course-wrapper {
-		width: 80%;
-		float: left;
-		margin-right: 10%;
-		padding-top: 40px;
-		text-align: left;
-	}
-
-	.content-wrapper.content-page .course-wrapper.right {
-		padding-top: 0;
-	}
-
+					.content-list {
+						width: 47%;
+					}
 
 }
 

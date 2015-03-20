@@ -18,18 +18,16 @@
   <title>TwentyKnots SUP- ja Purjelautailuelämyksiä</title>
   <!-- Please don't add "maximum-scale=1" here. It's bad for accessibility. -->
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
+ <meta name="description" content="SUP-melonta välinevuokrausta, kursseja ja tapahtumia ryhmille Helsingissä">
+   <meta name="keywords" content="sup, sup-melonta, suppaus, stand-up-paddling, twentyknots, Helsinki, Espoo, Kirkkonummi, pääkaupunkiseutu, alkeiskurssi, kurssit, retket" />
+  <meta name="Author" content="Joel Mikkonen">
 
-  <link rel="stylesheet" href="fonts.css">
   <link rel="stylesheet" href="main.css">
-
-  <!-- Javascript (remember to move to bottom of page.) -->
   
 
   <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
   <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-  <script type="text/javascript" src="jquery.cycle.lite.js"></script>
-  <script src="jquery.pjax.js"></script>
-  <script src="modernizr.js"></script>
+  <script src="jquery.scrollTo.min.js"></script>
   <script src="javascript.js"></script>
 
   <!--[if lt IE 9]>
@@ -37,44 +35,49 @@
   <![endif]-->
   
 </head>
-<img class="bg sup" src="images/HaukipaaSUP-13.jpg">
+<img class="bg sup" src="images/bg_sup.jpg" alt="sup melonta">
 <body> 
 
-            <div id="nav-container" class="sup-main main-navigation navigation-sup white">
+            <div class="sup-main main-navigation white">
                       <a href="index.html"><img id="main-logo" src="images/twentyknotslogo2015.png" alt="TwentyKnots"/></a>
                       <ul>
                         <li class="closed">
+                                <img class="menu_logo" src="images/mobilelogos2015/activitylogo.png">
+                                <img class="dots_logo" src="images/mobilelogos2015/dotslogo.png">
                                 <h4 class="active">elämykset</h4>
                                 <ul class="submenu">
                                     <li><a class="page" href="purjelautailu.html"><h4>purjelautailu</h4></a></li>
                                     <li><a class="page" id="sup" href="sup.html"><h4>sup-melonta</h4></a></li>
-                                    <li><a class="page" href=""><h4>retket</h4></a></li>
-                                    <li><a class="page" href=""><h4>rib-veneily</h4></a></li>
+                                    <li><a class="page" href="supyoga.html"><h4>sup-yoga</h4></a></li>
+                                    <li><a class="page" href="retket.html"><h4>retket</h4></a></li>
                                 </ul>
                                 <div class="clear"></div>
                         </li>
                         <li>
-                          <a href=""><h4>yritykset</h4></a>
+                          <img class="menu_logo" src="images/mobilelogos2015/peoplelogo.png">
+                          <a href="ryhmat.html"><h4>Ryhmät</h4></a>
                         </li>
                         <li class="closed">
-                                <h4>sijainti</h4>
+                                <img class="menu_logo sijainti" src="images/mobilelogos2015/sijaintilogo.png">
+                                <img class="dots_logo" src="images/mobilelogos2015/dotslogo.png">
+                                <h4>Toimipisteet</h4>
                                 <ul class="submenu">
-                                    <li><a href=""><h4>helsinki</h4></a></li>
-                                    <li><a href=""><h4>espoo</h4></a></li>
-                                    <li><a href=""><h4>kirkkonummi</h4></a></li>
+                                    <li><a href="helsinki.html"><h4>helsinki</h4></a></li>
+                                    <li><a href="kirkkonummi.html"><h4>kirkkonummi</h4></a></li>
+                                    <li><a href="naantali.html"><h4>naantali</h4></a></li>
                                 </ul>
                                 <div class="clear"></div>
                         </li>
                         <li>
-                          <a href=""><h4>Varaukset</h4></a>
+                          <img class="menu_logo" src="images/mobilelogos2015/calendarlogo.png">
+                          <a href="yhteystiedot.html"><h4>Yhteystiedot</h4></a>
                         </li>
                         <li>
-                          <a href=""><h4>twentyknots</h4></a>
+                          <img class="menu_logo" src="images/mobilelogos2015/infologo.png">
+                          <a href="twentyknots.html"><h4>twentyknots</h4></a>
                         </li>
                       </ul>
-          
-            </div>
-
+                  </div>
             <div class="mobile-navigation-button">
                   <img src="images/menu.png">
             </div>
@@ -85,61 +88,71 @@
                          <ul class="submenu">
                                 <li><a class="page" href="purjelautailu.html"><h4>purjelautailu</h4></a></li>
                                 <li><a class="page" id="sup" href="sup.html"><h4>sup-melonta</h4></a></li>
-                                <li><a class="page" href=""><h4>retket</h4></a></li>
-                                <li><a class="page" href=""><h4>rib-veneily</h4></a></li>
+                                <li><a class="page" href="supyoga.html"><h4>sup-yoga</h4></a></li>
+                                <li><a class="page" href="retket.html"><h4>retket</h4></a></li>
                           </ul>
                       </li>
-                      <li class="clear">Yritykset & Ryhmät</li> 
-                      <li class="clear closed">Sijainti
+                      <li class="clear"><a class="page" href="ryhmat.html"><h4>Ryhmät</h4></a></li> 
+                      <li class="clear closed"><h4>Toimipisteet</h4>
                           <ul class="submenu">
-                                 <li><a href=""><h4>helsinki</h4></a></li>
-                                 <li><a href=""><h4>espoo</h4></a></li>
-                                 <li><a href=""><h4>kirkkonummi</h4></a></li>
+                                 <li><a href="helsinki.html"><h4>helsinki</h4></a></li>
+                                 <li><a href="kirkkonummi.html"><h4>kirkkonummi</h4></a></li>
+                                 <li><a href="naantali.html"><h4>naantali</h4></a></li>
                           </ul>
 
                       </li>
-                      <li class="clear">Blog</li>
-                      <li class="clear last">TwentyKnots</li>
+                      <li class="clear"><a href="yhteystiedot.html"><h4>yhteystiedot</h4></a></li>
+                      <li class="clear"><a href="twentyknots.html"><h4>TwentyKnots</h4></a></li>
                   </ul>
             </div>
-            <div class="sup page_title"><h1>SUP - Stand Up Paddling</h1></div>
-            <div class="sup navigation-sup mobile-also">
+            <div class="sup page_title"></div>
+            
+           <div class="sub-navigation">
+                        <h1 class="largeOnDesktop">SUP-MELONTA</h1>
                         <ul>
-                          <li>
-                            <img class="menu_logo" src="images/mobilelogos2015/infologo.png">
-                            <h4>sup?</h4>
-                          </li>
-                          <li>
+                          <li class="vuokraus">
                             <img class="menu_logo" src="images/mobilelogos2015/peoplelogo.png">
-                            <h4>kurssit</h4>
+                            <h4 class="largeOnDesktop">välinevuokraus</h4>
                           </li>
-                          <li>
+                          <li class="kurssit">
                             <img class="menu_logo" src="images/mobilelogos2015/sijaintilogo.png">
-                            <h4>vuokraus</h4>
+                            <h4 class="largeOnDesktop">kurssit</h4>
                           </li>
-                          <li>
-                            <img class="menu_logo" src="images/mobilelogos2015/activitylogo.png">
-                            <h4>sup & breakfast</h4>
+                           <li class="sup">
+                            <img class="menu_logo" src="images/mobilelogos2015/infologo.png">
+                            <h4 class="largeOnDesktop">sup infoa</h4>
                           </li>
                         </ul>
+                         
                         <img class="arrow_logo sup" src="images/mobilelogos2015/arrowdownlogobw.png">
             </div>
-           
           
             <div class="content-wrapper content-page">
                         <img class="down_logo full" src="images/mobilelogos2015/arrowdownlogowhite.png">
-                        <h2>TWENTYKNOTS & SUP</h2>
-                        <P>TwentyKnots on Pohjoismaiden ensimmäinen ja ainut ASI-akreditoitu (Academy of Surfing Instructors) SUP-koulu. Koulutetut ja liikunnalliset ohjaajamme, laadukkaat Starboardin kovat SUP-laudat ja turvallinen harjoitteluympäristö luovat hyvän alustan SUP melontaan. Järjestämme SUP alkeiskursseja, SUP retkiä, SUP välineiden vuokrausta, SUP Joogaa sekä muita hauskoja aktiviteetteja supeilla. </P>
-                        <br>
-                        <h3>Mitä on SUP?</h3>
-                        <br>
-                        <p>Hawaiilta alunperin lähtöisin oleva suppaus eli SUP melonta (Stand Up Paddle) on erittäin hauska ja helposti omaksuttava liikuntamuoto vesillä, jossa liikutaan seisaaltaan meloen surffilautaa muistuttavan laudan päällä. Voit retkeillä, joogata, kuntoilla, surffata aalloilla ja nauttia veden äärellä liikkumisesta erilaisissa vesistöissä. Suppailu on lisäksi erittäin tehokas kokovartalotreeni! Suomen luonto ja saaristo tarjoaa erinomaiset puitteet SUP-melontaan. </p>  
-                        <h2>SUP-MELONNNAN ALKEISKURSSI & RETKI</h2>
+                        <h2 id="vuokraus-anchor">VÄLINEVUOKRAUS</h2>
+                        <P>TwentyKnots Helsinki pisteeltäämme on mahdollista vuokrata SUP-melontalautoja. Käytössä ovat kovat Starboard:in laudat ja säädettävät melat. Katso pisteen sijainti ja aukioloajat täältä. Laudan voit varata varausjärjestelmämme: </P>
+                        <a class="varauslinkki" target="_blank" href="http://www.varaaheti.fi/twentyknots/">www.varaaheti.fi/twentyknots</a>
+                        <div class="course-wrapper-container">
+                              <div class="course-wrapper left">
+                                    <p><span>Vuokraushinnat:</span><small>(sis. alv.)</small><br><br>
+                                    1 tunti: 20€<br>
+                                    lisätunnit: 10€
+                                    </p>
+                                    <p><span>Sarjakortit:</span><small>(Sarjakortin käyttökerta on 2 tuntia. Kortit käyvät kaikissa Twentyknots pisteissä.)</small><br><br>
+                                    5-kerran kortti: 90€<br>
+                                    10-kerran kortti: 160€
+                                    </p>
+                                    <p><span>Kauden 2015 SUP-kausikortti:</span> 290€<br><br>
+                                    Kausikortilla voit varata välineet varausjärjestelmästämme kerrallaan 2 tuntia per päivä. Päivän tilanteen mukaan on mahdollista varata lauta pidemmäksi aikaa. tästä sovitaan puhelimitse aina erikseen. Kausikorttilaiset pääsevät myös retkillemme ja kursseillemme erikoishintaan.
+                                    </p>    
+                              </div>
+                        </div>
+                        <h2 id="kurssit-anchor">SUP-MELONNNAN ALKEISKURSSI & RETKI</h2>
                         <P>SUP alkeiskurssilla (n. 2h) opit SUP melonnan perusteet; laudalle nousu sekä poistuminen, SUP-laudan ja melan käsittely, melontatekniikoita, käännökset sekä turvallisuus vesillä. Lähdemme kurssin aikana myös melontaretkelle jonka aikana varmuus SUP-lautaan karttuu. Kurssin jälkeen olet valmis melomaan itsenäisesti ja osallistumaan monipuolisiin retkiimme. Kurssin hintaan sisältyy kaikki tarvittavat välineet sekä yksi yhden tunnin SUP-vuokraus kaudelle 2014.</P>
                         <div class="contentimg-container">
-                              <img src="images/supalkeiskurssi-1.jpg">
-                              <img src="images/supalkeiskurssi-2.jpg">
-                              <img src="images/supalkeiskurssi-3.jpg">
+                              <img src="images/supalkeiskurssi-1.jpg" alt="sup-melonnan alkeiskurssi">
+                              <img src="images/supalkeiskurssi-2.jpg" alt="sup-melonta retki">
+                              <img src="images/supalkeiskurssi-3.jpg" alt="sup-lautailu">
                         </div>
                         <div class="course-wrapper-container">
                               <div class="course-wrapper left">
@@ -156,28 +169,17 @@
                               </div>
                               <div class="course-wrapper right">
                                     <p><span>Ilmoittautuminen ja tulevat kurssit:</span><br><br>
-                                    Kurssille ilmoittaudutaan varausjärjestelmästämme: <a href="http://www.varaaheti.fi/twentyknots/">www.varaaheti.fi/twentyknots</a>. Sieltä löytyvät myös kaikki tulevat kurssit.</p>
+                                    Kurssille ilmoittaudutaan varausjärjestelmästämme: </p>
+                                     <a class="varauslinkki" target="_blank" href="http://www.varaaheti.fi/twentyknots/">www.varaaheti.fi/twentyknots</a>
                               </div>
                         </div>
-                        <p>Lisäämme kursseja sivuille kauden mittaan. Tilaa uutiskirjeemme tai tykkää facebook-sivustamme niin välitämme teille uutiset retkistämme ja muista ajankohtaisista asioista.</p>
-                        <h2>VÄLINEVUOKRAUS</h2>
-                        <P>TwentyKnots Helsinki pisteeltäämme on mahdollista vuokrata SUP-melontalautoja. Käytössä ovat kovat Starboard:in laudat ja säädettävät melat. Katso pisteen sijainti ja aukioloajat täältä. Laudan voit varata varausjärjestelmämme: www.varaaheti.fi/twentyknots</P>
-                        <div class="course-wrapper-container">
-                              <div class="course-wrapper left">
-                                    <p><span>Vuokraushinnat:</span><small>(sis. alv.)</small><br><br>
-                                    1 tunti: 20€<br>
-                                    2 tuntia: 30€<br>
-                                    4 tuntia: 40€
-                                    </p>
-                                    <p><span>Sarjakortit:</span><small>(Sarjakortin käyttökerta on 2 tuntia. Kortit käyvät kaikissa Twentyknots pisteissä.)</small><br><br>
-                                    5-kerran kortti: 90€<br>
-                                    10-kerran kortti: 160€
-                                    </p>
-                                    <p><span>Kauden 2015 SUP-kausikortti:</span> 290€<br><br>
-                                    Kausikortilla voit varata varausjärjestelmästämme kerrallaan 2 tuntia per päivä. Päivän tilanteen mukaan on mahdollista ottaa lauta pidemmäksi aikaa, tästä sovitaan aina erikseen puhelimitse. Kausikorttilaiset pääsevät myös retkillemme ja kursseillemme erikoishintaan.
-                                    </p>    
-                              </div>
-                        </div>
+                         <h2 id="sup-anchor">TWENTYKNOTS & SUP</h2>
+                        <P>TwentyKnots on Pohjoismaiden ensimmäinen ASI-akreditoitu (Academy of Surfing Instructors) SUP-koulu. Koulutetut ja liikunnalliset ohjaajamme, laadukkaat Starboardin kovat SUP-laudat ja turvallinen harjoitteluympäristö luovat hyvän alustan SUP melontaan. Järjestämme SUP alkeiskursseja, SUP retkiä, SUP välineiden vuokrausta, SUP Joogaa sekä muita hauskoja aktiviteetteja supeilla. </P>
+                        <br>
+                        <h3>Mitä on SUP?</h3>
+                        <br>
+                        <p>Hawaiilta alunperin lähtöisin oleva suppaus eli SUP melonta (Stand Up Paddle) on erittäin hauska ja helposti omaksuttava liikuntamuoto vesillä, jossa liikutaan seisaaltaan meloen surffilautaa muistuttavan laudan päällä. Voit retkeillä, joogata, kuntoilla, surffata aalloilla ja nauttia veden äärellä liikkumisesta erilaisissa vesistöissä. Suppailu on lisäksi erittäin tehokas kokovartalotreeni! Suomen luonto ja saaristo tarjoaa erinomaiset puitteet SUP-melontaan. </p>  
+            </div>
 
 </body>
 </html>

@@ -1081,6 +1081,22 @@ img.mobile-nav-logo {
     width: 70%;
 }
 
+.content-wrapper.content-page img.retkicover {
+    width: 100%;
+}
+
+.content-wrapper.content-page span {
+    font-weight: 400;
+}
+
+.content-wrapper.content-page.retket p {
+    margin-top: 20px;
+}
+
+.content-wrapper.content-page.retket h3 { margin-top: 60px; text-align: left;}
+
+
+
 .content-wrapper.content-page img.henkilokuva {
     width: 70%;
 }

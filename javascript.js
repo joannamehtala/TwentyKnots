@@ -74,7 +74,6 @@ $(function() {
         if(trueOrFalse){
         	var korkeus = $( window ).height()-25;
         	$(".content-wrapper").css('margin-top', korkeus);
-        	console.log(korkeus);
         } else {
         	$(".content-wrapper").css('margin-top', '0');
         }      
@@ -94,7 +93,6 @@ $(function() {
 	            $(".mobile-navigation").css('display', 'block');
 	            onkoAuki = true;
 	        } else {
-	              console.log("hello");
 	              $(".mobile-navigation").css('display', 'none');
 	              onkoAuki = false;
 	        }

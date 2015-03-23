@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
     <style type="text/css">
       html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
     </style>
@@ -8,32 +9,7 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1pEM1hGTESl2YoesdrVnhuWfCdBsvJ78&sensor=false">
     </script>
     <script type="text/javascript">
-        
-        
-    /********** Luodaan retki objekti ja array johon niitä tallennetaan **********/    
-    
-    /* retkien koordinaattien säilömiseen suunniteltu array */    
-        
-        
-    /* luodaan rekti olio */
-    function retki(nimi, koordinaatit, kuvaus, zoomLevel){
-        this.nimi = nimi;
-        this.koordinaatit = koordinaatit;
-        this.kuvaus = kuvaus;
-        this.zoomLevel = zoomLevel;
-    }   
-        
-   
-    
-    /* luodaan retkiä */    
-    var suvisaaristo = new retki("suvisaaristo", [60.13176, 24.793814], "tämä on kuvaus", 12);
-        
-        
-        
-    console.log(suvisaaristo.nimi); 
-    console.log(suvisaaristo.koordinaatit[0]); 
-        
-        
+            
     /********  GOOGLE MAPS SETIT ALKAA ********/    
      function initialize() {
         var mapOptions = {
@@ -43,44 +19,103 @@
         };
         var map = new google.maps.Map(document.getElementById('map-canvas'),
             mapOptions);
-          
-          
-        var contentString = '<div id="content">'+
-                  '<div id="siteNotice">'+
-                  '</div>'+
-                  '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
-                  '<div id="bodyContent">'+
-                  '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
-                  'sandstone rock formation in the southern part of the '+
-                  'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
-                  'south west of the nearest large town, Alice Springs; 450&#160;km '+
-                  '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
-                  'features of the Uluru - Kata Tjuta National Park. Uluru is '+
-                  'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
-                  'Aboriginal people of the area. It has many springs, waterholes, '+
-                  'rock caves and ancient paintings. Uluru is listed as a World '+
-                  'Heritage Site.</p>'+
-                  '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
-                  'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
-                  '(last visited June 22, 2009).</p>'+
-                  '</div>'+
-                  '</div>';
 
-              var infowindow = new google.maps.InfoWindow({
-                  content: contentString
-              });
-
-              var marker = new google.maps.Marker({
+        var marker = new google.maps.Marker({
                   position: { lat: 60.13176, lng: 24.793814},
                   map: map,
                   title: 'Uluru (Ayers Rock)'
+        });
+
+        google.maps.event.addListener(marker, 'click', function() {
+                suvisaaristo.piirraReitti(map);
+                suvisaaristo.avaaInfoWindow(map, marker);
               });
-              google.maps.event.addListener(marker, 'click', function() {
-                infowindow.open(map,marker);
-              });  
-          
-      }
-      google.maps.event.addDomListener(window, 'load', initialize);
+
+        
+
+         
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+
+      /********** Luodaan retki objekti ja array johon niitä tallennetaan **********/    
+    
+    /* retkien koordinaattien säilömiseen suunniteltu array */    
+        
+        
+    /* luodaan rekti olio */
+    function retki(nimi, koordinaatit, tiedot, zoomLevel){
+        this.nimi = nimi;
+        this.koordinaatit = koordinaatit;
+        this.tiedot = tiedot;
+        this.zoomLevel = zoomLevel;
+        this.muutaZoom = function(kartta) {
+          kartta.setZoom(this.zoomLevel);
+          console.log("muutettu");
+        }
+        this.piirraReitti = function(kartta) {
+          var reitti = new google.maps.Polyline({
+            path: suvisaaristo.koordinaatit,
+            geodesic: true,
+            strokeColor: '#FFFFFF',
+            strokeOpacity: 1.0,
+            strokeWeight: 2
+            });
+            reitti.setMap(kartta);
+            this.muutaZoom(kartta);
+        }
+
+        this.avaaInfoWindow = function(map, marker){
+            var info = tiedot.annaHTMLMuodossa(); 
+            var infowindow = new google.maps.InfoWindow({
+                  content: info
+            });
+
+            infowindow.open(map, marker);
+        }
+    }
+
+    function tiedot(nimi, kuvaus, ajankohta, kesto, hinta){
+        this.nimi = nimi;
+        this.kuvaus = kuvaus;
+        this.ajankohta = ajankohta;
+        this.kesto = kesto;
+        this.hinta = hinta;
+
+        this.annaHTMLMuodossa = function(){
+            var htmlMuodossa = '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<h1 id="firstHeading" class="firstHeading">'+this.nimi+'</h1>'+
+            '<div id="bodyContent">'+
+            '<p>'+this.kuvaus+'</p>'+
+            '</div>'+
+            '</div>';
+
+            return htmlMuodossa;
+        }
+    }
+        
+   
+    
+    /* luodaan retkiä */ 
+    var nimi = "suvisaaristo";
+    var kuvaus = "Kevään ensimmäisellä retkellä kierrämme kauniin Suinon saaren. Monipuolisen melontareitin varrella pääsee ihastelemaan saaren kaunista luontoa, upeita näkymiä aavalle merelle sekä suloisia saaristohuviloita. Pysähdymme retken aikana luodolle nauttimaan kuumaa juotavaa ja retkieväitä. Jokainen osallistuja saa paikanpäältä lämpimän märkäpuvun ja tossut.";
+    var ajankohta = "huhtikuu";
+    var kesto = "2 tuntia";
+    var hinta = "50 €"; 
+    var tiedotSuvisaaristo = new tiedot(nimi, kuvaus, ajankohta, kesto, hinta);
+
+    var suvisaaristo = new retki("suvisaaristo", [
+      new google.maps.LatLng(60.13176, 24.793814),
+      new google.maps.LatLng(60.135664, 24.814234),
+      new google.maps.LatLng(60.124721, 24.824534),
+      new google.maps.LatLng(60.117024, 24.797068),
+      new google.maps.LatLng(60.128996, 24.791232),
+      new google.maps.LatLng(60.13176, 24.793814)
+      ], tiedotSuvisaaristo, 14);
+    
+
     </script>
   </head>
   <body>

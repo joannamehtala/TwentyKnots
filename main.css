@@ -173,12 +173,22 @@ html {
 
 /*  Nuoli logot  */
 
-img.arrow_logo {
+a.arrow_logo {
+	display: block;
 	width: 50px;
 	position: absolute;
-	bottom: 65px;
+	bottom: 50px;
 	left: 47%;
 	margin-left: 0;
+}
+
+a.arrow_logo img {
+	display: block;
+	width: 100%;
+	height: auto;
+	margin: 0;
+	padding: 0;
+	border: none;
 }
 
 img.arrow_logo.sup {

@@ -166,14 +166,21 @@ $(function() {
     		}
 		}); 
 
-		/* Scroll down */
+		/* Scroll down sub-navigation */
 		$(".sub-navigation li").click(function() {
 			var kohde = $(this).attr("class");
 	    	$.scrollTo( '#'+kohde+'-anchor', 1000, {
 	    		'axis':'y'
 	    	});
 
+	    });
 
+	    /* Scroll down arrow-logo */
+		$(".scrollto").click(function() {
+	    	$.scrollTo($(this).attr("href"), 1000, {
+	    		'axis':'y'
+	    	});	
+	    	return false; 
 		});
 
     }

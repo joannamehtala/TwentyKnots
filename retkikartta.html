@@ -95,8 +95,7 @@
             return htmlMuodossa;
         }
     }
-        
-   
+
     
     /* luodaan retkiä */ 
     var nimi = "suvisaaristo";
@@ -114,6 +113,11 @@
       new google.maps.LatLng(60.128996, 24.791232),
       new google.maps.LatLng(60.13176, 24.793814)
       ], tiedotSuvisaaristo, 14);
+
+    var marker = new google.maps.Marker({
+                  position: { lat: 60.124721, lng: 24.824534},
+                  map: map
+    });
     
 
     </script>

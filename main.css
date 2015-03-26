@@ -177,12 +177,29 @@ a.arrow_logo {
 	display: block;
 	width: 50px;
 	position: absolute;
-	bottom: 50px;
+	bottom: 35px;
 	left: 47%;
 	margin-left: 0;
 }
 
 a.arrow_logo img {
+	display: block;
+	width: 100%;
+	height: auto;
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+a.down_logo {
+	display: block;
+	width: 50px;
+	position: absolute;
+	bottom: 35px;
+	left: 47%;
+	margin-left: 0;
+}
+
+a.down_logo img {
 	display: block;
 	width: 100%;
 	height: auto;

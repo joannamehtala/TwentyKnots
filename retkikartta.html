@@ -23,17 +23,13 @@
         };
         map = new google.maps.Map(document.getElementById('map-canvas'),
             mapOptions);
+        
+        suvisaaristo.markkerit[0].setMap(map);
 
-        var marker = new google.maps.Marker({
-                  position: { lat: 60.13176, lng: 24.793814},
-                  map: map,
-                  title: 'Uluru (Ayers Rock)'
-        });
-
-        google.maps.event.addListener(marker, 'click', function() {
+        google.maps.event.addListener(suvisaaristo.markkerit[0], 'click', function() {
                 suvisaaristo.piirraReitti(map);
-                suvisaaristo.avaaInfoWindow(map, marker);
-                suvisaaristo.markkerit[0].setMap(map);
+                suvisaaristo.avaaInfoWindow(map, suvisaaristo.markkerit[0]);
+                suvisaaristo.markkerit[1].setMap(map);
               });
 
         
@@ -122,7 +118,16 @@
         
         
     var image = new google.maps.MarkerImage("images/karttaicons/kamera.png", null, null, null, new      google.maps.Size(54, 54));
+    var image2 = new google.maps.MarkerImage("images/karttaicons/markkeri.png", null, null, null, new      google.maps.Size(54, 84));
     
+    
+    var aloitus = new google.maps.Marker({
+                  position: { lat: 60.13176, lng: 24.793814},
+                  map: map,
+                  icon: image2
+    });    
+        
+        
     /* luodaan retken markkereita */    
     var kuvia1  = new google.maps.Marker({
                   position: { lat: 60.135023, lng: 24.816037},
@@ -131,9 +136,9 @@
     });
     
     /* lisätäänmarkkerit retken markkerit listaan */
+    suvisaaristo.markkerit.push(aloitus);
     suvisaaristo.markkerit.push(kuvia1);
         
-    console.log(suvisaaristo.markkerit[0]);
     
 
     </script>

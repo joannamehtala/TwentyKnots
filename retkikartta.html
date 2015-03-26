@@ -119,11 +119,16 @@
       new google.maps.LatLng(60.128996, 24.791232),
       new google.maps.LatLng(60.13176, 24.793814)
       ], tiedotSuvisaaristo, 14);
-
+        
+        
+        
+    var image = 'images/karttaicons/kamera.png'; 
+    
     /* luodaan retken markkereita */    
     var kuvia1  = new google.maps.Marker({
                   position: { lat: 60.135023, lng: 24.816037},
-                  map: map
+                  map: map,
+                  icon: image
     });
     
     /* lisätäänmarkkerit retken markkerit listaan */

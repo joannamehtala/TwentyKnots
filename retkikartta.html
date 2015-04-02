@@ -30,7 +30,13 @@
                 suvisaaristo.piirraReitti(map);
                 suvisaaristo.avaaInfoWindow(map, suvisaaristo.markkerit[0]);
                 suvisaaristo.markkerit[1].setMap(map);
-              });
+                suvisaaristo.markkerit[2].setMap(map);
+        });
+
+        google.maps.event.addListener(suvisaaristo.markkerit[1], 'click', function() {
+                console.log("Menee tanne");
+                kuva1.avaaKuvaWindow(map, suvisaaristo.markkerit[1]);
+        });
     
     }
         
@@ -127,6 +133,25 @@
         }
     }
 
+    function kuva(kuvatiedosto, markkeri){
+        this.kuvatiedosto = kuvatiedosto;
+        this.markkeri = markkeri;
+
+        this.avaaKuvaWindow = function(map, markkeri){
+            var kuvaWindow = new google.maps.InfoWindow({
+                  content: '<div id="content">'+
+                            '<div id="siteNotice">'+
+                            '</div>'+
+                            '<div id="bodyContent">'+
+                            '<img src="'+this.kuvatiedosto+'" width="500">'+
+                            '</div>'+
+                            '</div>'
+                            });
+
+            kuvaWindow.open(map, markkeri);
+        }
+    }
+
     
     /* luodaan retkiä */ 
     var nimi = "suvisaaristo";
@@ -145,8 +170,7 @@
       new google.maps.LatLng(60.13176, 24.793814)
       ], tiedotSuvisaaristo, 14);
         
-        
-    var image = new google.maps.MarkerImage("images/karttaicons/kamera.png", null, null, null, new      google.maps.Size(54, 54));
+    var image = new google.maps.MarkerImage("images/karttaicons/kamera.png", null, null, null, new      google.maps.Size(40, 40));
     var image2 = new google.maps.MarkerImage("images/karttaicons/markkeri.png", null, null, null, new      google.maps.Size(54, 84));
     
     
@@ -158,16 +182,26 @@
         
         
     /* luodaan retken markkereita */    
-    var kuvia1  = new google.maps.Marker({
-                  position: { lat: 60.135023, lng: 24.816037},
+    var kuvia1 = new google.maps.Marker({
+                  position: { lat: 60.135023, lng: 24.816037 },
                   map: map,
                   icon: image
     });
+
+    var kuvia2 = new google.maps.Marker({
+                  position: { lat: 60.124721, lng: 24.824534 },
+                  map: map,
+                  icon: image
+    })
+
+
     
     /* lisätäänmarkkerit retken markkerit listaan */
     suvisaaristo.markkerit.push(aloitus);
     suvisaaristo.markkerit.push(kuvia1);
-        
+    suvisaaristo.markkerit.push(kuvia2);
+
+    var kuva1 = new kuva("images/supyoga.jpg", suvisaaristo.markkerit[1]);
     
 
     </script>

@@ -32,15 +32,12 @@
                 suvisaaristo.piirraReitti(map);
                 suvisaaristo.avaaInfoWindow(map, suvisaaristo.markkerit[0]);
                 suvisaaristo.markkerit[1].setMap(map);
-<<<<<<< HEAD
-=======
                 suvisaaristo.markkerit[2].setMap(map);
         });
 
         google.maps.event.addListener(suvisaaristo.markkerit[1], 'click', function() {
                 console.log("Menee tanne");
                 kuva1.avaaKuvaWindow(map, suvisaaristo.markkerit[1]);
->>>>>>> origin/master
         });
     
     }

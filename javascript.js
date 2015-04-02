@@ -1,9 +1,5 @@
 
 
-
-
-
-
 $(function() {
 
 	initContentPage();
@@ -137,7 +133,7 @@ $(function() {
     }
 
 
-    /*    Dropdown for main navigation mobile & mmobile navigatio   */
+    /*    Dropdown for main navigation mobile & mobile navigation   */
     var initDropdownMenuMobile = function(){
     	$('.main-navigation li').css('height', 'auto');
     	$('.main-navigation li').click(function(){

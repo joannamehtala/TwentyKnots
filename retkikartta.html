@@ -5,8 +5,10 @@
     <style type="text/css">
       html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
     </style>
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1pEM1hGTESl2YoesdrVnhuWfCdBsvJ78&sensor=false">
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1pEM1hGTESl2YoesdrVnhuWfCdBsvJ78&sensor=false&libraries=places,drawing,geometry">
     </script>
     <script type="text/javascript">
             
@@ -30,42 +32,12 @@
                 suvisaaristo.piirraReitti(map);
                 suvisaaristo.avaaInfoWindow(map, suvisaaristo.markkerit[0]);
                 suvisaaristo.markkerit[1].setMap(map);
-              });
+        });
     
     }
         
-    
-        
-    var departure = new google.maps.LatLng(-6.18049, 106.82638); //Set to whatever lat/lng you need for your departure location
-    var arrival = new google.maps.LatLng(-6.17770, 106.82141); //Set to whatever lat/lng you need for your arrival location
-    var line = new google.maps.Polyline({
-        path: [departure, departure],
-        strokeColor: "#FF0000",
-        strokeOpacity: 0.7,
-        strokeWeight: 2,
-        geodesic: true, //set to false if you want straight line instead of arc
-        map: map,
-    });
-    var step = 0;
-    var numSteps = 250; //Change this to set animation resolution
-    var timePerStep = 5; //Change this to alter animation speed
-    var interval = setInterval(function() {
-       step += 1;
-       if (step > numSteps) {
-           clearInterval(interval);
-       } else {
-           var are_we_there_yet = google.maps.geometry.spherical.interpolate(departure,arrival,step/numSteps);
-           line.setPath([departure, are_we_there_yet]);
-       }
-    }, timePerStep);    
-
-        
-      
-    
         
         
-        
-
     google.maps.event.addDomListener(window, 'load', initialize);
 
       /********** Luodaan retki objekti ja array johon niitä tallennetaan **********/    
@@ -82,19 +54,68 @@
         this.markkerit = [];
         this.muutaZoom = function(kartta) {
           kartta.setZoom(this.zoomLevel);
-          console.log("muutettu");
         }
         this.piirraReitti = function(kartta) {
-          var reitti = new google.maps.Polyline({
-            path: suvisaaristo.koordinaatit,
-            geodesic: true,
-            strokeColor: '#003366',
-            strokeOpacity: 0.5,
-            strokeWeight: 7
+           
+            var x = 0;
+            var departure = suvisaaristo.koordinaatit[x];
+            var arrival = suvisaaristo.koordinaatit[x+1];
+            var reitti = new google.maps.Polyline({
+                path: [departure, departure],
+                strokeColor: "#FF0000",
+                strokeOpacity: 0.7,
+                strokeWeight: 2,
+                geodesic: true, //set to false if you want straight line instead of arc
+                map: kartta,
             });
-            reitti.setMap(kartta);
+               
+            var step = 0;
+            var numSteps = 100; //Change this to set animation resolution
+            var timePerStep = 2; //Change this to alter animation speed
+            var interval;
+            var path = [];
+            var ensimmainenKerta = true;
+            
+            function alustaAnimaatio(){
+                
+                departure = suvisaaristo.koordinaatit[x];
+                arrival = suvisaaristo.koordinaatit[x+1];
+                step = 0;
+                if(x < suvisaaristo.koordinaatit.length-1){
+                    interval = setInterval(animoiReitti, timePerStep);
+                }
+    
+            }
+                
+            function animoiReitti(){
+                   
+                   step += 1;
+                   if (step > numSteps) {
+                       
+                       
+                       clearInterval(interval);
+                       x++;
+                       alustaAnimaatio();
+                   } else { 
+                       var are_we_there_yet = google.maps.geometry.spherical.interpolate(departure,arrival,step/numSteps);
+                       if(ensimmainenKerta){
+                         path.push(are_we_there_yet);
+                         path.push(departure);
+                         ensimmainenKerta = false;
+                       } else {
+                         path.push(departure);
+                         path[path.length-1] = are_we_there_yet;
+                       }
+                       reitti.setPath(path);       
+                   }       
+            }
+            
+        
+            alustaAnimaatio();
+  
             this.muutaZoom(kartta);
         }
+    
 
         this.avaaInfoWindow = function(map, marker){
             var info = tiedot.annaHTMLMuodossa(); 

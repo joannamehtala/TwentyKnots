@@ -1128,6 +1128,27 @@ img.mobile-nav-logo {
     width: 70%;
 }
 
+.content-wrapper.content-page img.tiimikuva {
+    width: 40%;
+    margin-bottom: 20px;
+}
+
+.profiili{
+	margin-top: 50px;
+	text-align: left;
+	display: inline-block;
+}
+
+.profiilinimi {
+	position: left;
+	margin-bottom: 20px;
+}
+
+.esittely{
+	display: inline-block;
+	float: left;
+
+}
 
 @media only screen and (min-width: 1050px) {
     .content-wrapper.content-page {

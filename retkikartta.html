@@ -5,6 +5,7 @@
     <style type="text/css">
       html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
     </style>
+    <link rel="stylesheet" href="kartta_style.css">
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript"
@@ -144,6 +145,7 @@
         this.avaaInfoWindow = function(map, marker){
             var info = tiedot.annaHTMLMuodossa(); 
             var infowindow = new google.maps.InfoWindow({
+                  maxWidth: 400,
                   content: info
             });
 
@@ -167,7 +169,7 @@
         this.hinta = hinta;
 
         this.annaHTMLMuodossa = function(){
-            var htmlMuodossa = '<div id="content">'+
+            var htmlMuodossa = '<div id="content" class="infobox">'+
             '<div id="siteNotice">'+
             '</div>'+
             '<h1 id="firstHeading" class="firstHeading">'+this.nimi+'</h1>'+
@@ -191,7 +193,7 @@
 
         this.avaaKuvaWindow = function(map, markkeri){
             var kuvaWindow = new google.maps.InfoWindow({
-                  content: '<div id="content">'+
+                  content: '<div id="content" class="infobox">'+
                             '<div id="siteNotice">'+
                             '</div>'+
                             '<div id="bodyContent">'+

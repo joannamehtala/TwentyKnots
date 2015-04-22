@@ -5,7 +5,6 @@
     <style type="text/css">
       html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
     </style>
-    <link rel="stylesheet" href="kartta_style.css">
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript"
@@ -16,7 +15,8 @@
     /********  GOOGLE MAPS SETIT ALKAA ********/    
      
     /* meidän pääkartta */    
-    var map;    
+    var map;
+    var retket = [];
     
     function initialize() {
         var mapOptions = {
@@ -24,23 +24,36 @@
           zoom: 12
         
         };
+        
         map = new google.maps.Map(document.getElementById('map-canvas'),
             mapOptions);
         
-        suvisaaristo.markkerit[0].setMap(map);
+        
+        
+        
+        //alustetaan kaikki retket
+        var j = 0;
+        while(j < retket.length){
+            var retki = retket[j]
+            retki.ikonit[0].setMap(map);
+            google.maps.event.addListener(retki.ikonit[0], 'click', function() {
+                
+                retki.piirraReitti(map);
+                //suvisaaristo.avaaInfoWindow(map, suvisaaristo.ikonit[0]);
 
-        google.maps.event.addListener(suvisaaristo.markkerit[0], 'click', function() {
-                suvisaaristo.piirraReitti(map);
-                suvisaaristo.avaaInfoWindow(map, suvisaaristo.markkerit[0]);
-                suvisaaristo.markkerit[1].setMap(map);
-                suvisaaristo.markkerit[2].setMap(map);
-        });
+                var i = 0;
+                while(i < retki.ikonit.length){
+                    retki.ikonit[i].setMap(map);
+                    i++;
+                }
+            });
 
-        google.maps.event.addListener(suvisaaristo.markkerit[1], 'click', function() {
-                console.log("Menee tanne");
-                kuva1.avaaKuvaWindow(map, suvisaaristo.markkerit[1]);
-        });
-    
+            google.maps.event.addListener(retki.ikonit[1], 'click', function() {
+                    kuva1.avaaKuvaWindow(map, retki.ikonit[1]);
+            });
+            
+            j++;
+        };
     }
         
     
@@ -56,14 +69,13 @@
     /****************** luodaan retki olio ******************/
     /********************************************************/
         
-    function retki(nimi, koordinaatit, tiedot, zoomLevel){
+    function retki(koordinaatit, tiedot, zoomLevel){
         
         /* attribuutit */
-        this.nimi = nimi;
         this.koordinaatit = koordinaatit;
         this.tiedot = tiedot;
         this.zoomLevel = zoomLevel;
-        this.markkerit = [];
+        this.ikonit = [];
         
         
         /* funktioita */
@@ -132,7 +144,6 @@
         this.avaaInfoWindow = function(map, marker){
             var info = tiedot.annaHTMLMuodossa(); 
             var infowindow = new google.maps.InfoWindow({
-                  maxWidth: 400,
                   content: info
             });
 
@@ -156,7 +167,7 @@
         this.hinta = hinta;
 
         this.annaHTMLMuodossa = function(){
-            var htmlMuodossa = '<div id="content" class="infobox">'+
+            var htmlMuodossa = '<div id="content">'+
             '<div id="siteNotice">'+
             '</div>'+
             '<h1 id="firstHeading" class="firstHeading">'+this.nimi+'</h1>'+
@@ -180,7 +191,7 @@
 
         this.avaaKuvaWindow = function(map, markkeri){
             var kuvaWindow = new google.maps.InfoWindow({
-                  content: '<div id="content" class="infobox">'+
+                  content: '<div id="content">'+
                             '<div id="siteNotice">'+
                             '</div>'+
                             '<div id="bodyContent">'+
@@ -207,7 +218,8 @@
     var hinta = "50 €"; 
     var tiedotSuvisaaristo = new tiedot(nimi, kuvaus, ajankohta, kesto, hinta);
 
-    var suvisaaristo = new retki("suvisaaristo", [
+        
+    var suvisaaristo = new retki([
       new google.maps.LatLng(60.13176, 24.793814),
       new google.maps.LatLng(60.135664, 24.814234),
       new google.maps.LatLng(60.124721, 24.824534),
@@ -216,8 +228,15 @@
       new google.maps.LatLng(60.13176, 24.793814)
       ], tiedotSuvisaaristo, 14);
         
+    retket.push(suvisaaristo);
+        
+/* luodaan google maps kuvaiconit */        
+        
     var image = new google.maps.MarkerImage("images/karttaicons/kamera.png", null, null, null, new      google.maps.Size(40, 40));
     var image2 = new google.maps.MarkerImage("images/karttaicons/markkeri.png", null, null, null, new      google.maps.Size(54, 84));
+    var imageinfo = new google.maps.MarkerImage("images/karttaicons/info.png", null, null, null, new      google.maps.Size(40, 40));
+    var imagesaa = new google.maps.MarkerImage("images/karttaicons/saa.png", null, null, null, new      google.maps.Size(40, 40));
+    var imagekalenteri = new google.maps.MarkerImage("images/karttaicons/kalenteri.png", null, null, null, new      google.maps.Size(40, 40));
     
     
     var aloitus = new google.maps.Marker({
@@ -239,17 +258,45 @@
                   map: map,
                   icon: image
     })
-
+    
+    
+    
+    
+    var info = new google.maps.Marker({
+                  position: { lat: suvisaaristo.koordinaatit[0].lat()+0.005, lng: suvisaaristo.koordinaatit[0].lng()+0.003 },
+                  map: map,
+                  icon: imageinfo
+    })
+    
+    var saa = new google.maps.Marker({
+                  position: { lat: suvisaaristo.koordinaatit[0].lat()+0.005, lng: suvisaaristo.koordinaatit[0].lng()+0.008 },
+                  map: map,
+                  icon: imagesaa
+    })
+    
+    var kalenteri = new google.maps.Marker({
+                  position: { lat: suvisaaristo.koordinaatit[0].lat()+0.005, lng: suvisaaristo.koordinaatit[0].lng()+0.013 },
+                  map: map,
+                  icon: imagekalenteri
+    })
 
     
-    /* lisätäänmarkkerit retken markkerit listaan */
-    suvisaaristo.markkerit.push(aloitus);
-    suvisaaristo.markkerit.push(kuvia1);
-    suvisaaristo.markkerit.push(kuvia2);
+    /* lisätäänikonit retken ikonit listaan */
+    suvisaaristo.ikonit.push(aloitus);
+    suvisaaristo.ikonit.push(kuvia1);
+    suvisaaristo.ikonit.push(kuvia2);
+    suvisaaristo.ikonit.push(info);
+    suvisaaristo.ikonit.push(saa);
+    suvisaaristo.ikonit.push(kalenteri);
 
-    var kuva1 = new kuva("images/supyoga.jpg", suvisaaristo.markkerit[1]);
+    var kuva1 = new kuva("images/supyoga.jpg", suvisaaristo.ikonit[1]);
     
 
+        
+        
+        
+        
+        
     </script>
   </head>
   <body>

@@ -6,6 +6,7 @@
       html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
     </style>
     <link rel="stylesheet" href="kartta_style.css">
+    <script src="infobubble.js"></script>
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript"
@@ -52,7 +53,15 @@
             google.maps.event.addListener(retki.ikonit[1], 'click', function() {
                     kuva1.avaaKuvaWindow(map, retki.ikonit[1]);
             });
+
+            google.maps.event.addListener(retki.ikonit[2], 'click', function() {
+                    tiedotSuvisaaristo.avaaInfoWindow(map, retki.ikonit[2]);
+            });
             
+            google.maps.event.addListener(retki.ikonit[3], 'click', function() {
+                    saaSuvisaaristo.avaaSaaWindow(map, retki.ikonit[3]);
+            });
+
             j++;
         };
     }
@@ -113,9 +122,9 @@
             var arrival = suvisaaristo.koordinaatit[x+1];
             var reitti = new google.maps.Polyline({
                 path: [departure, departure],
-                strokeColor: "#FF0000",
-                strokeOpacity: 0.7,
-                strokeWeight: 2,
+                strokeColor: "#335A9F",
+                strokeOpacity: 1,
+                strokeWeight: 6,
                 geodesic: true, //set to false if you want straight line instead of arc
                 map: kartta,
             });
@@ -160,18 +169,7 @@
             alustaAnimaatio();
             this.muutaZoom(kartta);
         }
-    
-
-        
-        this.avaaInfoWindow = function(map, marker){
-            var info = tiedot.annaHTMLMuodossa(); 
-            var infowindow = new google.maps.InfoWindow({
-                  maxWidth: 400,
-                  content: info
-            });
-
-            infowindow.open(map, marker);
-        }
+  
     }
 
         
@@ -188,6 +186,21 @@
         this.ajankohta = ajankohta;
         this.kesto = kesto;
         this.hinta = hinta;
+
+        this.avaaInfoWindow = function(map, marker){
+            var info = this.annaHTMLMuodossa(); 
+            var infowindow = new InfoBubble({
+                  maxWidth: 400,
+                  map: map,
+                  backgroundColor: 'rgba(255,255,255,0.7)',
+                  borderRadius: 3,
+                  borderColor: 'rgba(255,255,255,0.7)',
+                  shadowStyle: 0,
+                  content: info
+            });
+
+            infowindow.open(map, marker);
+        }
 
         this.annaHTMLMuodossa = function(){
             var htmlMuodossa = '<div id="content" class="infobox">'+
@@ -208,12 +221,16 @@
  /********************************************************/            
    
         
-    function kuva(kuvatiedosto, markkeri){
+    function kuva(kuvatiedosto){
         this.kuvatiedosto = kuvatiedosto;
-        this.markkeri = markkeri;
 
-        this.avaaKuvaWindow = function(map, markkeri){
-            var kuvaWindow = new google.maps.InfoWindow({
+        this.avaaKuvaWindow = function(map, marker){
+            var kuvaWindow = new InfoBubble({
+                  map: map,
+                  backgroundColor: 'rgba(255,255,255,0.7)',
+                  borderRadius: 3,
+                  borderColor: 'rgba(255,255,255,0.7)',
+                  shadowStyle: 0,
                   content: '<div id="content" class="infobox">'+
                             '<div id="siteNotice">'+
                             '</div>'+
@@ -223,26 +240,49 @@
                             '</div>'
                             });
 
-            kuvaWindow.open(map, markkeri);
+            kuvaWindow.open(map, marker);
         }
     }
 
+ /********************************************************/
+ /****************** luodaan saa olio *******************/
+ /********************************************************/
+
+
+    function saa(otsikko, kuvaus){
+        this.otsikko = otsikko;
+        this.kuvaus = kuvaus;
+
+        this.avaaSaaWindow = function(map, marker){
+            var saaWindow = new InfoBubble({
+                  map: map,
+                  backgroundColor: 'rgba(255,255,255,0.7)',
+                  borderRadius: 3,
+                  borderColor: 'rgba(255,255,255,0.7)',
+                  shadowStyle: 0,
+                  content: '<div id="content" class="infobox">'+
+                           '<div id="siteNotice">'+
+                           '</div>'+
+                           '<h1 id="firstHeading" class="firstHeading">'+this.otsikko+'</h1>'+
+                           '<div id="bodyContent">'+
+                           '<p>'+this.kuvaus+'</p>'+
+                           '</div>'+
+                           '</div>'
+                          });
+
+            saaWindow.open(map, marker);
+        }
+    }
+
+
         
- /* luodaan google maps kuvaiconit */        
+ /* luodaan google maps kuvaikonit */        
         
     var image = new google.maps.MarkerImage("images/karttaicons/kamera.png", null, null, null, new      google.maps.Size(40, 40));
     var image2 = new google.maps.MarkerImage("images/karttaicons/markkeri.png", null, null, null, new      google.maps.Size(54, 84));
     var imageinfo = new google.maps.MarkerImage("images/karttaicons/info.png", null, null, null, new      google.maps.Size(40, 40));
     var imagesaa = new google.maps.MarkerImage("images/karttaicons/saa.png", null, null, null, new      google.maps.Size(40, 40));
     var imagekalenteri = new google.maps.MarkerImage("images/karttaicons/kalenteri.png", null, null, null, new      google.maps.Size(40, 40));        
-        
-        
-        
-        
-        
-        
-        
-        
         
     
  /********************************************************/
@@ -256,6 +296,8 @@
     var kesto = "2 tuntia";
     var hinta = "50 €"; 
     var tiedotSuvisaaristo = new tiedot(nimi, kuvaus, ajankohta, kesto, hinta);
+    var saaSuvisaaristo = new saa("Suvisaariston sää", "Sääpalvelun tarjoaa Foreca");
+    var kuva1 = new kuva("images/supyoga.jpg");
 
         
     var suvisaaristo = new retki([
@@ -289,20 +331,18 @@
                   icon: imagekalenteri
     })
     
-     var kuvat = new google.maps.Marker({
+    var kuvat = new google.maps.Marker({
                   position: { lat: suvisaaristo.koordinaatit[0].lat()+suvisaaristo.ikonilisa, lng: suvisaaristo.koordinaatit[0].lng()+0.018 },
                   map: map,
                   icon: image
     });
 
     
-    /* lisätäänikonit retken ikonit listaan */
+    /* lisätään retken ikonit listaan */
     suvisaaristo.ikonit.push(kuvat);
     suvisaaristo.ikonit.push(info);
     suvisaaristo.ikonit.push(saa);
     suvisaaristo.ikonit.push(kalenteri);
-
-    var kuva1 = new kuva("images/supyoga.jpg", suvisaaristo.ikonit[1]);
     
 
         

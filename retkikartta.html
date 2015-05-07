@@ -64,10 +64,15 @@
                     var klikattuRetki2 = retket[this.retkenNumero];
                     klikattuRetki2.saa.avaaSaaWindow(map, klikattuRetki2.ikonit[2]);
             });
+
+            google.maps.event.addListener(retki.ikonit[3], 'click', function() {
+                    var klikattuRetki3 = retket[this.retkenNumero];
+                    klikattuRetki3.kalenteri.avaaKalenteriWindow(map, klikattuRetki3.ikonit[3]);
+            });
             
             google.maps.event.addListener(retki.ikonit[4], 'click', function() {
-                var klikattuRetki4 = retket[this.retkenNumero];    
-                klikattuRetki4.kuva.avaaKuvaWindow(map, klikattuRetki4.ikonit[4]);
+                    var klikattuRetki4 = retket[this.retkenNumero];    
+                    klikattuRetki4.kuva.avaaKuvaWindow(map, klikattuRetki4.ikonit[4]);
             });
 
 
@@ -88,12 +93,13 @@
     /****************** luodaan retki olio ******************/
     /********************************************************/
         
-    function retki(koordinaatit, tiedot, saa, kuva, zoomLevel){
+    function retki(koordinaatit, tiedot, saa, kalenteri, kuva, zoomLevel){
         
         /* attribuutit */
         this.koordinaatit = koordinaatit;
         this.tiedot = tiedot;
         this.saa = saa;
+        this.kalenteri = kalenteri;
         this.kuva = kuva;
         this.zoomLevel = zoomLevel;
         this.ikonit = [];
@@ -199,9 +205,11 @@
             var info = this.annaHTMLMuodossa(); 
             var infowindow = new InfoBubble({
                   maxWidth: 400,
+                  maxHeight: 400,
                   map: map,
                   backgroundColor: 'rgba(255,255,255,0.7)',
                   borderRadius: 3,
+                  disableAnimation: true,
                   borderColor: 'rgba(255,255,255,0.7)',
                   shadowStyle: 0,
                   content: info
@@ -211,12 +219,17 @@
         }
 
         this.annaHTMLMuodossa = function(){
-            var htmlMuodossa = '<div id="content" class="infobox">'+
-            '<div id="siteNotice">'+
+            var htmlMuodossa = '<div class="infobox">'+
             '</div>'+
-            '<h1 id="firstHeading" class="firstHeading">'+this.nimi+'</h1>'+
-            '<div id="bodyContent">'+
+            '<h1>'+this.nimi+'</h1>'+
+            '<div class="content">'+
             '<p>'+this.kuvaus+'</p>'+
+            '<div class="wrapper left">'+
+            '<p>'+this.ajankohta+'</p>'+
+            '<p>'+this.kesto+'</p>'+
+            '</div>'+
+            '<div class="wrapper right">'+
+            '<p>'+this.hinta+'</p>'+
             '</div>'+
             '</div>';
 
@@ -239,6 +252,7 @@
                   borderRadius: 3,
                   borderColor: 'rgba(255,255,255,0.7)',
                   shadowStyle: 0,
+                  disableAnimation: true,
                   content: '<div id="content" class="infobox">'+
                             '<div id="siteNotice">'+
                             '</div>'+
@@ -268,6 +282,7 @@
                   borderRadius: 3,
                   borderColor: 'rgba(255,255,255,0.7)',
                   shadowStyle: 0,
+                  disableAnimation: true,
                   content: '<div id="content" class="infobox">'+
                            '<div id="siteNotice">'+
                            '</div>'+
@@ -282,6 +297,38 @@
         }
     }
 
+ /********************************************************/
+ /****************** luodaan kalenteri olio *******************/
+ /********************************************************/
+
+
+    function kalenteri(otsikko, kuvaus){
+        this.otsikko = otsikko;
+        this.kuvaus = kuvaus;
+
+        this.avaaKalenteriWindow = function(map, marker){
+            var kalenteriWindow = new InfoBubble({
+                  map: map,
+                  maxWidth: 350,
+                  backgroundColor: 'rgba(255,255,255,0.7)',
+                  borderRadius: 3,
+                  borderColor: 'rgba(255,255,255,0.7)',
+                  shadowStyle: 0,
+                  disableAnimation: true,
+                  content: '<div id="content" class="infobox">'+
+                           '<div id="siteNotice">'+
+                           '</div>'+
+                           '<h1 id="firstHeading" class="firstHeading">'+this.otsikko+'</h1>'+
+                           '<div id="bodyContent">'+
+                           '<p>'+this.kuvaus+'</p>'+
+                           '</div>'+
+                           '</div>'
+                          });
+
+            kalenteriWindow.open(map, marker);
+        }
+
+    }
 
         
  /* luodaan google maps kuvaikonit */        
@@ -305,11 +352,12 @@
     /* luodaan retkiä */ 
     var nimi = "Suvisaaristo";
     var kuvaus = "Kevään ensimmäisellä retkellä kierrämme kauniin Suinon saaren. Monipuolisen melontareitin varrella pääsee ihastelemaan saaren kaunista luontoa, upeita näkymiä aavalle merelle sekä suloisia saaristohuviloita. Pysähdymme retken aikana luodolle nauttimaan kuumaa juotavaa ja retkieväitä. Jokainen osallistuja saa paikanpäältä lämpimän märkäpuvun ja tossut.";
-    var ajankohta = "huhtikuu";
-    var kesto = "2 tuntia";
-    var hinta = "50 €"; 
+    var ajankohta = '<b>'+"Ajankohta:"+'</b>'+" Su 12.4.2015 klo 12:00-15:00";
+    var kesto = '<b>'+"Kesto:"+'</b>'+" n. 3 tuntia (on mahdollista että retken kesto menee yli 3 tunnin).";
+    var hinta = '<b>'+"Hinta:"+'</b>'+" 50€ (Kausikorttilaiset: 25€ ja sarjakorttilaiset: 3 * SUP-vuokra)"; 
     var tiedotSuvisaaristo = new tiedot(nimi, kuvaus, ajankohta, kesto, hinta);
     var saaSuvisaaristo = new saa("Suvisaariston sää", "Sääpalvelun tarjoaa Foreca");
+    var kalenteriSuvisaaristo = new kalenteri("Tulevat retket Suvisaaristoon", "12.04.2015 klo 12:00-15:00");
     var kuva1 = new kuva("images/supyoga.jpg");
 
         
@@ -336,7 +384,7 @@
             new google.maps.LatLng( 60.121799551050096, 24.699668884277344),
             new google.maps.LatLng( 60.12539096269888, 24.69426155090332),
             new google.maps.LatLng( 60.127015520191065, 24.68979835510254),
-      ], tiedotSuvisaaristo, saaSuvisaaristo, kuva1,  14);
+      ], tiedotSuvisaaristo, saaSuvisaaristo, kalenteriSuvisaaristo, kuva1,  14);
         
     retket.push(suvisaaristo);
                 
@@ -350,6 +398,7 @@
     var hinta = "50 €"; 
     var tiedotKaarmeluodot = new tiedot(nimi, kuvaus, ajankohta, kesto, hinta);
     var saaKaarmeluodot = new saa("Suvisaariston sää", "Sääpalvelun tarjoaa Foreca");
+    var kalenteriKaarmeluodot = new kalenteri("Tulevat retket Suvisaaristoon", "12.04.2015 klo 12:00-15:00");
     var kuva1 = new kuva("images/supyoga.jpg");    
     var kaarmeluodot = new retki([    
     
@@ -373,7 +422,7 @@
         new google.maps.LatLng( 60.15043443411743, 24.873390197753906),
         new google.maps.LatLng( 60.15342470046727, 24.873647689819336 ),
 
-    ], tiedotKaarmeluodot, saaKaarmeluodot, kuva1, 14);
+    ], tiedotKaarmeluodot, saaKaarmeluodot, kalenteriKaarmeluodot, kuva1, 14);
         
     retket.push(kaarmeluodot);
         

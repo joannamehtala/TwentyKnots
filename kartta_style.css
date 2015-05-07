@@ -23,3 +23,22 @@ p { font-size: 1.4em; line-height: 1.2em;}
 h2, h3, h4, h5, h6{
 	font-size: 1.2em;
 }
+
+.infobox {
+}
+
+.content {
+}
+
+.wrapper {
+	width: 45%;
+	float: left;
+	text-align: left;
+}
+
+.wrapper.right {
+	width: 50%;
+	float: right;
+	text-align: left;
+
+}

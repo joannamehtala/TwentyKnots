@@ -1,3 +1,25 @@
-infobox {
-	
+h1, h2, h3, h4, h5, li, a {
+ 	font-family: "brandon-grotesque", 'Source Sans Pro', 'Arial Black', 'Arial', 'sans-serif';
+ 	font-weight: 500;
+ 	text-transform: uppercase
+ }
+
+p {
+ 	font-family: 'Source Sans Pro', 'Arial Black', 'Arial', 'sans-serif';
+ 	font-weight: 200;
+ }
+
+
+h2 {
+ 	margin: 0;
+ }
+
+body { font-size: 1em;}
+
+/*leipäteksti*/
+p { font-size: 1.4em; line-height: 1.2em;}
+
+/* otsikko */
+h2, h3, h4, h5, h6{
+	font-size: 1.2em;
 }

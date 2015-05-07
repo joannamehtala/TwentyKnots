@@ -39,31 +39,37 @@
         //alustetaan kaikki retket
         var j = 0;
         while(j < retket.length){
-            var retki = retket[j]
+            var retki = retket[j];
             retki.ikonit[0].setMap(map);
+            
             google.maps.event.addListener(retki.ikonit[0], 'click', function() {
-                
-                retki.piirraReitti(map);
-                //suvisaaristo.avaaInfoWindow(map, suvisaaristo.ikonit[0]);
+                    
+                var klikattuRetki = retket[this.retkenNumero];
+                klikattuRetki.piirraReitti(map);
 
                 var i = 0;
-                while(i < retki.ikonit.length){
-                    retki.ikonit[i].setMap(map);
+                while(i < klikattuRetki.ikonit.length){
+                    klikattuRetki.ikonit[i].setMap(map);
                     i++;
                 }
             });
 
             google.maps.event.addListener(retki.ikonit[1], 'click', function() {
-                    kuva1.avaaKuvaWindow(map, retki.ikonit[1]);
-            });
-
-            google.maps.event.addListener(retki.ikonit[2], 'click', function() {
-                    tiedotSuvisaaristo.avaaInfoWindow(map, retki.ikonit[2]);
+                    console.log(this.retkenNumero);
+                    var klikattuRetki1 = retket[this.retkenNumero];
+                    klikattuRetki1.tiedot.avaaInfoWindow(map, klikattuRetki1.ikonit[1]);
             });
             
-            google.maps.event.addListener(retki.ikonit[3], 'click', function() {
-                    saaSuvisaaristo.avaaSaaWindow(map, retki.ikonit[3]);
+            google.maps.event.addListener(retki.ikonit[2], 'click', function() {
+                    var klikattuRetki2 = retket[this.retkenNumero];
+                    klikattuRetki2.saa.avaaSaaWindow(map, klikattuRetki2.ikonit[2]);
             });
+            
+            google.maps.event.addListener(retki.ikonit[4], 'click', function() {
+                var klikattuRetki4 = retket[this.retkenNumero];    
+                klikattuRetki4.kuva.avaaKuvaWindow(map, klikattuRetki4.ikonit[4]);
+            });
+
 
             j++;
         };
@@ -82,22 +88,17 @@
     /****************** luodaan retki olio ******************/
     /********************************************************/
         
-    function retki(koordinaatit, tiedot, zoomLevel){
+    function retki(koordinaatit, tiedot, saa, kuva, zoomLevel){
         
         /* attribuutit */
         this.koordinaatit = koordinaatit;
         this.tiedot = tiedot;
+        this.saa = saa;
+        this.kuva = kuva;
         this.zoomLevel = zoomLevel;
         this.ikonit = [];
         this.ikonilisa = 0.005; 
         this.latAvg;
-        var aloitusikoni = new google.maps.Marker({
-                  position: { lat: this.koordinaatit[0].lat(), lng: this.koordinaatit[0].lng()},
-                  map: map,
-                  icon: image2
-        }); 
-        
-        this.ikonit.push(aloitusikoni);
         
         /* lasketaan reittipisteiden latitude keskiarvo  */
         var summa = 0;
@@ -117,12 +118,15 @@
           kartta.setZoom(this.zoomLevel);
         }
         
+        this.muutaCenter = function(kartta){
+            kartta.setCenter(this.koordinaatit[0]);
+        }
     
         this.piirraReitti = function(kartta) {
            
             var x = 0;
-            var departure = suvisaaristo.koordinaatit[x];
-            var arrival = suvisaaristo.koordinaatit[x+1];
+            var departure = this.koordinaatit[x];
+            var arrival = this.koordinaatit[x+1];
             var reitti = new google.maps.Polyline({
                 path: [departure, departure],
                 strokeColor: "#335A9F",
@@ -133,18 +137,18 @@
             });
                
             var step = 0;
-            var numSteps = 100; //Change this to set animation resolution
-            var timePerStep = 2; //Change this to alter animation speed
+            var numSteps = 50; //Change this to set animation resolution
+            var timePerStep = 1; //Change this to alter animation speed
             var interval;
             var path = [];
             var ensimmainenKerta = true;
             
             function alustaAnimaatio(){
                 
-                departure = suvisaaristo.koordinaatit[x];
-                arrival = suvisaaristo.koordinaatit[x+1];
+                departure = koordinaatit[x];
+                arrival = koordinaatit[x+1];
                 step = 0;
-                if(x < suvisaaristo.koordinaatit.length-1){
+                if(x < koordinaatit.length-1){
                     interval = setInterval(animoiReitti, timePerStep);
                 }
             }
@@ -171,6 +175,7 @@
             }
             alustaAnimaatio();
             this.muutaZoom(kartta);
+            this.muutaCenter(kartta);
         }
   
     }
@@ -287,7 +292,12 @@
     var imagesaa = new google.maps.MarkerImage("images/karttaicons/saa.png", null, null, null, new      google.maps.Size(40, 40));
     var imagekalenteri = new google.maps.MarkerImage("images/karttaicons/kalenteri.png", null, null, null, new      google.maps.Size(40, 40));        
         
-    
+
+        
+        
+        
+        
+        
  /********************************************************/
  /****************** luodaan retkiä **********************/
  /********************************************************/    
@@ -304,51 +314,130 @@
 
         
     var suvisaaristo = new retki([
-      new google.maps.LatLng(60.13176, 24.793814),
-      new google.maps.LatLng(60.135664, 24.814234),
-      new google.maps.LatLng(60.124721, 24.824534),
-      new google.maps.LatLng(60.117024, 24.797068),
-      new google.maps.LatLng(60.128996, 24.791232),
-      new google.maps.LatLng(60.13176, 24.793814)
-      ], tiedotSuvisaaristo, 14);
+            new google.maps.LatLng( 60.12787051824118, 24.691343307495117),
+            new google.maps.LatLng( 60.127357522076636, 24.694690704345703),
+            new google.maps.LatLng( 60.1282125112417, 24.697608947753906),
+            new google.maps.LatLng( 60.12979418263997, 24.701128005981445),
+            new google.maps.LatLng( 60.133299237518216, 24.70198631286621),
+            new google.maps.LatLng( 60.13547902235875, 24.71022605895996),
+            new google.maps.LatLng( 60.136376538846946, 24.72696304321289),
+            new google.maps.LatLng( 60.13428229561916, 24.73125457763672),
+            new google.maps.LatLng( 60.13278632597922, 24.731769561767578),
+            new google.maps.LatLng( 60.13210243148941, 24.735631942749023),
+            new google.maps.LatLng( 60.12983692946053, 24.73374366760254),
+            new google.maps.LatLng( 60.12757127145036, 24.728593826293945),
+            new google.maps.LatLng( 60.12513444629072, 24.730310440063477),
+            new google.maps.LatLng( 60.12308224305198, 24.72970962524414),
+            new google.maps.LatLng( 60.12252641598807, 24.726791381835938),
+            new google.maps.LatLng( 60.123253264875714, 24.724044799804688),
+            new google.maps.LatLng( 60.122611928454944, 24.717693328857422),
+            new google.maps.LatLng( 60.12205609344919, 24.713315963745117),
+            new google.maps.LatLng( 60.12329602019279, 24.71099853515625),
+            new google.maps.LatLng( 60.121799551050096, 24.699668884277344),
+            new google.maps.LatLng( 60.12539096269888, 24.69426155090332),
+            new google.maps.LatLng( 60.127015520191065, 24.68979835510254),
+      ], tiedotSuvisaaristo, saaSuvisaaristo, kuva1,  14);
         
     retket.push(suvisaaristo);
                 
+     
         
-    /* luodaan retken ikoneita */    
-    var info = new google.maps.Marker({
-                  position: { lat: suvisaaristo.koordinaatit[0].lat()+suvisaaristo.ikonilisa, lng: suvisaaristo.koordinaatit[0].lng()+0.003 },
-                  map: map,
-                  icon: imageinfo
-    })
+     /* luodaan retkiä */ 
+    var nimi = "Käärmeluodot";
+    var kuvaus = "Kevään ensimmäisellä retkellä kierrämme kauniin Suinon saaren. Monipuolisen melontareitin varrella pääsee ihastelemaan saaren kaunista luontoa, upeita näkymiä aavalle merelle sekä suloisia saaristohuviloita. Pysähdymme retken aikana luodolle nauttimaan kuumaa juotavaa ja retkieväitä. Jokainen osallistuja saa paikanpäältä lämpimän märkäpuvun ja tossut.";
+    var ajankohta = "huhtikuu";
+    var kesto = "2 tuntia";
+    var hinta = "50 €"; 
+    var tiedotKaarmeluodot = new tiedot(nimi, kuvaus, ajankohta, kesto, hinta);
+    var saaKaarmeluodot = new saa("Suvisaariston sää", "Sääpalvelun tarjoaa Foreca");
+    var kuva1 = new kuva("images/supyoga.jpg");    
+    var kaarmeluodot = new retki([    
     
-    var saa = new google.maps.Marker({
-                  position: { lat: suvisaaristo.koordinaatit[0].lat()+suvisaaristo.ikonilisa, lng: suvisaaristo.koordinaatit[0].lng()+0.008 },
-                  map: map,
-                  icon: imagesaa
-    })
-    
-    var kalenteri = new google.maps.Marker({
-                  position: { lat: suvisaaristo.koordinaatit[0].lat()+suvisaaristo.ikonilisa, lng: suvisaaristo.koordinaatit[0].lng()+0.013 },
-                  map: map,
-                  icon: imagekalenteri
-    })
-    
-    var kuvat = new google.maps.Marker({
-                  position: { lat: suvisaaristo.koordinaatit[0].lat()+suvisaaristo.ikonilisa, lng: suvisaaristo.koordinaatit[0].lng()+0.018 },
-                  map: map,
-                  icon: image
-    });
+        new google.maps.LatLng(60.15459937355298, 24.872617721557617),
+        new google.maps.LatLng( 60.15171601014133, 24.86952781677246),
+        new google.maps.LatLng( 60.15069075331861, 24.86309051513672),
+        new google.maps.LatLng( 60.15069075331861, 24.85558032989502),
+        new google.maps.LatLng( 60.15113930711245, 24.845237731933594),
+        new google.maps.LatLng( 60.15090435112648, 24.840989112854004),
+        new google.maps.LatLng( 60.15009267207424, 24.83905792236328),
+        new google.maps.LatLng( 60.14896055993272, 24.8386287689209),
+        new google.maps.LatLng( 60.14370534038359, 24.837899208068848),
+        new google.maps.LatLng( 60.142637103631955, 24.839229583740234),
+        new google.maps.LatLng( 60.14250891289015, 24.84236240386963),
+        new google.maps.LatLng( 60.14441035763323, 24.844379425048828),
+        new google.maps.LatLng( 60.146098064803944, 24.84661102294922),
+        new google.maps.LatLng( 60.14579898377164, 24.848756790161133),
+        new google.maps.LatLng( 60.14564944223549, 24.85407829284668),
+        new google.maps.LatLng( 60.14765751468975, 24.863948822021484),
+        new google.maps.LatLng( 60.149238251424435, 24.872102737426758),
+        new google.maps.LatLng( 60.15043443411743, 24.873390197753906),
+        new google.maps.LatLng( 60.15342470046727, 24.873647689819336 ),
 
-    
-    /* lisätään retken ikonit listaan */
-    suvisaaristo.ikonit.push(kuvat);
-    suvisaaristo.ikonit.push(info);
-    suvisaaristo.ikonit.push(saa);
-    suvisaaristo.ikonit.push(kalenteri);
-    
-
+    ], tiedotKaarmeluodot, saaKaarmeluodot, kuva1, 14);
         
+    retket.push(kaarmeluodot);
+        
+    
+        
+        
+    
+        
+        
+        
+    //alustetaan kaikki retket
+    var k = 0;
+    while(k < retket.length){
+        var retki = retket[k]
+    
+            /* luodaan retken ikoneita */ 
+        
+            var aloitusikoni = new google.maps.Marker({
+                  position: { lat: retki.koordinaatit[0].lat(), lng: retki.koordinaatit[0].lng()},
+                  map: map,
+                  icon: image2,
+                  retkenNumero: k
+            }); 
+        
+            var info = new google.maps.Marker({
+                          position: { lat: retki.koordinaatit[0].lat()+retki.ikonilisa, lng: retki.koordinaatit[0].lng()+0.003 },
+                          map: map,
+                          icon: imageinfo,
+                          retkenNumero: k
+            })
+
+            var saa = new google.maps.Marker({
+                          position: { lat: retki.koordinaatit[0].lat()+retki.ikonilisa, lng: retki.koordinaatit[0].lng()+0.008 },
+                          map: map,
+                          icon: imagesaa,
+                          retkenNumero: k
+            })
+
+            var kalenteri = new google.maps.Marker({
+                          position: { lat: retki.koordinaatit[0].lat()+retki.ikonilisa, lng: retki.koordinaatit[0].lng()+0.013 },
+                          map: map,
+                          icon: imagekalenteri,
+                          retkenNumero: k
+            })
+
+            var kuvat = new google.maps.Marker({
+                          position: { lat: retki.koordinaatit[0].lat()+retki.ikonilisa, lng: retki.koordinaatit[0].lng()+0.018 },
+                          map: map,
+                          icon: image,
+                          retkenNumero: k
+            });
+
+
+            /* lisätään retken ikonit listaan */
+        
+            retki.ikonit.push(aloitusikoni);
+            retki.ikonit.push(info);
+            retki.ikonit.push(saa);
+            retki.ikonit.push(kalenteri);
+            retki.ikonit.push(kuvat);
+        
+        k++;
+    
+    }
         
         
         

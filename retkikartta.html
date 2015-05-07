@@ -77,7 +77,28 @@
         this.tiedot = tiedot;
         this.zoomLevel = zoomLevel;
         this.ikonit = [];
+        this.ikonilisa = 0.005; 
+        this.latAvg;
+        var aloitusikoni = new google.maps.Marker({
+                  position: { lat: this.koordinaatit[0].lat(), lng: this.koordinaatit[0].lng()},
+                  map: map,
+                  icon: image2
+        }); 
         
+        this.ikonit.push(aloitusikoni);
+        
+        /* lasketaan reittipisteiden latitude keskiarvo  */
+        var summa = 0;
+        for( var i = 0; i < this.koordinaatit.length; i++ ){
+            summa += this.koordinaatit[i].lat();
+            console.log(summa);
+        }
+        this.latAvg = summa/this.koordinaatit.length;
+        console.log(this.latAvg)
+        
+        if( this.latAvg > this.koordinaatit[0].lat() ){
+            this.ikonilisa = -0.003;
+        }
         
         /* funktioita */
         this.muutaZoom = function(kartta) {
@@ -207,6 +228,22 @@
     }
 
         
+ /* luodaan google maps kuvaiconit */        
+        
+    var image = new google.maps.MarkerImage("images/karttaicons/kamera.png", null, null, null, new      google.maps.Size(40, 40));
+    var image2 = new google.maps.MarkerImage("images/karttaicons/markkeri.png", null, null, null, new      google.maps.Size(54, 84));
+    var imageinfo = new google.maps.MarkerImage("images/karttaicons/info.png", null, null, null, new      google.maps.Size(40, 40));
+    var imagesaa = new google.maps.MarkerImage("images/karttaicons/saa.png", null, null, null, new      google.maps.Size(40, 40));
+    var imagekalenteri = new google.maps.MarkerImage("images/karttaicons/kalenteri.png", null, null, null, new      google.maps.Size(40, 40));        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
  /********************************************************/
  /****************** luodaan retkiä **********************/
@@ -231,62 +268,36 @@
       ], tiedotSuvisaaristo, 14);
         
     retket.push(suvisaaristo);
+                
         
-/* luodaan google maps kuvaiconit */        
-        
-    var image = new google.maps.MarkerImage("images/karttaicons/kamera.png", null, null, null, new      google.maps.Size(40, 40));
-    var image2 = new google.maps.MarkerImage("images/karttaicons/markkeri.png", null, null, null, new      google.maps.Size(54, 84));
-    var imageinfo = new google.maps.MarkerImage("images/karttaicons/info.png", null, null, null, new      google.maps.Size(40, 40));
-    var imagesaa = new google.maps.MarkerImage("images/karttaicons/saa.png", null, null, null, new      google.maps.Size(40, 40));
-    var imagekalenteri = new google.maps.MarkerImage("images/karttaicons/kalenteri.png", null, null, null, new      google.maps.Size(40, 40));
-    
-    
-    var aloitus = new google.maps.Marker({
-                  position: { lat: 60.13176, lng: 24.793814},
-                  map: map,
-                  icon: image2
-    });    
-        
-        
-    /* luodaan retken markkereita */    
-    var kuvia1 = new google.maps.Marker({
-                  position: { lat: 60.135023, lng: 24.816037 },
-                  map: map,
-                  icon: image
-    });
-
-    var kuvia2 = new google.maps.Marker({
-                  position: { lat: 60.124721, lng: 24.824534 },
-                  map: map,
-                  icon: image
-    })
-    
-    
-    
-    
+    /* luodaan retken ikoneita */    
     var info = new google.maps.Marker({
-                  position: { lat: suvisaaristo.koordinaatit[0].lat()+0.005, lng: suvisaaristo.koordinaatit[0].lng()+0.003 },
+                  position: { lat: suvisaaristo.koordinaatit[0].lat()+suvisaaristo.ikonilisa, lng: suvisaaristo.koordinaatit[0].lng()+0.003 },
                   map: map,
                   icon: imageinfo
     })
     
     var saa = new google.maps.Marker({
-                  position: { lat: suvisaaristo.koordinaatit[0].lat()+0.005, lng: suvisaaristo.koordinaatit[0].lng()+0.008 },
+                  position: { lat: suvisaaristo.koordinaatit[0].lat()+suvisaaristo.ikonilisa, lng: suvisaaristo.koordinaatit[0].lng()+0.008 },
                   map: map,
                   icon: imagesaa
     })
     
     var kalenteri = new google.maps.Marker({
-                  position: { lat: suvisaaristo.koordinaatit[0].lat()+0.005, lng: suvisaaristo.koordinaatit[0].lng()+0.013 },
+                  position: { lat: suvisaaristo.koordinaatit[0].lat()+suvisaaristo.ikonilisa, lng: suvisaaristo.koordinaatit[0].lng()+0.013 },
                   map: map,
                   icon: imagekalenteri
     })
+    
+     var kuvat = new google.maps.Marker({
+                  position: { lat: suvisaaristo.koordinaatit[0].lat()+suvisaaristo.ikonilisa, lng: suvisaaristo.koordinaatit[0].lng()+0.018 },
+                  map: map,
+                  icon: image
+    });
 
     
     /* lisätäänikonit retken ikonit listaan */
-    suvisaaristo.ikonit.push(aloitus);
-    suvisaaristo.ikonit.push(kuvia1);
-    suvisaaristo.ikonit.push(kuvia2);
+    suvisaaristo.ikonit.push(kuvat);
     suvisaaristo.ikonit.push(info);
     suvisaaristo.ikonit.push(saa);
     suvisaaristo.ikonit.push(kalenteri);

@@ -9,7 +9,7 @@
     <script>try{Typekit.load();}catch(e){}</script>
      <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,700,900italic' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="kartta_style.css">
-    <script src="infobubble_edit.js"></script>
+    <script src="infobubble.js"></script>
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript"
@@ -120,9 +120,7 @@
             
         
         });
-        
-        
-        
+    
     }
         
     
@@ -269,6 +267,8 @@
                   maxWidth: 500,
                   maxHeight: 600,
                   map: map,
+                  position: new google.maps.LatLng(map.getCenter().lat(), map.getCenter().lng()),
+                  disableAutoPan: true,
                   backgroundColor: 'rgba(255,255,255,0.7)',
                   borderRadius: 3,
                   disableAnimation: true,
@@ -276,7 +276,7 @@
                   shadowStyle: 0,
                   content: info
             });
-
+            console.log(map.getCenter().lat(), map.getCenter().lng());
             infowindow.open(map, marker);
         }
 
@@ -314,6 +314,7 @@
         this.avaaKuvaWindow = function(map, marker){
             var kuvaWindow = new InfoBubble({
                   map: map,
+                  position: new google.maps.LatLng(map.getCenter()),
                   backgroundColor: 'rgba(255,255,255,0.7)',
                   borderRadius: 3,
                   borderColor: 'rgba(255,255,255,0.7)',
@@ -375,6 +376,7 @@
         this.avaaKalenteriWindow = function(map, marker){
             var kalenteriWindow = new InfoBubble({
                   map: map,
+                  position: new google.maps.LatLng(map.getCenter()),
                   maxWidth: 350,
                   backgroundColor: 'rgba(255,255,255,0.7)',
                   borderRadius: 3,
@@ -501,6 +503,56 @@
     retket.push(kaarmeluodot);
         
     
+        
+    /* luodaan retkiä */ 
+    var nimi = "Midnight SUP / Eira - Töölönlahti";
+    var kuvaus = "Tällä retkellä kierrämme kauniin Suinon saaren. Monipuolisen melontareitin varrella pääsee ihastelemaan saaren kaunista luontoa, upeita näkymiä aavalle merelle sekä suloisia saaristohuviloita. Pysähdymme retken aikana luodolle nauttimaan kuumaa juotavaa ja retkieväitä. Jokainen osallistuja saa paikanpäältä lämpimän märkäpuvun ja tossut.";
+    var kesto = '<b>'+"Kesto:"+'</b>'+" n. 3 tuntia (on mahdollista että retken kesto menee yli 3 tunnin).";
+    var hinta = '<b>'+"Hinta:"+'</b>'+" 50€ (Kausikorttilaiset: 25€ ja sarjakorttilaiset: 3 * SUP-vuokra)"; 
+    var tarvikkeet = '<b>'+"Mitä tarvitsen:"+'</b>'+" Kuoritakki/tuulitakki, pipo, ohuet hanskat, pyyhe, kuivat vaatteet, vesipullo, ja retkievästä.";
+    var taso = '<b>'+"Retken taso:"+'</b>'+" Reitin taso on helppo ja melomme rauhallista tahtia osallistujien toiveiden mukaan. Retkelle osallistujilta vaadimme kuitenkin aikaisempaa SUP-melontakokemusta.";
+    var lahto = '<b>'+"Lähtöpaikka:"+'</b>'+" Svinön Uimaranta. Suvisaarentie 9, Espoo. Tapaamme suurella hiekkaparkkipaikalla tien vieressä. Paikalle pääsee linja-autolla 145 sekä omalla autolla.";
+    var sis = '<b>'+"Hintaan sis:"+'</b>'+" Kova sup-melontalauta, mela, pelastusliivit, märkäpuku ja tossut.";
+    var huom = '<b>'+"Muuta huomioitavaa:"+'</b>'+" Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.";
+    var tiedotMidnight = new tiedot(nimi, kuvaus, kesto, hinta, tarvikkeet, taso, lahto, sis, huom);
+    var saaMidnight = new saa("Suvisaariston sää", "Sääpalvelun tarjoaa Foreca");
+    var kalenteriMidnight = new kalenteri("Tulevat retket Suvisaaristoon", "12.04.2015 klo 12:00-15:00");
+    var kuva1 = new kuva("images/supyoga.jpg");    
+    var midnight = new retki([    
+    
+        new google.maps.LatLng(60.153809143552216, 24.93570327758789),
+        new google.maps.LatLng(60.152783952001904, 24.93844985961914),
+        new google.maps.LatLng(60.153809143552216, 24.94668960571289),
+        new google.maps.LatLng(60.153894574738345, 24.952526092529297),
+        new google.maps.LatLng(60.15227134423812, 24.95819091796875),
+        new google.maps.LatLng(60.15440715719298, 24.963855743408203),
+        new google.maps.LatLng(60.15722621783532, 24.965229034423828),
+        new google.maps.LatLng(60.16021586646704, 24.96316909790039),
+        new google.maps.LatLng(60.16311983618494, 24.962997436523438),
+        new google.maps.LatLng(60.16636514575052, 24.957332611083984),
+        new google.maps.LatLng(60.16807307468363, 24.956817626953125),
+        new google.maps.LatLng(60.16952474447549, 24.96042251586914),
+        new google.maps.LatLng(60.17037863792086, 24.969005584716797),
+        new google.maps.LatLng(60.17234250862234, 24.971580505371094),
+        new google.maps.LatLng(60.17533078226463, 24.96969223022461),
+        new google.maps.LatLng(60.176526015605326, 24.964027404785156),
+        new google.maps.LatLng(60.17729435692852, 24.959392547607422),
+        new google.maps.LatLng(60.176782131376854, 24.953556060791016),
+        new google.maps.LatLng(60.17626989783665, 24.94823455810547),
+        new google.maps.LatLng(60.177550466708695, 24.94342803955078),
+        new google.maps.LatLng(60.179257814206515, 24.941024780273438),
+        new google.maps.LatLng(60.17977000114811, 24.935359954833984),
+        new google.maps.LatLng(60.17729435692852, 24.933643341064453),  
+
+    ], tiedotMidnight, saaMidnight, kalenteriMidnight, kuva1, 13);
+        
+    retket.push(midnight);    
+        
+        
+        
+        
+
+        
         
         
     

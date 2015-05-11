@@ -886,7 +886,7 @@ InfoBubble.prototype.draw = function() {
   }
 
   // Adjust for the height of the info bubble
-  var top = pos.y - (height + arrowSize);
+  var top = pos.y - (height / 2 - 50);
 
   if (anchorHeight) {
     // If there is an anchor then include the height

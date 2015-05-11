@@ -45,12 +45,28 @@
             google.maps.event.addListener(retki.ikonit[0], 'click', function() {
                     
                 var klikattuRetki = retket[this.retkenNumero];
-                klikattuRetki.piirraReitti(map);
+                
+                //jos retki ei oo vielä auki
+                if(klikattuRetki.onkoAvattu == false) {
+                    console.log("avataan");
+                    klikattuRetki.piirraReitti(map);
 
-                var i = 0;
-                while(i < klikattuRetki.ikonit.length){
-                    klikattuRetki.ikonit[i].setMap(map);
-                    i++;
+                    var i = 0;
+                    while(i < klikattuRetki.ikonit.length){
+                        klikattuRetki.ikonit[i].setMap(map);
+                        i++;
+                    } 
+                    
+                    klikattuRetki.onkoAvattu = true;
+                } else {
+                    
+                    console.log('suljetaan');
+                    // otetaan reitti pois
+                    klikattuRetki.suljeReitti();
+                    // otetaan ikonit pois
+                    klikattuRetki.poistaIkonit();
+                    klikattuRetki.onkoAvattu = false;
+                
                 }
             });
 
@@ -105,6 +121,8 @@
         this.ikonit = [];
         this.ikonilisa = 0.005; 
         this.latAvg;
+        this.reitti2;
+        this.onkoAvattu = false;
         
         /* lasketaan reittipisteiden latitude keskiarvo  */
         var summa = 0;
@@ -182,6 +200,21 @@
             alustaAnimaatio();
             this.muutaZoom(kartta);
             this.muutaCenter(kartta);
+            this.reitti2 = reitti;
+        }
+        
+        this.suljeReitti = function(){
+          console.log(this.reitti2);
+          this.reitti2.setMap(null);
+          console.log("helloo");
+        }   
+        
+        this.poistaIkonit = function(){
+            var i = 1;
+            while(i < this.ikonit.length){
+                this.ikonit[i].setMap(null);
+                i++;
+            } 
         }
   
     }
@@ -396,7 +429,7 @@
             new google.maps.LatLng( 60.121799551050096, 24.699668884277344),
             new google.maps.LatLng( 60.12539096269888, 24.69426155090332),
             new google.maps.LatLng( 60.127015520191065, 24.68979835510254),
-      ], tiedotSuvisaaristo, saaSuvisaaristo, kalenteriSuvisaaristo, kuva1,  14);
+      ], tiedotSuvisaaristo, saaSuvisaaristo, kalenteriSuvisaaristo, kuva1,  13);
         
     retket.push(suvisaaristo);
                 
@@ -438,7 +471,7 @@
         new google.maps.LatLng( 60.15043443411743, 24.873390197753906),
         new google.maps.LatLng( 60.15342470046727, 24.873647689819336 ),
 
-    ], tiedotKaarmeluodot, saaKaarmeluodot, kalenteriKaarmeluodot, kuva1, 14);
+    ], tiedotKaarmeluodot, saaKaarmeluodot, kalenteriKaarmeluodot, kuva1, 13);
         
     retket.push(kaarmeluodot);
         

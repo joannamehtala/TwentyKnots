@@ -46,9 +46,22 @@
                     
                 var klikattuRetki = retket[this.retkenNumero];
                 
+                //suljetaan muut retket 
+                for(var i = 0; i < retket.length; i++){
+                    var retki2 = retket[i];
+                    if(retki2 != klikattuRetki){
+                        if(retki2.onkoAvattu == true){
+                             // otetaan reitti pois
+                            retki2.suljeReitti();
+                            // otetaan ikonit pois
+                            retki2.poistaIkonit();
+                            retki2.onkoAvattu = false;
+                        }
+                    }
+                }
+                
                 //jos retki ei oo vielä auki
                 if(klikattuRetki.onkoAvattu == false) {
-                    console.log("avataan");
                     klikattuRetki.piirraReitti(map);
 
                     var i = 0;
@@ -59,8 +72,6 @@
                     
                     klikattuRetki.onkoAvattu = true;
                 } else {
-                    
-                    console.log('suljetaan');
                     // otetaan reitti pois
                     klikattuRetki.suljeReitti();
                     // otetaan ikonit pois
@@ -71,7 +82,6 @@
             });
 
             google.maps.event.addListener(retki.ikonit[1], 'click', function() {
-                    console.log(this.retkenNumero);
                     var klikattuRetki1 = retket[this.retkenNumero];
                     klikattuRetki1.tiedot.avaaInfoWindow(map, klikattuRetki1.ikonit[1]);
             });
@@ -94,6 +104,25 @@
 
             j++;
         };
+        
+        
+        google.maps.event.addListener(map, 'zoom_changed', function() {
+            if(map.getZoom() < 13) {
+                var j = 0;
+                while(j < retket.length){
+                    var retki = retket[j];
+                    retki.suljeReitti();
+                    retki.poistaIkonit();
+                    retki.onkoAvattu = false;
+                    j++;
+                }
+            }
+            
+        
+        });
+        
+        
+        
     }
         
     
@@ -128,10 +157,8 @@
         var summa = 0;
         for( var i = 0; i < this.koordinaatit.length; i++ ){
             summa += this.koordinaatit[i].lat();
-            console.log(summa);
         }
         this.latAvg = summa/this.koordinaatit.length;
-        console.log(this.latAvg)
         
         if( this.latAvg > this.koordinaatit[0].lat() ){
             this.ikonilisa = -0.003;
@@ -204,9 +231,7 @@
         }
         
         this.suljeReitti = function(){
-          console.log(this.reitti2);
           this.reitti2.setMap(null);
-          console.log("helloo");
         }   
         
         this.poistaIkonit = function(){

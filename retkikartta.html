@@ -194,17 +194,22 @@
  /********************************************************/        
         
         
-    function tiedot(nimi, kuvaus, kesto, hinta){
+    function tiedot(nimi, kuvaus, kesto, hinta, tarvikkeet, taso, lahto, sis, huom){
         this.nimi = nimi;
         this.kuvaus = kuvaus;
         this.kesto = kesto;
         this.hinta = hinta;
+        this.tarvikkeet = tarvikkeet;
+        this.taso = taso;
+        this.lahto = lahto;
+        this.sis = sis;
+        this.huom = huom;
 
         this.avaaInfoWindow = function(map, marker){
             var info = this.annaHTMLMuodossa(); 
             var infowindow = new InfoBubble({
-                  maxWidth: 400,
-                  maxHeight: 400,
+                  maxWidth: 500,
+                  maxHeight: 600,
                   map: map,
                   backgroundColor: 'rgba(255,255,255,0.7)',
                   borderRadius: 3,
@@ -225,9 +230,14 @@
             '<p>'+this.kuvaus+'</p>'+
             '<div class="wrapper left">'+
             '<p>'+this.kesto+'</p>'+
+            '<p>'+this.tarvikkeet+'</p>'+
+            '<p>'+this.taso+'</p>'+
+            '<p>'+this.lahto+'</p>'+
             '</div>'+
             '<div class="wrapper right">'+
             '<p>'+this.hinta+'</p>'+
+            '<p>'+this.sis+'</p>'+
+            '<p>'+this.huom+'</p>'+
             '</div>'+
             '</div>';
 
@@ -349,10 +359,15 @@
         
     /* luodaan retkiä */ 
     var nimi = "Suvisaaristo";
-    var kuvaus = "Kevään ensimmäisellä retkellä kierrämme kauniin Suinon saaren. Monipuolisen melontareitin varrella pääsee ihastelemaan saaren kaunista luontoa, upeita näkymiä aavalle merelle sekä suloisia saaristohuviloita. Pysähdymme retken aikana luodolle nauttimaan kuumaa juotavaa ja retkieväitä. Jokainen osallistuja saa paikanpäältä lämpimän märkäpuvun ja tossut.";
+    var kuvaus = "Tällä retkellä kierrämme kauniin Suinon saaren. Monipuolisen melontareitin varrella pääsee ihastelemaan saaren kaunista luontoa, upeita näkymiä aavalle merelle sekä suloisia saaristohuviloita. Pysähdymme retken aikana luodolle nauttimaan kuumaa juotavaa ja retkieväitä. Jokainen osallistuja saa paikanpäältä lämpimän märkäpuvun ja tossut.";
     var kesto = '<b>'+"Kesto:"+'</b>'+" n. 3 tuntia (on mahdollista että retken kesto menee yli 3 tunnin).";
     var hinta = '<b>'+"Hinta:"+'</b>'+" 50€ (Kausikorttilaiset: 25€ ja sarjakorttilaiset: 3 * SUP-vuokra)"; 
-    var tiedotSuvisaaristo = new tiedot(nimi, kuvaus, kesto, hinta);
+    var tarvikkeet = '<b>'+"Mitä tarvitsen:"+'</b>'+" Kuoritakki/tuulitakki, pipo, ohuet hanskat, pyyhe, kuivat vaatteet, vesipullo, ja retkievästä.";
+    var taso = '<b>'+"Retken taso:"+'</b>'+" Reitin taso on helppo ja melomme rauhallista tahtia osallistujien toiveiden mukaan. Retkelle osallistujilta vaadimme kuitenkin aikaisempaa SUP-melontakokemusta.";
+    var lahto = '<b>'+"Lähtöpaikka:"+'</b>'+" Svinön Uimaranta. Suvisaarentie 9, Espoo. Tapaamme suurella hiekkaparkkipaikalla tien vieressä. Paikalle pääsee linja-autolla 145 sekä omalla autolla.";
+    var sis = '<b>'+"Hintaan sis:"+'</b>'+" Kova sup-melontalauta, mela, pelastusliivit, märkäpuku ja tossut.";
+    var huom = '<b>'+"Muuta huomioitavaa:"+'</b>'+" Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.";
+    var tiedotSuvisaaristo = new tiedot(nimi, kuvaus, kesto, hinta, tarvikkeet, taso, lahto, sis, huom);
     var saaSuvisaaristo = new saa("Suvisaariston sää", "Sääpalvelun tarjoaa Foreca");
     var kalenteriSuvisaaristo = new kalenteri("Tulevat retket Suvisaaristoon", "12.04.2015 klo 12:00-15:00");
     var kuva1 = new kuva("images/supyoga.jpg");
@@ -389,10 +404,15 @@
         
      /* luodaan retkiä */ 
     var nimi = "Käärmeluodot";
-    var kuvaus = "Kevään ensimmäisellä retkellä kierrämme kauniin Suinon saaren. Monipuolisen melontareitin varrella pääsee ihastelemaan saaren kaunista luontoa, upeita näkymiä aavalle merelle sekä suloisia saaristohuviloita. Pysähdymme retken aikana luodolle nauttimaan kuumaa juotavaa ja retkieväitä. Jokainen osallistuja saa paikanpäältä lämpimän märkäpuvun ja tossut.";
-    var kesto = "2 tuntia";
-    var hinta = "50 €"; 
-    var tiedotKaarmeluodot = new tiedot(nimi, kuvaus, kesto, hinta);
+    var kuvaus = "Tällä retkellä kierrämme kauniin Suinon saaren. Monipuolisen melontareitin varrella pääsee ihastelemaan saaren kaunista luontoa, upeita näkymiä aavalle merelle sekä suloisia saaristohuviloita. Pysähdymme retken aikana luodolle nauttimaan kuumaa juotavaa ja retkieväitä. Jokainen osallistuja saa paikanpäältä lämpimän märkäpuvun ja tossut.";
+    var kesto = '<b>'+"Kesto:"+'</b>'+" n. 3 tuntia (on mahdollista että retken kesto menee yli 3 tunnin).";
+    var hinta = '<b>'+"Hinta:"+'</b>'+" 50€ (Kausikorttilaiset: 25€ ja sarjakorttilaiset: 3 * SUP-vuokra)"; 
+    var tarvikkeet = '<b>'+"Mitä tarvitsen:"+'</b>'+" Kuoritakki/tuulitakki, pipo, ohuet hanskat, pyyhe, kuivat vaatteet, vesipullo, ja retkievästä.";
+    var taso = '<b>'+"Retken taso:"+'</b>'+" Reitin taso on helppo ja melomme rauhallista tahtia osallistujien toiveiden mukaan. Retkelle osallistujilta vaadimme kuitenkin aikaisempaa SUP-melontakokemusta.";
+    var lahto = '<b>'+"Lähtöpaikka:"+'</b>'+" Svinön Uimaranta. Suvisaarentie 9, Espoo. Tapaamme suurella hiekkaparkkipaikalla tien vieressä. Paikalle pääsee linja-autolla 145 sekä omalla autolla.";
+    var sis = '<b>'+"Hintaan sis:"+'</b>'+" Kova sup-melontalauta, mela, pelastusliivit, märkäpuku ja tossut.";
+    var huom = '<b>'+"Muuta huomioitavaa:"+'</b>'+" Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.";
+    var tiedotKaarmeluodot = new tiedot(nimi, kuvaus, kesto, hinta, tarvikkeet, taso, lahto, sis, huom);
     var saaKaarmeluodot = new saa("Suvisaariston sää", "Sääpalvelun tarjoaa Foreca");
     var kalenteriKaarmeluodot = new kalenteri("Tulevat retket Suvisaaristoon", "12.04.2015 klo 12:00-15:00");
     var kuva1 = new kuva("images/supyoga.jpg");    

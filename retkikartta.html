@@ -194,10 +194,9 @@
  /********************************************************/        
         
         
-    function tiedot(nimi, kuvaus, ajankohta, kesto, hinta){
+    function tiedot(nimi, kuvaus, kesto, hinta){
         this.nimi = nimi;
         this.kuvaus = kuvaus;
-        this.ajankohta = ajankohta;
         this.kesto = kesto;
         this.hinta = hinta;
 
@@ -225,7 +224,6 @@
             '<div class="content">'+
             '<p>'+this.kuvaus+'</p>'+
             '<div class="wrapper left">'+
-            '<p>'+this.ajankohta+'</p>'+
             '<p>'+this.kesto+'</p>'+
             '</div>'+
             '<div class="wrapper right">'+
@@ -352,10 +350,9 @@
     /* luodaan retkiä */ 
     var nimi = "Suvisaaristo";
     var kuvaus = "Kevään ensimmäisellä retkellä kierrämme kauniin Suinon saaren. Monipuolisen melontareitin varrella pääsee ihastelemaan saaren kaunista luontoa, upeita näkymiä aavalle merelle sekä suloisia saaristohuviloita. Pysähdymme retken aikana luodolle nauttimaan kuumaa juotavaa ja retkieväitä. Jokainen osallistuja saa paikanpäältä lämpimän märkäpuvun ja tossut.";
-    var ajankohta = '<b>'+"Ajankohta:"+'</b>'+" Su 12.4.2015 klo 12:00-15:00";
     var kesto = '<b>'+"Kesto:"+'</b>'+" n. 3 tuntia (on mahdollista että retken kesto menee yli 3 tunnin).";
     var hinta = '<b>'+"Hinta:"+'</b>'+" 50€ (Kausikorttilaiset: 25€ ja sarjakorttilaiset: 3 * SUP-vuokra)"; 
-    var tiedotSuvisaaristo = new tiedot(nimi, kuvaus, ajankohta, kesto, hinta);
+    var tiedotSuvisaaristo = new tiedot(nimi, kuvaus, kesto, hinta);
     var saaSuvisaaristo = new saa("Suvisaariston sää", "Sääpalvelun tarjoaa Foreca");
     var kalenteriSuvisaaristo = new kalenteri("Tulevat retket Suvisaaristoon", "12.04.2015 klo 12:00-15:00");
     var kuva1 = new kuva("images/supyoga.jpg");
@@ -393,10 +390,9 @@
      /* luodaan retkiä */ 
     var nimi = "Käärmeluodot";
     var kuvaus = "Kevään ensimmäisellä retkellä kierrämme kauniin Suinon saaren. Monipuolisen melontareitin varrella pääsee ihastelemaan saaren kaunista luontoa, upeita näkymiä aavalle merelle sekä suloisia saaristohuviloita. Pysähdymme retken aikana luodolle nauttimaan kuumaa juotavaa ja retkieväitä. Jokainen osallistuja saa paikanpäältä lämpimän märkäpuvun ja tossut.";
-    var ajankohta = "huhtikuu";
     var kesto = "2 tuntia";
     var hinta = "50 €"; 
-    var tiedotKaarmeluodot = new tiedot(nimi, kuvaus, ajankohta, kesto, hinta);
+    var tiedotKaarmeluodot = new tiedot(nimi, kuvaus, kesto, hinta);
     var saaKaarmeluodot = new saa("Suvisaariston sää", "Sääpalvelun tarjoaa Foreca");
     var kalenteriKaarmeluodot = new kalenteri("Tulevat retket Suvisaaristoon", "12.04.2015 klo 12:00-15:00");
     var kuva1 = new kuva("images/supyoga.jpg");    

@@ -266,17 +266,17 @@
             var info = this.annaHTMLMuodossa(); 
             var infowindow = new InfoBubble({
                   maxWidth: 500,
-                  maxHeight: 600,
+                  //maxHeight: 600,
                   map: map,
                   position: new google.maps.LatLng(map.getCenter().lat(), map.getCenter().lng()),
                   disableAutoPan: true,
                   backgroundColor: 'rgba(255,255,255,0.7)',
                   backgroundColor: 'rgba(255,255,255,0.9)',
                   borderRadius: 3,
-                  disableAnimation: false,
                   borderColor: 'rgba(255,255,255,0.9)',
                   shadowStyle: 0,
-                  content: info
+                  content: info,
+                  arrowStyle: 3
             });
             console.log(map.getCenter().lat(), map.getCenter().lng());
             infowindow.open(map, marker);
@@ -284,7 +284,6 @@
 
         this.annaHTMLMuodossa = function(){
             var htmlMuodossa = '<div class="infobox">'+
-            '</div>'+
             '<h1>'+this.nimi+'</h1>'+
             '<div class="content">'+
             '<p>'+this.kuvaus+'</p>'+
@@ -298,6 +297,7 @@
             '<p>'+this.hinta+'</p>'+
             '<p>'+this.sis+'</p>'+
             '<p>'+this.huom+'</p>'+
+            '</div>'+
             '</div>'+
             '</div>';
 
@@ -316,6 +316,7 @@
         this.avaaKuvaWindow = function(map, marker){
             var kuvaWindow = new InfoBubble({
                   map: map,
+                  maxWidth: 500,
                   position: new google.maps.LatLng(map.getCenter().lat(), map.getCenter().lng()),
                   disableAutoPan: true,
                   backgroundColor: 'rgba(255,255,255,0.7)',
@@ -323,13 +324,9 @@
                   borderRadius: 3,
                   borderColor: 'rgba(255,255,255,0.9)',
                   shadowStyle: 0,
-                  disableAnimation: false,
-                  content: '<div id="content" class="infobox">'+
-                            '<div id="siteNotice">'+
-                            '</div>'+
-                            '<div id="bodyContent">'+
-                            '<img src="'+this.kuvatiedosto+'" width="500">'+
-                            '</div>'+
+                  arrowStyle: 3,
+                  content: '<div class="infobox">'+
+                            '<img src="'+this.kuvatiedosto+'">'+
                             '</div>'
                             });
 
@@ -348,6 +345,7 @@
 
         this.avaaSaaWindow = function(map, marker){
             var saaWindow = new InfoBubble({
+                  maxWidth: 500,
                   map: map,
                   position: new google.maps.LatLng(map.getCenter().lat(), map.getCenter().lng()),
                   disableAutoPan: true,
@@ -355,12 +353,10 @@
                   borderRadius: 3,
                   borderColor: 'rgba(255,255,255,0.9)',
                   shadowStyle: 0,
-                  disableAnimation: true,
-                  content: '<div id="content" class="infobox">'+
-                           '<div id="siteNotice">'+
-                           '</div>'+
-                           '<h1 id="firstHeading" class="firstHeading">'+this.otsikko+'</h1>'+
-                           '<div id="bodyContent">'+
+                  arrowStyle: 3,
+                  content: '<div class="infobox">'+
+                           '<h1>'+this.otsikko+'</h1>'+
+                           '<div class="content">'+
                            '<p>'+this.kuvaus+'</p>'+
                            '</div>'+
                            '</div>'
@@ -381,21 +377,20 @@
 
         this.avaaKalenteriWindow = function(map, marker){
             var kalenteriWindow = new InfoBubble({
+                  maxWidth: 500,
                   map: map,
                   position: new google.maps.LatLng(map.getCenter().lat(), map.getCenter().lng()),
                   disableAutoPan: true,
-                  maxWidth: 350,
                   backgroundColor: 'rgba(255,255,255,0.9)',
                   borderRadius: 3,
                   borderColor: 'rgba(255,255,255,0.9)',
                   shadowStyle: 0,
-                  disableAnimation: true,
-                  content: '<div id="content" class="infobox">'+
-                           '<div id="siteNotice">'+
-                           '</div>'+
-                           '<h1 id="firstHeading" class="firstHeading">'+this.otsikko+'</h1>'+
-                           '<div id="bodyContent">'+
+                  arrowStyle: 3,
+                  content: '<div class="infobox">'+
+                           '<h1>'+this.otsikko+'</h1>'+
+                           '<div class="content">'+
                            '<p>'+this.kuvaus+'</p>'+
+                           '<a class="varauslinkki" target="_blank" href="http://www.varaaheti.fi/twentyknots/">'+"www.varaaheti.fi/twentyknots"+'</a>'+
                            '</div>'+
                            '</div>'
                           });
@@ -426,7 +421,7 @@
         
     /* luodaan retkiä */ 
     var nimi = "Suvisaaristo";
-    var kuvaus = "Tällä retkellä kierrämme kauniin Suinon saaren. Monipuolisen melontareitin varrella pääsee ihastelemaan saaren kaunista luontoa, upeita näkymiä aavalle merelle sekä suloisia saaristohuviloita. Pysähdymme retken aikana luodolle nauttimaan kuumaa juotavaa ja retkieväitä. Jokainen osallistuja saa paikanpäältä lämpimän märkäpuvun ja tossut.";
+    var kuvaus = "Tällä retkellä kierrämme kauniin Suinon saaren. Monipuolisen melontareitin varrella pääsee ihastelemaan saaren kaunista luontoa, upeita näkymiä aavalle merelle sekä suloisia saaristohuviloita. Pysähdymme retken aikana luodolle nauttimaan kuumaa juotavaa ja retkieväitä. Jokainen osallistuja saa paikan päältä lämpimän märkäpuvun ja tossut.";
     var kesto = '<b>'+"Kesto:"+'</b>'+" n. 3 tuntia (on mahdollista että retken kesto menee yli 3 tunnin).";
     var hinta = '<b>'+"Hinta:"+'</b>'+" 50€ (Kausikorttilaiset: 25€ ja sarjakorttilaiset: 3 * SUP-vuokra)"; 
     var tarvikkeet = '<b>'+"Mitä tarvitsen:"+'</b>'+" Kuoritakki/tuulitakki, pipo, ohuet hanskat, pyyhe, kuivat vaatteet, vesipullo, ja retkievästä.";
@@ -435,8 +430,8 @@
     var sis = '<b>'+"Hintaan sis:"+'</b>'+" Kova sup-melontalauta, mela, pelastusliivit, märkäpuku ja tossut.";
     var huom = '<b>'+"Muuta huomioitavaa:"+'</b>'+" Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.";
     var tiedotSuvisaaristo = new tiedot(nimi, kuvaus, kesto, hinta, tarvikkeet, taso, lahto, sis, huom);
-    var saaSuvisaaristo = new saa("Suvisaariston sää", "Sääpalvelun tarjoaa Foreca");
-    var kalenteriSuvisaaristo = new kalenteri("Tulevat retket Suvisaaristoon", "12.04.2015 klo 12:00-15:00");
+    var saaSuvisaaristo = new saa("Sää: Suvisaaristo", "Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.<p>Sääpalvelun tarjoaa Foreca</p>");
+    var kalenteriSuvisaaristo = new kalenteri("Tulevat retket Suvisaaristoon", "21.5.2015 klo 17:00-20:00");
     var kuva1 = new kuva("images/supyoga.jpg");
 
         
@@ -480,8 +475,8 @@
     var sis = '<b>'+"Hintaan sis:"+'</b>'+" Kova sup-melontalauta, mela, pelastusliivit, märkäpuku ja tossut.";
     var huom = '<b>'+"Muuta huomioitavaa:"+'</b>'+" Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.";
     var tiedotKaarmeluodot = new tiedot(nimi, kuvaus, kesto, hinta, tarvikkeet, taso, lahto, sis, huom);
-    var saaKaarmeluodot = new saa("Suvisaariston sää", "Sääpalvelun tarjoaa Foreca");
-    var kalenteriKaarmeluodot = new kalenteri("Tulevat retket Suvisaaristoon", "12.04.2015 klo 12:00-15:00");
+    var saaKaarmeluodot = new saa("Sää: Lauttasaari", "Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.<p>Sääpalvelun tarjoaa Foreca</p>");
+    var kalenteriKaarmeluodot = new kalenteri("Tulevat retket Käärmeluodoille", "Toistaiseksi ei päivämääriä");
     var kuva1 = new kuva("images/supyoga.jpg");    
     var kaarmeluodot = new retki([    
     
@@ -522,8 +517,8 @@
     var sis = '<b>'+"Hintaan sis:"+'</b>'+" Kova sup-melontalauta, mela, pelastusliivit, märkäpuku ja tossut.";
     var huom = '<b>'+"Muuta huomioitavaa:"+'</b>'+" Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.";
     var tiedotMidnight = new tiedot(nimi, kuvaus, kesto, hinta, tarvikkeet, taso, lahto, sis, huom);
-    var saaMidnight = new saa("Suvisaariston sää", "Sääpalvelun tarjoaa Foreca");
-    var kalenteriMidnight = new kalenteri("Tulevat retket Suvisaaristoon", "12.04.2015 klo 12:00-15:00");
+    var saaMidnight = new saa("Sää: Etelä-Helsinki", "Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.<p>Sääpalvelun tarjoaa Foreca</p>");
+    var kalenteriMidnight = new kalenteri("Tulevat retket: Midnight SUP / Eira - Töölönlahti", "Toistaiseksi ei päivämääriä");
     var kuva1 = new kuva("images/supyoga.jpg");    
     var midnight = new retki([    
     

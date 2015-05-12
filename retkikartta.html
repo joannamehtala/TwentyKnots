@@ -151,7 +151,7 @@
         this.reitti2;
         this.onkoAvattu = false;
         
-        /* lasketaan reittipisteiden latitude keskiarvo  */
+        /* lasketaan reittipisteiden latitude keskiarvo 
         var summa = 0;
         for( var i = 0; i < this.koordinaatit.length; i++ ){
             summa += this.koordinaatit[i].lat();
@@ -161,6 +161,7 @@
         if( this.latAvg > this.koordinaatit[0].lat() ){
             this.ikonilisa = -0.003;
         }
+        */
         
         /* funktioita */
         this.muutaZoom = function(kartta) {
@@ -270,9 +271,10 @@
                   position: new google.maps.LatLng(map.getCenter().lat(), map.getCenter().lng()),
                   disableAutoPan: true,
                   backgroundColor: 'rgba(255,255,255,0.7)',
+                  backgroundColor: 'rgba(255,255,255,0.9)',
                   borderRadius: 3,
-                  disableAnimation: true,
-                  borderColor: 'rgba(255,255,255,0.7)',
+                  disableAnimation: false,
+                  borderColor: 'rgba(255,255,255,0.9)',
                   shadowStyle: 0,
                   content: info
             });
@@ -314,12 +316,14 @@
         this.avaaKuvaWindow = function(map, marker){
             var kuvaWindow = new InfoBubble({
                   map: map,
-                  position: new google.maps.LatLng(map.getCenter()),
+                  position: new google.maps.LatLng(map.getCenter().lat(), map.getCenter().lng()),
+                  disableAutoPan: true,
                   backgroundColor: 'rgba(255,255,255,0.7)',
+                  backgroundColor: 'rgba(255,255,255,0.9)',
                   borderRadius: 3,
-                  borderColor: 'rgba(255,255,255,0.7)',
+                  borderColor: 'rgba(255,255,255,0.9)',
                   shadowStyle: 0,
-                  disableAnimation: true,
+                  disableAnimation: false,
                   content: '<div id="content" class="infobox">'+
                             '<div id="siteNotice">'+
                             '</div>'+
@@ -345,9 +349,11 @@
         this.avaaSaaWindow = function(map, marker){
             var saaWindow = new InfoBubble({
                   map: map,
-                  backgroundColor: 'rgba(255,255,255,0.7)',
+                  position: new google.maps.LatLng(map.getCenter().lat(), map.getCenter().lng()),
+                  disableAutoPan: true,
+                  backgroundColor: 'rgba(255,255,255,0.9)',
                   borderRadius: 3,
-                  borderColor: 'rgba(255,255,255,0.7)',
+                  borderColor: 'rgba(255,255,255,0.9)',
                   shadowStyle: 0,
                   disableAnimation: true,
                   content: '<div id="content" class="infobox">'+
@@ -376,11 +382,12 @@
         this.avaaKalenteriWindow = function(map, marker){
             var kalenteriWindow = new InfoBubble({
                   map: map,
-                  position: new google.maps.LatLng(map.getCenter()),
+                  position: new google.maps.LatLng(map.getCenter().lat(), map.getCenter().lng()),
+                  disableAutoPan: true,
                   maxWidth: 350,
-                  backgroundColor: 'rgba(255,255,255,0.7)',
+                  backgroundColor: 'rgba(255,255,255,0.9)',
                   borderRadius: 3,
-                  borderColor: 'rgba(255,255,255,0.7)',
+                  borderColor: 'rgba(255,255,255,0.9)',
                   shadowStyle: 0,
                   disableAnimation: true,
                   content: '<div id="content" class="infobox">'+
@@ -552,14 +559,8 @@
         
         
 
-        
-        
-        
     
-        
-        
-        
-    //alustetaan kaikki retket
+    // luodaan retkille ikonti
     var k = 0;
     while(k < retket.length){
         var retki = retket[k]
@@ -614,6 +615,20 @@
     
     }
         
+        
+        
+    /*     Ikonien skaalaus       */
+        
+    function skaalaaIkoneita(skaalauksenMaara){
+        var i = 0;
+        while(i < retket.length){
+            var retki = retket[i];
+            if(retki.onkoAvattu){
+                var j = 
+            }
+                
+            i++;    
+    }
         
         
         

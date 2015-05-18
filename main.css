@@ -1133,10 +1133,21 @@ img.mobile-nav-logo {
     margin-bottom: 20px;
 }
 
-.profiili{
+.profiili {
 	margin-top: 50px;
 	text-align: left;
 	display: inline-block;
+}
+
+.profiili:after {
+	content : "\0020";
+	display : block;
+	float :  none;
+	clear : both;
+	width : 0;
+	height : 0;
+	padding : 0;
+	margin : 0;
 }
 
 .profiilinimi {
@@ -1144,11 +1155,36 @@ img.mobile-nav-logo {
 	margin-bottom: 20px;
 }
 
-.esittely{
-	display: inline-block;
+.profiili img {
+	display: block;
 	float: left;
-
 }
+
+.esittely{
+	display: block;
+	float: left;
+	width : 60%;
+}
+
+.esittely p {
+	margin-left : 20px;
+	margin-bottom : 20px;
+}
+
+@media all and (max-width : 767px) {
+	.esittely {
+		width : 100%;
+	}
+
+	.esittely p {
+		margin-left : 0;
+	}
+
+	.profiili img {
+		width : 100% !important;
+	}
+}
+
 
 @media only screen and (min-width: 1050px) {
     .content-wrapper.content-page {

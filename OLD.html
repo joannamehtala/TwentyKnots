@@ -22,12 +22,14 @@
     /* meidän pääkartta */    
     var map;
     var retket = [];
-    var zoomNyt = 10;
     
     function initialize() {
         var mapOptions = {
           center: { lat: 60.13176, lng: 24.793814},
-          zoom: 10
+          zoom: 12
+          var zoomNyt = 12;
+
+        
         };
         
         map = new google.maps.Map(document.getElementById('map-canvas'),
@@ -63,7 +65,6 @@
                 //jos retki ei oo vielä auki
                 if(klikattuRetki.onkoAvattu == false) {
                     klikattuRetki.piirraReitti(map);
-                    klikattuRetki.teksti.avaaTekstiWindow(map, klikattuRetki.ikonit[0]);
 
                     var i = 0;
                     while(i < klikattuRetki.ikonit.length){
@@ -76,7 +77,6 @@
                     // otetaan reitti pois
                     klikattuRetki.suljeReitti();
                     // otetaan ikonit pois
-                    skaalaaIkoneita(35, map, false, true);
                     klikattuRetki.poistaIkonit();
                     klikattuRetki.onkoAvattu = false;
                 
@@ -88,29 +88,28 @@
                     klikattuRetki1.tiedot.avaaInfoWindow(map, klikattuRetki1.ikonit[1]);
             });
             
-            /*
             google.maps.event.addListener(retki.ikonit[2], 'click', function() {
                     var klikattuRetki2 = retket[this.retkenNumero];
                     klikattuRetki2.saa.avaaSaaWindow(map, klikattuRetki2.ikonit[2]);
             });
-            */
-        
-            google.maps.event.addListener(retki.ikonit[2], 'click', function() {
-                    var klikattuRetki3 = retket[this.retkenNumero];
-                    klikattuRetki3.kalenteri.avaaKalenteriWindow(map, klikattuRetki3.ikonit[2]);
-            });
-            
+
             google.maps.event.addListener(retki.ikonit[3], 'click', function() {
-                    var klikattuRetki4 = retket[this.retkenNumero];    
-                    klikattuRetki4.kuva.avaaKuvaWindow(map, klikattuRetki4.ikonit[3]);
+                    var klikattuRetki3 = retket[this.retkenNumero];
+                    klikattuRetki3.kalenteri.avaaKalenteriWindow(map, klikattuRetki3.ikonit[3]);
             });
             
+            google.maps.event.addListener(retki.ikonit[4], 'click', function() {
+                    var klikattuRetki4 = retket[this.retkenNumero];    
+                    klikattuRetki4.kuva.avaaKuvaWindow(map, klikattuRetki4.ikonit[4]);
+            });
+
 
             j++;
         };
         
         
         google.maps.event.addListener(map, 'zoom_changed', function() {
+            
             var nouseeko = true;
 
             if(map.getZoom() > zoomNyt){
@@ -127,7 +126,7 @@
                 var j = 0;
                 while(j < retket.length){
                     var retki = retket[j];
-                    if(retki.onkoAvattu){
+                   if(retki.onkoAvattu){
                         console.log(retki.reitti2);
                         retki.suljeReitti();
                         retki.poistaIkonit();
@@ -137,7 +136,7 @@
                 }
             }
             
-            /* skaalataan avoimien retkien ikoneita kun zoom vaihtuu */
+             /* skaalataan avoimien retkien ikoneita kun zoom vaihtuu */
             var skaalauksenMaara;
             
             console.log(map.getZoom());
@@ -159,9 +158,12 @@
                     skaalauksenMaara = 35;
             }
                     
-            skaalaaIkoneita(skaalauksenMaara, map, nouseeko, false);
+            skaalaaIkoneita(skaalauksenMaara, map, nouseeko);
             
             
+
+            
+        
         });
     
     }
@@ -179,19 +181,14 @@
     /****************** luodaan retki olio ******************/
     /********************************************************/
         
-<<<<<<< HEAD
-    function retki(koordinaatit, tiedot, saa, kalenteri, kuva, teksti, zoomLevel){
-=======
-    function retki(koordinaatit, tiedot, kalenteri, kuva, zoomLevel){
->>>>>>> origin/master
+    function retki(koordinaatit, tiedot, saa, kalenteri, kuva, zoomLevel){
         
         /* attribuutit */
         this.koordinaatit = koordinaatit;
         this.tiedot = tiedot;
-        //this.saa = saa;
+        this.saa = saa;
         this.kalenteri = kalenteri;
         this.kuva = kuva;
-        this.teksti = teksti;
         this.zoomLevel = zoomLevel;
         this.ikonit = []; 
         this.reitti2;
@@ -267,14 +264,13 @@
                          path[path.length-1] = are_we_there_yet;
                        }
                        reitti.setPath(path); 
-                       this.reitti2 = reitti;
+                       this.reitti2 = reitti;      
                    }       
             }
             alustaAnimaatio();
             this.muutaZoom(kartta);
             this.muutaCenter(kartta);
             this.reitti2 = reitti;
-            console.log(this.reitti2);
         }
         
         this.suljeReitti = function(){
@@ -377,9 +373,6 @@
                   content: '<div class="infobox">'+
                             '<h1>'+this.otsikko+'</h1>'+
                             '<img src="'+this.kuvatiedosto+'">'+
-                            '<img src="'+this.kuvatiedosto+'">'+
-                            '<img src="'+this.kuvatiedosto+'">'+
-                            '<img src="'+this.kuvatiedosto+'">'+
                             '</div>'
                             });
 
@@ -387,9 +380,9 @@
         }
     }
 
- /*******************************************************/
+ /********************************************************/
  /****************** luodaan saa olio *******************/
- /*******************************************************/
+ /********************************************************/
 
 
     function saa(otsikko, kuvaus){
@@ -420,7 +413,7 @@
     }
 
  /********************************************************/
- /*************** luodaan kalenteri olio *****************/
+ /****************** luodaan kalenteri olio *******************/
  /********************************************************/
 
 
@@ -453,40 +446,14 @@
 
     }
 
- /********************************************************/
- /****************** luodaan teksti olio *****************/
- /********************************************************/
-    
-
-    function teksti(otsikko){
-        this.otsikko = otsikko;
-
-        this.avaaTekstiWindow = function(map, marker){
-            var tekstiWindow = new InfoBubble({
-                  maxWidth: 200,
-                  map: map,
-                  position: new google.maps.LatLng(map.getCenter().lat(), map.getCenter().lng()),
-                  disableAutoPan: true,
-                  backgroundColor: 'rgba(255,255,255,0)',
-                  borderColor: 'rgba(255,255,255,0)',
-                  shadowStyle: 0,
-                  arrowStyle: 3,
-                  content: '<div class="teksti">'+
-                           this.otsikko+'</div>'
-            });
-
-            tekstiWindow.open(map, marker);
-        }
-    }
-
         
  /* luodaan google maps kuvaikonit */        
         
-    var image = new google.maps.MarkerImage("images/karttaicons/kamera.png", null, null, null, new      google.maps.Size(35, 35));
+    var image = new google.maps.MarkerImage("images/karttaicons/kamera.png", null, null, null, new      google.maps.Size(40, 40));
     var image2 = new google.maps.MarkerImage("images/karttaicons/markkeri.png", null, null, null, new      google.maps.Size(54, 84));
-    var imageinfo = new google.maps.MarkerImage("images/karttaicons/info.png", null, null, null, new      google.maps.Size(35, 35));
-    var imagesaa = new google.maps.MarkerImage("images/karttaicons/saa.png", null, null, null, new      google.maps.Size(35, 35));
-    var imagekalenteri = new google.maps.MarkerImage("images/karttaicons/kalenteri.png", null, null, null, new      google.maps.Size(35, 35));        
+    var imageinfo = new google.maps.MarkerImage("images/karttaicons/info.png", null, null, null, new      google.maps.Size(40, 40));
+    var imagesaa = new google.maps.MarkerImage("images/karttaicons/saa.png", null, null, null, new      google.maps.Size(40, 40));
+    var imagekalenteri = new google.maps.MarkerImage("images/karttaicons/kalenteri.png", null, null, null, new      google.maps.Size(40, 40));        
         
 
         
@@ -512,7 +479,6 @@
     var saaSuvisaaristo = new saa("Sää: Suvisaaristo", "Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.<p>Sääpalvelun tarjoaa Foreca</p>");
     var kalenteriSuvisaaristo = new kalenteri("Tulevat retket Suvisaaristoon", "21.5.2015 klo 17:00-20:00");
     var kuvaSuvisaaristo = new kuva("Kuvia retkiltä Suvisaaristoon", "images/supyoga.jpg");
-    var tekstiSuvisaaristo = new teksti("SUVISAARISTO");
 
         
     var suvisaaristo = new retki([
@@ -538,11 +504,7 @@
             new google.maps.LatLng( 60.121799551050096, 24.699668884277344),
             new google.maps.LatLng( 60.12539096269888, 24.69426155090332),
             new google.maps.LatLng( 60.127015520191065, 24.68979835510254),
-<<<<<<< HEAD
-      ], tiedotSuvisaaristo, saaSuvisaaristo, kalenteriSuvisaaristo, kuvaSuvisaaristo, tekstiSuvisaaristo,  13);
-=======
-      ], tiedotSuvisaaristo, kalenteriSuvisaaristo, kuvaSuvisaaristo,  13);
->>>>>>> origin/master
+      ], tiedotSuvisaaristo, saaSuvisaaristo, kalenteriSuvisaaristo, kuvaSuvisaaristo,  13);
         
     retket.push(suvisaaristo);
                 
@@ -561,8 +523,7 @@
     var tiedotKaarmeluodot = new tiedot(nimi, kuvaus, kesto, hinta, tarvikkeet, taso, lahto, sis, huom);
     var saaKaarmeluodot = new saa("Sää: Lauttasaari", "Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.<p>Sääpalvelun tarjoaa Foreca</p>");
     var kalenteriKaarmeluodot = new kalenteri("Tulevat retket Käärmeluodoille", "Toistaiseksi ei päivämääriä");
-    var kuvaKaarmeluodot = new kuva("Kuvia retkiltä Käärmeluodoille", "images/supyoga.jpg");  
-    var tekstiKaarmeluodot = new teksti("KÄÄRMELUODOT");  
+    var kuvaKaarmeluodot = new kuva("Kuvia retkiltä Käärmeluodoille", "images/supyoga.jpg");    
     var kaarmeluodot = new retki([    
     
         new google.maps.LatLng(60.15459937355298, 24.872617721557617),
@@ -585,11 +546,7 @@
         new google.maps.LatLng( 60.15043443411743, 24.873390197753906),
         new google.maps.LatLng( 60.15342470046727, 24.873647689819336 ),
 
-<<<<<<< HEAD
-    ], tiedotKaarmeluodot, saaKaarmeluodot, kalenteriKaarmeluodot, kuvaKaarmeluodot, tekstiKaarmeluodot, 13);
-=======
-    ], tiedotKaarmeluodot, kalenteriKaarmeluodot, kuvaKaarmeluodot, 13);
->>>>>>> origin/master
+    ], tiedotKaarmeluodot, saaKaarmeluodot, kalenteriKaarmeluodot, kuvaKaarmeluodot, 13);
         
     retket.push(kaarmeluodot);
         
@@ -608,8 +565,7 @@
     var tiedotMidnight = new tiedot(nimi, kuvaus, kesto, hinta, tarvikkeet, taso, lahto, sis, huom);
     var saaMidnight = new saa("Sää: Etelä-Helsinki", "Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.<p>Sääpalvelun tarjoaa Foreca</p>");
     var kalenteriMidnight = new kalenteri("Tulevat retket: Midnight SUP / Eira - Töölönlahti", "Toistaiseksi ei päivämääriä");
-    var kuvaMidnight = new kuva("Kuvia Midnight-retkiltä", "images/supyoga.jpg"); 
-    var tekstiMidnight = new teksti("MIDNIGHT SUP");   
+    var kuvaMidnight = new kuva("Kuvia Midnight-retkiltä", "images/supyoga.jpg");    
     var midnight = new retki([    
     
         new google.maps.LatLng(60.153809143552216, 24.93570327758789),
@@ -636,11 +592,7 @@
         new google.maps.LatLng(60.17977000114811, 24.935359954833984),
         new google.maps.LatLng(60.17729435692852, 24.933643341064453),  
 
-<<<<<<< HEAD
-    ], tiedotMidnight, saaMidnight, kalenteriMidnight, kuvaMidnight, tekstiMidnight, 13);
-=======
-    ], tiedotMidnight, kalenteriMidnight, kuvaMidnight, 13);
->>>>>>> origin/master
+    ], tiedotMidnight, saaMidnight, kalenteriMidnight, kuvaMidnight, 13);
         
     retket.push(midnight);    
         
@@ -649,7 +601,7 @@
         
 
     
-    // luodaan retkille ikonit
+    // luodaan retkille ikonti
     var k = 0;
     while(k < retket.length){
         var retki = retket[k]
@@ -664,37 +616,31 @@
             }); 
         
             var info = new google.maps.Marker({
-                          position: { lat: retki.koordinaatit[0].lat()+0.007, lng: retki.koordinaatit[0].lng()+0.005 },
+                          position: { lat: retki.koordinaatit[0].lat()+retki.ikonilisa, lng: retki.koordinaatit[0].lng()+0.003 },
                           map: map,
                           icon: imageinfo,
-                          retkenNumero: k,
-                          sijaintiVakio: 1
+                          retkenNumero: k
             })
 
-            /*
             var saa = new google.maps.Marker({
-                          position: { lat: retki.koordinaatit[0].lat()+0.007, lng: retki.koordinaatit[0].lng()+0.012 },
+                          position: { lat: retki.koordinaatit[0].lat()+retki.ikonilisa, lng: retki.koordinaatit[0].lng()+0.008 },
                           map: map,
                           icon: imagesaa,
-                          retkenNumero: k,
-                          sijaintiVakio: 2
+                          retkenNumero: k
             })
-            */
 
             var kalenteri = new google.maps.Marker({
-                          position: { lat: retki.koordinaatit[0].lat()+0.007, lng: retki.koordinaatit[0].lng()+0.012 },
+                          position: { lat: retki.koordinaatit[0].lat()+retki.ikonilisa, lng: retki.koordinaatit[0].lng()+0.013 },
                           map: map,
                           icon: imagekalenteri,
-                          retkenNumero: k,
-                          sijaintiVakio: 2
+                          retkenNumero: k
             })
 
             var kuvat = new google.maps.Marker({
-                          position: { lat: retki.koordinaatit[0].lat()+0.007, lng: retki.koordinaatit[0].lng()+0.019 },
+                          position: { lat: retki.koordinaatit[0].lat()+retki.ikonilisa, lng: retki.koordinaatit[0].lng()+0.018 },
                           map: map,
                           icon: image,
-                          retkenNumero: k,
-                          sijaintiVakio: 3
+                          retkenNumero: k
             });
 
 
@@ -702,7 +648,7 @@
         
             retki.ikonit.push(aloitusikoni);
             retki.ikonit.push(info);
-            //retki.ikonit.push(saa);
+            retki.ikonit.push(saa);
             retki.ikonit.push(kalenteri);
             retki.ikonit.push(kuvat);
         
@@ -714,34 +660,12 @@
         
     /*     Ikonien skaalaus       */
         
-    function skaalaaIkoneita(skaalauksenMaara, kartta, nouseeko, takaisinPerus){
+    function skaalaaIkoneita(skaalauksenMaara){
         var i = 0;
         while(i < retket.length){
             var retki = retket[i];
             if(retki.onkoAvattu){
-                for( var j = 1; j < retki.ikonit.length; j++){
-                    var ikoni = retki.ikonit[j];
-                    
-                    if(!takaisinPerus){
-                        ikoni.icon.size.width = skaalauksenMaara;
-                        ikoni.icon.size.height = skaalauksenMaara;
-                        if(nouseeko){
-                            ikoni.position.A -= 0.0025;
-                            ikoni.position.F -= ikoni.sijaintiVakio * 0.002;
-                        } else {
-                            ikoni.position.A += 0.0025;
-                            ikoni.position.F += ikoni.sijaintiVakio * 0.002;
-                        }
-                    } else {
-                        ikoni.icon.size.width = skaalauksenMaara;
-                        ikoni.icon.size.height = skaalauksenMaara;
-                        ikoni.position.A = retki.koordinaatit[0].lat()+0.007;
-                        ikoni.position.F = retki.koordinaatit[0].lng()+0.007+(0.007*(ikoni.sijaintiVakio-1));
-                        
-                    }
-                    ikoni.setMap(null);
-                    ikoni.setMap(kartta);
-                }
+                var j = 2;
             }
                 
             i++;    

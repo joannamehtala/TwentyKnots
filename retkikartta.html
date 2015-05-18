@@ -22,12 +22,12 @@
     /* meidän pääkartta */    
     var map;
     var retket = [];
-    var zoomNyt = 12;
+    var zoomNyt = 10;
     
     function initialize() {
         var mapOptions = {
           center: { lat: 60.13176, lng: 24.793814},
-          zoom: 12
+          zoom: 10
         };
         
         map = new google.maps.Map(document.getElementById('map-canvas'),
@@ -87,21 +87,23 @@
                     klikattuRetki1.tiedot.avaaInfoWindow(map, klikattuRetki1.ikonit[1]);
             });
             
+            /*
             google.maps.event.addListener(retki.ikonit[2], 'click', function() {
                     var klikattuRetki2 = retket[this.retkenNumero];
                     klikattuRetki2.saa.avaaSaaWindow(map, klikattuRetki2.ikonit[2]);
             });
-
-            google.maps.event.addListener(retki.ikonit[3], 'click', function() {
+            */
+        
+            google.maps.event.addListener(retki.ikonit[2], 'click', function() {
                     var klikattuRetki3 = retket[this.retkenNumero];
-                    klikattuRetki3.kalenteri.avaaKalenteriWindow(map, klikattuRetki3.ikonit[3]);
+                    klikattuRetki3.kalenteri.avaaKalenteriWindow(map, klikattuRetki3.ikonit[2]);
             });
             
-            google.maps.event.addListener(retki.ikonit[4], 'click', function() {
+            google.maps.event.addListener(retki.ikonit[3], 'click', function() {
                     var klikattuRetki4 = retket[this.retkenNumero];    
-                    klikattuRetki4.kuva.avaaKuvaWindow(map, klikattuRetki4.ikonit[4]);
+                    klikattuRetki4.kuva.avaaKuvaWindow(map, klikattuRetki4.ikonit[3]);
             });
-
+            
 
             j++;
         };
@@ -176,12 +178,12 @@
     /****************** luodaan retki olio ******************/
     /********************************************************/
         
-    function retki(koordinaatit, tiedot, saa, kalenteri, kuva, zoomLevel){
+    function retki(koordinaatit, tiedot, kalenteri, kuva, zoomLevel){
         
         /* attribuutit */
         this.koordinaatit = koordinaatit;
         this.tiedot = tiedot;
-        this.saa = saa;
+        //this.saa = saa;
         this.kalenteri = kalenteri;
         this.kuva = kuva;
         this.zoomLevel = zoomLevel;
@@ -503,7 +505,7 @@
             new google.maps.LatLng( 60.121799551050096, 24.699668884277344),
             new google.maps.LatLng( 60.12539096269888, 24.69426155090332),
             new google.maps.LatLng( 60.127015520191065, 24.68979835510254),
-      ], tiedotSuvisaaristo, saaSuvisaaristo, kalenteriSuvisaaristo, kuvaSuvisaaristo,  13);
+      ], tiedotSuvisaaristo, kalenteriSuvisaaristo, kuvaSuvisaaristo,  13);
         
     retket.push(suvisaaristo);
                 
@@ -545,7 +547,7 @@
         new google.maps.LatLng( 60.15043443411743, 24.873390197753906),
         new google.maps.LatLng( 60.15342470046727, 24.873647689819336 ),
 
-    ], tiedotKaarmeluodot, saaKaarmeluodot, kalenteriKaarmeluodot, kuvaKaarmeluodot, 13);
+    ], tiedotKaarmeluodot, kalenteriKaarmeluodot, kuvaKaarmeluodot, 13);
         
     retket.push(kaarmeluodot);
         
@@ -591,7 +593,7 @@
         new google.maps.LatLng(60.17977000114811, 24.935359954833984),
         new google.maps.LatLng(60.17729435692852, 24.933643341064453),  
 
-    ], tiedotMidnight, saaMidnight, kalenteriMidnight, kuvaMidnight, 13);
+    ], tiedotMidnight, kalenteriMidnight, kuvaMidnight, 13);
         
     retket.push(midnight);    
         
@@ -622,6 +624,7 @@
                           sijaintiVakio: 1
             })
 
+            /*
             var saa = new google.maps.Marker({
                           position: { lat: retki.koordinaatit[0].lat()+0.007, lng: retki.koordinaatit[0].lng()+0.012 },
                           map: map,
@@ -629,21 +632,22 @@
                           retkenNumero: k,
                           sijaintiVakio: 2
             })
+            */
 
             var kalenteri = new google.maps.Marker({
-                          position: { lat: retki.koordinaatit[0].lat()+0.007, lng: retki.koordinaatit[0].lng()+0.019 },
+                          position: { lat: retki.koordinaatit[0].lat()+0.007, lng: retki.koordinaatit[0].lng()+0.012 },
                           map: map,
                           icon: imagekalenteri,
                           retkenNumero: k,
-                          sijaintiVakio: 3
+                          sijaintiVakio: 2
             })
 
             var kuvat = new google.maps.Marker({
-                          position: { lat: retki.koordinaatit[0].lat()+0.007, lng: retki.koordinaatit[0].lng()+0.026 },
+                          position: { lat: retki.koordinaatit[0].lat()+0.007, lng: retki.koordinaatit[0].lng()+0.019 },
                           map: map,
                           icon: image,
                           retkenNumero: k,
-                          sijaintiVakio: 4
+                          sijaintiVakio: 3
             });
 
 
@@ -651,7 +655,7 @@
         
             retki.ikonit.push(aloitusikoni);
             retki.ikonit.push(info);
-            retki.ikonit.push(saa);
+            //retki.ikonit.push(saa);
             retki.ikonit.push(kalenteri);
             retki.ikonit.push(kuvat);
         

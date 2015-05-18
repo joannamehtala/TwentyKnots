@@ -1,26 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <style type="text/css">
-      html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
-    </style>
-    <script src="//use.typekit.net/pwf2wwo.js"></script>
-    <script>try{Typekit.load();}catch(e){}</script>
-     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,700,900italic' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="kartta_style.css">
-    <script src="infobubble.js"></script>
-    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1pEM1hGTESl2YoesdrVnhuWfCdBsvJ78&sensor=false&libraries=places,drawing,geometry">
-    </script>
-    <script type="text/javascript">
-        
-        
-        
-        
-        
+     
         
         
         
@@ -71,7 +49,6 @@
                 //jos retki ei oo vielä auki
                 if(klikattuRetki.onkoAvattu == false) {
                     klikattuRetki.piirraReitti(map);
-                    klikattuRetki.teksti.avaaTekstiWindow(map, klikattuRetki.ikonit[0]);
 
                     var i = 0;
                     while(i < klikattuRetki.ikonit.length){
@@ -187,11 +164,7 @@
     /****************** luodaan retki olio ******************/
     /********************************************************/
         
-<<<<<<< HEAD
-    function retki(koordinaatit, tiedot, saa, kalenteri, kuva, teksti, zoomLevel){
-=======
     function retki(koordinaatit, tiedot, kalenteri, kuva, zoomLevel){
->>>>>>> origin/master
         
         /* attribuutit */
         this.koordinaatit = koordinaatit;
@@ -199,7 +172,6 @@
         //this.saa = saa;
         this.kalenteri = kalenteri;
         this.kuva = kuva;
-        this.teksti = teksti;
         this.zoomLevel = zoomLevel;
         this.ikonit = []; 
         this.reitti2;
@@ -395,9 +367,9 @@
         }
     }
 
- /*******************************************************/
+ /********************************************************/
  /****************** luodaan saa olio *******************/
- /*******************************************************/
+ /********************************************************/
 
 
     function saa(otsikko, kuvaus){
@@ -428,7 +400,7 @@
     }
 
  /********************************************************/
- /*************** luodaan kalenteri olio *****************/
+ /****************** luodaan kalenteri olio *******************/
  /********************************************************/
 
 
@@ -459,32 +431,6 @@
             kalenteriWindow.open(map, marker);
         }
 
-    }
-
- /********************************************************/
- /****************** luodaan teksti olio *****************/
- /********************************************************/
-    
-
-    function teksti(otsikko){
-        this.otsikko = otsikko;
-
-        this.avaaTekstiWindow = function(map, marker){
-            var tekstiWindow = new InfoBubble({
-                  maxWidth: 200,
-                  map: map,
-                  position: new google.maps.LatLng(map.getCenter().lat(), map.getCenter().lng()),
-                  disableAutoPan: true,
-                  backgroundColor: 'rgba(255,255,255,0)',
-                  borderColor: 'rgba(255,255,255,0)',
-                  shadowStyle: 0,
-                  arrowStyle: 3,
-                  content: '<div class="teksti">'+
-                           this.otsikko+'</div>'
-            });
-
-            tekstiWindow.open(map, marker);
-        }
     }
 
         
@@ -520,7 +466,6 @@
     var saaSuvisaaristo = new saa("Sää: Suvisaaristo", "Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.<p>Sääpalvelun tarjoaa Foreca</p>");
     var kalenteriSuvisaaristo = new kalenteri("Tulevat retket Suvisaaristoon", "21.5.2015 klo 17:00-20:00");
     var kuvaSuvisaaristo = new kuva("Kuvia retkiltä Suvisaaristoon", "images/supyoga.jpg");
-    var tekstiSuvisaaristo = new teksti("SUVISAARISTO");
 
         
     var suvisaaristo = new retki([
@@ -546,11 +491,7 @@
             new google.maps.LatLng( 60.121799551050096, 24.699668884277344),
             new google.maps.LatLng( 60.12539096269888, 24.69426155090332),
             new google.maps.LatLng( 60.127015520191065, 24.68979835510254),
-<<<<<<< HEAD
-      ], tiedotSuvisaaristo, saaSuvisaaristo, kalenteriSuvisaaristo, kuvaSuvisaaristo, tekstiSuvisaaristo,  13);
-=======
       ], tiedotSuvisaaristo, kalenteriSuvisaaristo, kuvaSuvisaaristo,  13);
->>>>>>> origin/master
         
     retket.push(suvisaaristo);
                 
@@ -569,8 +510,7 @@
     var tiedotKaarmeluodot = new tiedot(nimi, kuvaus, kesto, hinta, tarvikkeet, taso, lahto, sis, huom);
     var saaKaarmeluodot = new saa("Sää: Lauttasaari", "Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.<p>Sääpalvelun tarjoaa Foreca</p>");
     var kalenteriKaarmeluodot = new kalenteri("Tulevat retket Käärmeluodoille", "Toistaiseksi ei päivämääriä");
-    var kuvaKaarmeluodot = new kuva("Kuvia retkiltä Käärmeluodoille", "images/supyoga.jpg");  
-    var tekstiKaarmeluodot = new teksti("KÄÄRMELUODOT");  
+    var kuvaKaarmeluodot = new kuva("Kuvia retkiltä Käärmeluodoille", "images/supyoga.jpg");    
     var kaarmeluodot = new retki([    
     
         new google.maps.LatLng(60.15459937355298, 24.872617721557617),
@@ -593,11 +533,7 @@
         new google.maps.LatLng( 60.15043443411743, 24.873390197753906),
         new google.maps.LatLng( 60.15342470046727, 24.873647689819336 ),
 
-<<<<<<< HEAD
-    ], tiedotKaarmeluodot, saaKaarmeluodot, kalenteriKaarmeluodot, kuvaKaarmeluodot, tekstiKaarmeluodot, 13);
-=======
     ], tiedotKaarmeluodot, kalenteriKaarmeluodot, kuvaKaarmeluodot, 13);
->>>>>>> origin/master
         
     retket.push(kaarmeluodot);
         
@@ -616,8 +552,7 @@
     var tiedotMidnight = new tiedot(nimi, kuvaus, kesto, hinta, tarvikkeet, taso, lahto, sis, huom);
     var saaMidnight = new saa("Sää: Etelä-Helsinki", "Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.<p>Sääpalvelun tarjoaa Foreca</p>");
     var kalenteriMidnight = new kalenteri("Tulevat retket: Midnight SUP / Eira - Töölönlahti", "Toistaiseksi ei päivämääriä");
-    var kuvaMidnight = new kuva("Kuvia Midnight-retkiltä", "images/supyoga.jpg"); 
-    var tekstiMidnight = new teksti("MIDNIGHT SUP");   
+    var kuvaMidnight = new kuva("Kuvia Midnight-retkiltä", "images/supyoga.jpg");    
     var midnight = new retki([    
     
         new google.maps.LatLng(60.153809143552216, 24.93570327758789),
@@ -644,11 +579,7 @@
         new google.maps.LatLng(60.17977000114811, 24.935359954833984),
         new google.maps.LatLng(60.17729435692852, 24.933643341064453),  
 
-<<<<<<< HEAD
-    ], tiedotMidnight, saaMidnight, kalenteriMidnight, kuvaMidnight, tekstiMidnight, 13);
-=======
     ], tiedotMidnight, kalenteriMidnight, kuvaMidnight, 13);
->>>>>>> origin/master
         
     retket.push(midnight);    
         
@@ -945,11 +876,3 @@
         }
     }
         
-        
-        
-    </script>
-  </head>
-  <body>
-<div id="map-canvas"></div>
-  </body>
-</html>

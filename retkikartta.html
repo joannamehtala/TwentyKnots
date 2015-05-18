@@ -187,11 +187,8 @@
     /****************** luodaan retki olio ******************/
     /********************************************************/
         
-<<<<<<< HEAD
-    function retki(koordinaatit, tiedot, saa, kalenteri, kuva, teksti, zoomLevel){
-=======
-    function retki(koordinaatit, tiedot, kalenteri, kuva, zoomLevel){
->>>>>>> origin/master
+    function retki(koordinaatit, tiedot, kalenteri, kuva, teksti, zoomLevel){
+
         
         /* attribuutit */
         this.koordinaatit = koordinaatit;
@@ -546,12 +543,8 @@
             new google.maps.LatLng( 60.121799551050096, 24.699668884277344),
             new google.maps.LatLng( 60.12539096269888, 24.69426155090332),
             new google.maps.LatLng( 60.127015520191065, 24.68979835510254),
-<<<<<<< HEAD
-      ], tiedotSuvisaaristo, saaSuvisaaristo, kalenteriSuvisaaristo, kuvaSuvisaaristo, tekstiSuvisaaristo,  13);
-=======
-      ], tiedotSuvisaaristo, kalenteriSuvisaaristo, kuvaSuvisaaristo,  13);
->>>>>>> origin/master
-        
+      ], tiedotSuvisaaristo, kalenteriSuvisaaristo, kuvaSuvisaaristo, tekstiSuvisaaristo,  13);
+
     retket.push(suvisaaristo);
                 
      
@@ -593,11 +586,7 @@
         new google.maps.LatLng( 60.15043443411743, 24.873390197753906),
         new google.maps.LatLng( 60.15342470046727, 24.873647689819336 ),
 
-<<<<<<< HEAD
-    ], tiedotKaarmeluodot, saaKaarmeluodot, kalenteriKaarmeluodot, kuvaKaarmeluodot, tekstiKaarmeluodot, 13);
-=======
-    ], tiedotKaarmeluodot, kalenteriKaarmeluodot, kuvaKaarmeluodot, 13);
->>>>>>> origin/master
+    ], tiedotKaarmeluodot, kalenteriKaarmeluodot, kuvaKaarmeluodot, tekstiKaarmeluodot, 13);
         
     retket.push(kaarmeluodot);
         
@@ -644,11 +633,7 @@
         new google.maps.LatLng(60.17977000114811, 24.935359954833984),
         new google.maps.LatLng(60.17729435692852, 24.933643341064453),  
 
-<<<<<<< HEAD
-    ], tiedotMidnight, saaMidnight, kalenteriMidnight, kuvaMidnight, tekstiMidnight, 13);
-=======
-    ], tiedotMidnight, kalenteriMidnight, kuvaMidnight, 13);
->>>>>>> origin/master
+    ], tiedotMidnight, kalenteriMidnight, kuvaMidnight, tekstiMidnight, 13);
         
     retket.push(midnight);    
         
@@ -667,6 +652,7 @@
     var tiedotVillinki = new tiedot(nimi, kuvaus, kesto, hinta, tarvikkeet, taso, lahto, sis, huom);
     var saaVillinki = new saa("Sää: Etelä-Helsinki", "Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.<p>Sääpalvelun tarjoaa Foreca</p>");
     var kalenteriVillinki = new kalenteri("Tulevat retket: Midnight SUP / Eira - Töölönlahti", "Toistaiseksi ei päivämääriä");
+    var tekstiVillinki = new teksti("Villingin kierto");  
     var kuvaVillinki = new kuva("Kuvia Midnight-retkiltä", "images/supyoga.jpg");    
     var villinki = new retki([  
         
@@ -700,7 +686,7 @@
         new google.maps.LatLng(60.16045075590866, 25.098567008972168),
         new google.maps.LatLng(60.159511188069885, 25.094575881958008), 
         
-    ], tiedotVillinki, kalenteriVillinki, kuvaVillinki, 13);
+    ], tiedotVillinki, kalenteriVillinki, kuvaVillinki, tekstiVillinki, 13);
         
     retket.push(villinki);    
         
@@ -720,6 +706,7 @@
     var tiedotPorkkala = new tiedot(nimi, kuvaus, kesto, hinta, tarvikkeet, taso, lahto, sis, huom);
     var saaPorkkala = new saa("Sää: Etelä-Helsinki", "Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.<p>Sääpalvelun tarjoaa Foreca</p>");
     var kalenteriPorkkala = new kalenteri("Tulevat retket: Midnight SUP / Eira - Töölönlahti", "Toistaiseksi ei päivämääriä");
+    var tekstiPorkkala = new teksti("Porkkala");  
     var kuvaPorkkala = new kuva("Kuvia Midnight-retkiltä", "images/supyoga.jpg");    
     var porkkala = new retki([  
         
@@ -749,7 +736,7 @@
         new google.maps.LatLng(59.980655630622195, 24.422435760498047),
         new google.maps.LatLng(59.98353251494715, 24.424667358398438), 
         
-    ], tiedotPorkkala, kalenteriPorkkala, kuvaPorkkala, 13);
+    ], tiedotPorkkala, kalenteriPorkkala, kuvaPorkkala, tekstiPorkkala, 13);
         
     retket.push(porkkala);        
         
@@ -769,6 +756,7 @@
     var tiedotHelsinki = new tiedot(nimi, kuvaus, kesto, hinta, tarvikkeet, taso, lahto, sis, huom);
     var saaHelsinki = new saa("Sää: Etelä-Helsinki", "Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.<p>Sääpalvelun tarjoaa Foreca</p>");
     var kalenteriHelsinki = new kalenteri("Tulevat retket: Midnight SUP / Eira - Töölönlahti", "Toistaiseksi ei päivämääriä");
+    var tekstiHelsinki = new teksti("Itä-Helsingin sisäsaaristo");  
     var kuvaHelsinki = new kuva("Kuvia Midnight-retkiltä", "images/supyoga.jpg");    
     var helsinki = new retki([  
         
@@ -797,7 +785,7 @@
         new google.maps.LatLng(60.18696111591289, 25.04809856414795),
         new google.maps.LatLng(60.18536085569452, 25.042004585266113),   
         
-    ], tiedotHelsinki, kalenteriHelsinki, kuvaHelsinki, 13);
+    ], tiedotHelsinki, kalenteriHelsinki, kuvaHelsinki, tekstiHelsinki, 13);
         
     retket.push(helsinki);            
     
@@ -816,6 +804,7 @@
     var tiedotBreku = new tiedot(nimi, kuvaus, kesto, hinta, tarvikkeet, taso, lahto, sis, huom);
     var saaBreku = new saa("Sää: Etelä-Helsinki", "Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.<p>Sääpalvelun tarjoaa Foreca</p>");
     var kalenteriBreku = new kalenteri("Tulevat retket: Midnight SUP / Eira - Töölönlahti", "Toistaiseksi ei päivämääriä");
+    var tekstiBreku = new teksti("SUP & Breakfast");  
     var kuvaBreku = new kuva("Kuvia Midnight-retkiltä", "images/supyoga.jpg");    
     var breku = new retki([  
         
@@ -840,7 +829,7 @@
         new google.maps.LatLng(60.152629102582466, 24.944608211517334),
         new google.maps.LatLng(60.15332858899359, 24.942376613616943),
         
-    ], tiedotBreku, kalenteriBreku, kuvaBreku, 13);
+    ], tiedotBreku, kalenteriBreku, kuvaBreku, tekstiBreku, 13);
         
     retket.push(breku);      
         

@@ -193,14 +193,14 @@ InfoBubble.prototype.buildDom_ = function() {
   tabsContainer.style['position'] = 'relative';
 
   // Close button
-  var close = this.close_ = document.createElement('IMG');
-  close.style['position'] = 'absolute';
-  close.style['width'] = this.px(12);
-  close.style['height'] = this.px(12);
-  close.style['border'] = 0;
-  close.style['zIndex'] = this.baseZIndex_ + 1;
-  close.style['cursor'] = 'pointer';
-  close.src = 'images/karttaicons/ruksi.png';
+    var close = this.close_ = document.createElement('IMG');
+    close.style['position'] = 'absolute';
+    close.style['width'] = this.px(12);
+    close.style['height'] = this.px(12);
+    close.style['border'] = 0;
+    close.style['zIndex'] = this.baseZIndex_ + 1;
+    close.style['cursor'] = 'pointer';
+    close.src = 'images/karttaicons/ruksi.png';
 
   var that = this;
   google.maps.event.addDomListener(close, 'click', function() {

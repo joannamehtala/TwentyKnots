@@ -67,6 +67,10 @@ h2, h3, h4, h5, h6{
 	color: white;
 }
 
+.teksti {
+	font-size: 2em;
+}
+
 #map-canvas {
     width: 70%;
     height: 80%;

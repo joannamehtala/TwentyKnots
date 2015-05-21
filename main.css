@@ -270,6 +270,16 @@ img.down_logo {
 	width: 81%;
 }
 
+.main-navigation.retket {
+    padding-left: 7.5%;
+    margin-left: 0;
+    position: absolute;
+    z-index: 100;
+    width: 100%;
+    //background-color: rgba(240,240,240,0.8);
+}
+
+
 .main-navigation li {
 	display: inline-block;
 	text-align: left;
@@ -286,6 +296,10 @@ img.down_logo {
 	text-align: left;
 	font-weight: 200;
 	text-transform: uppercase;
+}
+
+.main-navigation.retket h4 {
+    font-weight: 600;
 }
 
 .main-navigation p {
@@ -696,6 +710,10 @@ input.email {
     z-index: 1000;
 }
 
+.sub-navigation.full.retket {
+   
+}
+
 .sub-navigation.full li {
     
     padding: 5px 10px;
@@ -763,6 +781,10 @@ input.email {
                         bottom: 50px;
                         margin-top: 50px;
                     }
+    
+                     .sub-navigation.full.retket {
+                        position: absolute;
+                     }
 }
 
 @media only screen and (max-width: 980px) {
@@ -874,19 +896,18 @@ input.email {
 	position: fixed;
 	top: 0;
 	right: 0;
-	z-index: 100;
+	z-index: 1001;
 }
 
 .mobile-navigation {
 	display: none;
 	position: fixed;
-	z-index: 99;
+	z-index: 1000;
 	top: 0;
 	bottom: 0;
 	left: 0;
 	right: 0;
 	background-color: rgba(0,0,0, 0.8);
-	display: ;
 }
 
 .mobile-navigation ul {
@@ -986,6 +1007,13 @@ img.mobile-nav-logo {
 	padding-bottom: 50px;
 	background-color: rgba(250, 250, 250, 0.9);
 	text-align: center;
+}
+
+.content-wrapper.content-page.retket {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
 }
 
 
@@ -1106,6 +1134,23 @@ img.mobile-nav-logo {
 .content-wrapper.content-page img.retket {
     margin-top: 100px;
     width: 70%;
+}
+
+.content-wrapper.content-page .retket-container {
+    float: left;
+    width: 40%;
+}
+
+.content-wrapper.content-page .retket-container h2 {
+    border-bottom: none;
+    text-align: left;
+    margin-top: 50px;
+    margin-bottom: 0;
+}
+
+
+.content-wrapper.content-page .retket-container h3 {
+    
 }
 
 .content-wrapper.content-page img.retkicover {

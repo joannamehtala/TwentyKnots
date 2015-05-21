@@ -148,6 +148,14 @@
             
             
         });
+        
+        
+        var ruksi = document.getElementById("sulje");
+        ruksi.addEventListener("click", suljeInfoWindow);
+        
+        var ruksi2 = document.getElementById("sulje2");
+        ruksi2.addEventListener("click", suljeKuvaWindow);
+        
     
     }
         
@@ -157,7 +165,28 @@
         
         
         
+    
+    function suljeInfoWindow(){
         
+            document.getElementById("otsikko").innerHTML="";
+            document.getElementById("kuvaus").innerHTML="";
+            document.getElementById("kesto").innerHTML="<b>Kesto: </b>";
+            document.getElementById("hinta").innerHTML="<b>Hinta: </b>";
+            document.getElementById("tarvikkeet").innerHTML="<b>Mitä tarvitsen: </b>";
+            document.getElementById("taso").innerHTML="<b>Retken taso: </b>";
+            document.getElementById("lahto").innerHTML="<b>Lahtopaikka: </b>";
+            document.getElementById("sis").innerHTML="<b>Hintaan sis.: </b>";
+            document.getElementById("huom").innerHTML="<b>Muuta huomioitavaa: </b>";
+            
+            var ikkuna = document.getElementById("content-ikkunat");
+            $(ikkuna).css("visibility","hidden");
+    }
+
+    function suljeKuvaWindow(){
+            var ikkuna = document.getElementById("kuva-ikkuna");
+            $(ikkuna).css("visibility","hidden");
+    }
+
         
         
     /********************************************************/
@@ -195,9 +224,11 @@
         }
         
         this.muutaCenter = function(kartta){
-            kartta.setCenter(this.koordinaatit[0]);
+            console.log(this.koordinaatit[0]);
+            var koordinaatti = this.koordinaatit[0];
+            kartta.setCenter({lat: koordinaatti.A+0.01, lng:koordinaatti.F});
         }
-    
+        
         this.piirraReitti = function(kartta) {
            
             var x = 0;
@@ -250,11 +281,10 @@
                        this.reitti2 = reitti;
                    }       
             }
-            alustaAnimaatio();
             this.muutaZoom(kartta);
             this.muutaCenter(kartta);
+            alustaAnimaatio();
             this.reitti2 = reitti;
-            console.log(this.reitti2);
         }
         
         this.suljeReitti = function(){
@@ -291,7 +321,43 @@
         this.huom = huom;
 
         this.avaaInfoWindow = function(map, marker){
-            var info = this.annaHTMLMuodossa(); 
+            
+            var otsikko = document.getElementById("otsikko");
+            var kuvaus = document.getElementById("kuvaus");
+            var kesto = document.getElementById("kesto");
+            var hinta = document.getElementById("hinta");
+            var tarvikkeet = document.getElementById("tarvikkeet");
+            var taso = document.getElementById("taso");
+            var lahto = document.getElementById("lahto");
+            var sis = document.getElementById("sis");
+            var huom = document.getElementById("huom");
+            
+            
+            var otsikkoTeksti = document.createTextNode(this.nimi);
+            var otsikkoTeksti = document.createTextNode(this.nimi);
+            var kuvausTeksti = document.createTextNode(this.kuvaus);
+            var kestoTeksti = document.createTextNode(this.kesto);
+            var hintaTeksti = document.createTextNode(this.hinta);
+            var tarvikkeetTeksti = document.createTextNode(this.tarvikkeet);
+            var tasoTeksti = document.createTextNode(this.taso);
+            var lahtoTeksti = document.createTextNode(this.lahto)
+            var sisTeksti = document.createTextNode(this.sis);
+            var huomTeksti = document.createTextNode(this.huom);
+
+            otsikko.appendChild(otsikkoTeksti);
+            kuvaus.appendChild(kuvausTeksti);
+            kesto.appendChild(kestoTeksti);
+            hinta.appendChild(hintaTeksti);
+            tarvikkeet.appendChild(tarvikkeetTeksti);
+            taso.appendChild(tasoTeksti);
+            lahto.appendChild(lahtoTeksti);
+            sis.appendChild(sisTeksti);
+            huom.appendChild(huomTeksti);
+            
+            var ikkuna = document.getElementById("content-ikkunat");
+            $(ikkuna).css("visibility","visible");
+            
+            /*
             var infowindow = new InfoBubble({
                   maxWidth: 500,
                   //maxHeight: 600,
@@ -306,12 +372,31 @@
                   content: info,
                   arrowStyle: 3
             });
+            */
             console.log(map.getCenter().lat(), map.getCenter().lng());
-            infowindow.open(map, marker);
+            //infowindow.open(map, marker);
+        }
+        
+        this.suljeInfoWindow = function(){
+            document.getElementById("otsikko").innerHTML="";
+            document.getElementById("kuvaus").innerHTML="";
+            document.getElementById("kesto").innerHTML="";
+            document.getElementById("hinta").innerHTML="";
+            document.getElementById("tarvikkeet").innerHTML="";
+            document.getElementById("taso").innerHTML="";
+            document.getElementById("lahto").innerHTML="";
+            document.getElementById("sis").innerHTML="";
+            document.getElementById("huom").innerHTML="";
+            
+            var ikkuna = document.getElementById("content-ikkunat");
+            $(ikkuna).css("visibility","hidden");
         }
 
         this.annaHTMLMuodossa = function(){
-            var htmlMuodossa = '<div class="infobox">'+
+               
+            var htmlMuodossa = "hello";
+            /*
+            '<div class="infobox">'+
             '<h1>'+this.nimi+'</h1>'+
             '<div class="content">'+
             '<p>'+this.kuvaus+'</p>'+
@@ -325,10 +410,8 @@
             '<p>'+this.hinta+'</p>'+
             '<p>'+this.sis+'</p>'+
             '<p>'+this.huom+'</p>'+
-            '</div>'+
-            '</div>'+
             '</div>';
-
+            */
             return htmlMuodossa;
         }
     }
@@ -343,6 +426,19 @@
         this.kuvatiedosto = kuvatiedosto;
 
         this.avaaKuvaWindow = function(map, marker){
+            
+            var ikkuna = document.getElementById("kuva-ikkuna");
+            var kuvat = ikkuna.getElementsByTagName("img");    
+            console.log(kuvat);    
+            for(var i=1; i<kuvat.length; i++){
+                var kuva = kuvat[i];
+                $(kuva).attr(("src"), this.kuvatiedosto);
+            }
+            
+            //$("#pic1").attr("src", searchPic.src);
+           
+            $(ikkuna).css("visibility","visible");
+            /*
             var kuvaWindow = new InfoBubble({
                   map: map,
                   maxWidth: 500,
@@ -354,6 +450,7 @@
                   borderColor: 'rgba(255,255,255,0.9)',
                   shadowStyle: 0,
                   arrowStyle: 3,
+                  
                   content: '<div class="infobox">'+
                             '<h1>'+this.otsikko+'</h1>'+
                             '<img src="'+this.kuvatiedosto+'">'+
@@ -364,6 +461,7 @@
                             });
 
             kuvaWindow.open(map, marker);
+            */
         }
     }
 
@@ -409,6 +507,44 @@
         this.kuvaus = kuvaus;
 
         this.avaaKalenteriWindow = function(map, marker){
+            
+            
+            var otsikko = document.getElementById("otsikko");
+            var kuvaus = document.getElementById("kuvaus");
+            var kesto = document.getElementById("kesto");
+            var hinta = document.getElementById("hinta");
+            var tarvikkeet = document.getElementById("tarvikkeet");
+            var taso = document.getElementById("taso");
+            var lahto = document.getElementById("lahto");
+            var sis = document.getElementById("sis");
+            var huom = document.getElementById("huom");
+            
+            
+            var otsikkoTeksti = document.createTextNode(this.nimi);
+            var otsikkoTeksti = document.createTextNode(this.nimi);
+            var kuvausTeksti = document.createTextNode(this.kuvaus);
+            var kestoTeksti = document.createTextNode(this.kesto);
+            var hintaTeksti = document.createTextNode(this.hinta);
+            var tarvikkeetTeksti = document.createTextNode(this.tarvikkeet);
+            var tasoTeksti = document.createTextNode(this.taso);
+            var lahtoTeksti = document.createTextNode(this.lahto)
+            var sisTeksti = document.createTextNode(this.sis);
+            var huomTeksti = document.createTextNode(this.huom);
+
+            otsikko.appendChild(otsikkoTeksti);
+            kuvaus.appendChild(kuvausTeksti);
+            kesto.appendChild(kestoTeksti);
+            hinta.appendChild(hintaTeksti);
+            tarvikkeet.appendChild(tarvikkeetTeksti);
+            taso.appendChild(tasoTeksti);
+            lahto.appendChild(lahtoTeksti);
+            sis.appendChild(sisTeksti);
+            huom.appendChild(huomTeksti);
+            
+            var ikkuna = document.getElementById("content-ikkunat");
+            $(ikkuna).css("visibility","visible");
+            
+            /*
             var kalenteriWindow = new InfoBubble({
                   maxWidth: 500,
                   map: map,
@@ -429,6 +565,7 @@
                           });
 
             kalenteriWindow.open(map, marker);
+            */
         }
 
     }
@@ -455,13 +592,13 @@
     /* luodaan retkiä */ 
     var nimi = "Suvisaaristo";
     var kuvaus = "Tällä retkellä kierrämme kauniin Suinon saaren. Monipuolisen melontareitin varrella pääsee ihastelemaan saaren kaunista luontoa, upeita näkymiä aavalle merelle sekä suloisia saaristohuviloita. Pysähdymme retken aikana luodolle nauttimaan kuumaa juotavaa ja retkieväitä. Jokainen osallistuja saa paikan päältä lämpimän märkäpuvun ja tossut.";
-    var kesto = '<b>'+"Kesto:"+'</b>'+" n. 3 tuntia (on mahdollista että retken kesto menee yli 3 tunnin).";
-    var hinta = '<b>'+"Hinta:"+'</b>'+" 50€ (Kausikorttilaiset: 25€ ja sarjakorttilaiset: 3 * SUP-vuokra)"; 
-    var tarvikkeet = '<b>'+"Mitä tarvitsen:"+'</b>'+" Kuoritakki/tuulitakki, pipo, ohuet hanskat, pyyhe, kuivat vaatteet, vesipullo, ja retkievästä.";
-    var taso = '<b>'+"Retken taso:"+'</b>'+" Reitin taso on helppo ja melomme rauhallista tahtia osallistujien toiveiden mukaan. Retkelle osallistujilta vaadimme kuitenkin aikaisempaa SUP-melontakokemusta.";
-    var lahto = '<b>'+"Lähtöpaikka:"+'</b>'+" Svinön Uimaranta. Suvisaarentie 9, Espoo. Tapaamme suurella hiekkaparkkipaikalla tien vieressä. Paikalle pääsee linja-autolla 145 sekä omalla autolla.";
-    var sis = '<b>'+"Hintaan sis:"+'</b>'+" Kova sup-melontalauta, mela, pelastusliivit, märkäpuku ja tossut.";
-    var huom = '<b>'+"Muuta huomioitavaa:"+'</b>'+" Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.";
+    var kesto = " n. 3 tuntia (on mahdollista että retken kesto menee yli 3 tunnin).";
+    var hinta = " 50€ (Kausikorttilaiset: 25€ ja sarjakorttilaiset: 3 * SUP-vuokra)"; 
+    var tarvikkeet = " Kuoritakki/tuulitakki, pipo, ohuet hanskat, pyyhe, kuivat vaatteet, vesipullo, ja retkievästä.";
+    var taso = " Reitin taso on helppo ja melomme rauhallista tahtia osallistujien toiveiden mukaan. Retkelle osallistujilta vaadimme kuitenkin aikaisempaa SUP-melontakokemusta.";
+    var lahto = " Svinön Uimaranta. Suvisaarentie 9, Espoo. Tapaamme suurella hiekkaparkkipaikalla tien vieressä. Paikalle pääsee linja-autolla 145 sekä omalla autolla.";
+    var sis = " Kova sup-melontalauta, mela, pelastusliivit, märkäpuku ja tossut.";
+    var huom = " Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.";
     var tiedotSuvisaaristo = new tiedot(nimi, kuvaus, kesto, hinta, tarvikkeet, taso, lahto, sis, huom);
     var saaSuvisaaristo = new saa("Sää: Suvisaaristo", "Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.<p>Sääpalvelun tarjoaa Foreca</p>");
     var kalenteriSuvisaaristo = new kalenteri("Tulevat retket Suvisaaristoon", "21.5.2015 klo 17:00-20:00");

@@ -20,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
  <meta name="description" content="TwentyKnots tarjoaa SUP-melonta eli suppaus retkia ja seikkailuja Helsingin ympärillä.">
    <meta name="keywords" content="SUP, suppaus, retket, seikkailut, SUP-melonta, stand-up-paddling, twentyknots, Helsinki, Espoo, Kirkkonummi, pääkaupunkiseutu"/>
-  <meta name="Author" content="Joanna Mehtälä, Joel Mikkonen, Mira Matilainen">
+  <meta name="Author" content="Joel Mikkonen">
 
   <link rel="stylesheet" href="main.css">
   <link rel="stylesheet" href="kartta_style.css">
@@ -42,9 +42,10 @@
   <![endif]-->
   
 </head>
+<img class="bg retket" src="images/bg_retket.jpg" alt="sup-melonta retki">
 <body> 
 
-            <div class="sup-main main-navigation retket black">
+            <div class="sup-main main-navigation black">
                       <a href="index"><img id="main-logo" src="images/twentyknotslogo2015.png" alt="TwentyKnots"/></a>
                       <ul>
                         <li class="closed">
@@ -112,61 +113,44 @@
                   </ul>
             </div>
             <div class="sup page_title"></div>
-            <div id="map-canvas"></div> 
-            <div id="content-ikkunat" class="infobox">
-                    <img id="sulje" class="ruksi" src="images/karttaicons/ruksi.png">
-                    <h1 id="otsikko"></h1>
-                    <div class="content">
-                         <p id="kuvaus"></p>
-                    </div>
-                    <div class="wrapper left">
-                        <p id="kesto"><b>Kesto: </b></p>
-                        <p id="tarvikkeet"><b>Mitä tarvitsen: </b></p>
-                        <p id="taso"><b>Retken taso: </b></p>
-                        <p id="lahto"><b>Lähtöpaikka: </b></p>
-                    </div>
-                    <div class="wrapper right">
-                        <p id="hinta"><b>Hinta: </b></p>
-                        <p id="sis"><b>Hintaan sis.: </b></p>
-                        <p id="huom">Muuta huomioitavaa: </p>
-                    </div>
+            
+           <div class="sub-navigation retket">
+                        <h1 class="largeOnDesktop">RETKET</h1>
+                        <ul>
+                          <li class="retket">
+                            <img class="menu_logo" src="images/mobilelogos2015/peoplelogo.png">
+                            <h4 class="largeOnDesktop">tulevat retket</h4>
+                          </li>
+                          <li class="vaativuus">
+                            <img class="menu_logo" src="images/mobilelogos2015/sijaintilogo.png">
+                            <h4 class="largeOnDesktop">retkien vaativuus</h4>
+                          </li>
+                           <li class="reitit">
+                            <img class="menu_logo" src="images/mobilelogos2015/infologo.png">
+                            <h4 class="largeOnDesktop">melontareittejä</h4>
+                          </li>
+                        </ul>
             </div>
-            <div id="kuva-ikkuna" class="infobox">
-                <img id="sulje2" class="ruksi" src="images/karttaicons/ruksi.png">
-                <img class="retken-kuva">
-                <img class="retken-kuva">
-                <img class="retken-kuva">
-                <img class="retken-kuva">
+                        <a class="down_logo full scrollto" href="#retket-anchor">
+                            <img src="images/mobilelogos2015/arrowdownlogowhite.png" alt="arrow logo">
+                        </a>
+
+            <div id="retket-anchor" class="content-wrapper content-page retket">
+                        
+                
+                        <div id="map-canvas"></div>
+                        <div class="retket-container">
+                            <h2>KAUDEN 2015 RETKET</h2>
+                            <h3>12.04.2015  Suvisaaristo</h3>
+                            <h3>19.04.2015  Tammisalo</h3>
+                            <h3>19.04.2015  Tammisalo</h3>
+                            <h3>19.04.2015  Tammisalo</h3>
+                            <h3>19.04.2015  Tammisalo</h3>
+                            <h3>19.04.2015  Tammisalo</h3>
+                            <h3>19.04.2015  Tammisalo</h3>
+                        </div>
             </div>
-            <div id="kalenteri-ikkuna" class="infobox">
-                <h1 id="kalenteri-otsikko"></h1>
-                <div class="content">
-                    <p id="kalenteri-sisalto"></p>
-                    <a class="varauslinkki" target="_blank" href="http://www.varaaheti.fi/twentyknots/">'+"www.varaaheti.fi/twentyknots"+'</a>
-                </div>
-            </div>
-    
-    
-            content: '<div class="infobox">'+
-                           '<h1>'+this.otsikko+'</h1>'+
-                           '<div class="content">'+
-                           '<p>'+this.kuvaus+'</p>'+
-                           '<a class="varauslinkki" target="_blank" href="http://www.varaaheti.fi/twentyknots/">'+"www.varaaheti.fi/twentyknots"+'</a>'+
-                           '</div>'+
-                           '</div>'
-    
-            <div class="retki-palkki">
-                <ul>
-                    <li>28.05 &nbsp&nbsp Käärmeluodot</li>
-                    <li>02.06 &nbsp&nbsp SUP & Breakfast</li>
-                    <li>03.06 &nbsp&nbsp Tammisalo</li>
-                    <li>15.06 &nbsp&nbsp Porkkala</li>
-                    <li>24.06 &nbsp&nbsp Midnight SUP</li>
-                    <li>01.07 &nbsp&nbsp Suvisaaristo</li>
-                    <li>12.07 &nbsp&nbsp Siuntio</li>
-                    <li>19.07 &nbsp&nbsp Villinki</li>
-                </ul>
-            </div>
+
 </body>
 </html>
 

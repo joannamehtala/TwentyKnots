@@ -87,9 +87,13 @@ $(function() {
 	    $(".mobile-navigation-button").click(function(){
 	        if(!onkoAuki){
 	            $(".mobile-navigation").css('display', 'block');
+                //vaihdetaan menulogo valkoiseksi
+                $(".mobile-navigation-button img").attr("src","images/menuwhite.png");
 	            onkoAuki = true;
 	        } else {
 	              $(".mobile-navigation").css('display', 'none');
+                  //vaihdetaan menulogo mustaksi
+                  $(".mobile-navigation-button img").attr("src","images/menu.png");    
 	              onkoAuki = false;
 	        }
 	    });

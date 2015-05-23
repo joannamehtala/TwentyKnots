@@ -30,14 +30,30 @@ b {
     font-weight: 600;
 }
 
+p, h1, h2, h3, h4, h5, h6 {
+    color: white;
+}
+
+p {
+    font-size: 0.9em;
+}
+
+h1 {
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
 .infobox {
 	width: 65%;
     margin-left: 12.5%;
-    top: 100px;
+    top: 20%;
     padding-top: 50px;
     padding-bottom: 50px;
 	padding-left: 5%;
 	padding-right: 5%;
+    max-height: 50%;
+    max-width: 800px;
+    overflow: scroll;
 }
 
 .infobox img {
@@ -48,7 +64,7 @@ b {
     width: 40px;
     position: absolute;
     top: 20px;
-    right: 10px;
+    right: 20px;
 }
 
 .ruksi:hover {
@@ -60,6 +76,8 @@ b {
 	width: 96%;
     margin-top: 10px;
     margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: solid 1px white;
 }
 
 .wrapper {
@@ -124,14 +142,28 @@ b {
     padding-bottom: 7px;
 }
 
+.retki-palkki li:nth-child(2){
+    margin-top: 10px;
+}
+
+.retki-palkki li.header {
+    font-weight: 600;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+.retki-palkki li.header:hover {
+    cursor: pointer;
+    color: gray;
+}
+
 .retki-palkki li:hover {
     cursor: pointer;
-    font-weight: 600;
 }
 
 #content-ikkunat {
     visibility: hidden;
-    background-color: rgba(240,240,240,0.9);
+    background-color: rgba(0,0,0,0.8);
     z-index: 2000;
     position: absolute;
 }
@@ -144,15 +176,83 @@ b {
 }
 
 #kuva-ikkuna img.retken-kuva {
-    width: 48%;
-    margin-right: 1%;
-    margin-bottom: 1%;
+    width: 85%;
+    margin-bottom: 20px;
+}
+
+#kalenteri-ikkuna {
+    visibility: hidden;
+    background-color: rgba(240,240,240,0.9);
+    z-index: 2000;
+    position: absolute;
+    width: 50%;
+}
+
+#kalenteri-ikkuna.content {
+    border-bottom: none;
+}
+
+#kalenteri-ikkuna h1,
+#kalenteri-ikkuna p {
+    color: black;
 }
 
 
+@media only screen and (max-width: 900px) {
+                                    .infobox {
+                                        width: 80%;
+                                        margin-left: 5%;
+                                    }
+    
+                                    #kalenteri-ikkuna {
+                                        width: 80%;
+                                    }   
+}
 
 
+@media only screen and (max-width: 720px) {
+                                
+                                .retki-palkki {
+                                    background-color: rgba(240,240,240,0.8);
+                                    padding: 5%;    
+                                    width: 90%;
+                                    left: 0;
+                                    border-top-left-radius: 0;
+                                    border-top-right-radius: 0;
+                                }
+    
+                                .infobox {
+                                    width: 90%;
+                                    height: 80%;
+                                    max-height: 100%;
+                                    margin: 0%;
+                                    top: 40px;
+                                    left: 0;
+                                }
+    
+                                #kalenteri-ikkuna {
+                                        width: 90%;
+                                } 
 
+}
+
+@media only screen and (max-width: 620px) {
+                                .wrapper {
+                                    width: 95%;
+                                    padding-right: 1%;
+                                    float: left;
+                                    text-align: left;
+                                }
+
+            
+                                .wrapper.right {
+                                    width: 100%;
+                                    float: left;
+                                    text-align: left;
+
+                                }
+
+}
 
 
 

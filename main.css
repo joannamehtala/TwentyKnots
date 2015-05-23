@@ -370,6 +370,9 @@ img.down_logo {
 }
 
 
+
+
+
 /*  MOBILE VERSION OF MAIN NAVIGATION (only appearing on index.html at the moment)  */
 @media only screen and (max-width: 640px) {
 						.sup-main.main-navigation { display: none; }
@@ -415,10 +418,14 @@ img.down_logo {
 
 
 
+/*** special settings for retket sivu ***/
 
 
 
-
+@media only screen and (max-width: 720px) {
+    .sup-main.main-navigation.retket { display: none; }
+    
+}
 
 
 
@@ -896,13 +903,13 @@ input.email {
 	position: fixed;
 	top: 0;
 	right: 0;
-	z-index: 1001;
+	z-index: 2001;
 }
 
 .mobile-navigation {
 	display: none;
 	position: fixed;
-	z-index: 1000;
+	z-index: 2000;
 	top: 0;
 	bottom: 0;
 	left: 0;
@@ -992,6 +999,7 @@ img.mobile-nav-logo {
 	text-align: center;
 	width: 100%;
 	top: 190px;
+    z-index: 1000;
 }
 
 .sup.page_title.black h1 {
@@ -1239,6 +1247,13 @@ img.mobile-nav-logo {
 
 }
 
+@media only screen and (min-width: 721px) {
+            .sup.page_title.retket {
+                display: none;
+            }
+
+}
+
 @media only screen and (max-width: 720px) {
 
 				
@@ -1262,6 +1277,19 @@ img.mobile-nav-logo {
                     .content-wrapper.content-page img.retket {
                         margin-left: 15%;
                     }
+    
+                    .sup.page_title.retket {
+						position: absolute;
+						font-weight: 600;
+						color: #000;
+						text-align: left;
+						height: 20px;
+						width: 96%;
+						background-color: rgba(250, 250, 250, 0.8);
+						top: 0px;
+						left: 0px;
+						padding: 10px 2%;
+					}
 }
 
 @media only screen and (max-width: 640px) {

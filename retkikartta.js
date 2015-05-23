@@ -30,44 +30,11 @@
             
             google.maps.event.addListener(retki.ikonit[0], 'click', function() {
                     
-                var klikattuRetki = retket[this.retkenNumero];
+                var klikattuRetki = retket[this.retkenNumero]
+                avaaRetki(klikattuRetki);
                 
-                //suljetaan muut retket 
-                for(var i = 0; i < retket.length; i++){
-                    var retki2 = retket[i];
-                    if(retki2 != klikattuRetki){
-                        if(retki2.onkoAvattu == true){
-                             // otetaan reitti pois
-                            retki2.suljeReitti();
-                            // otetaan ikonit pois
-                            retki2.poistaIkonit();
-                            retki2.onkoAvattu = false;
-                        }
-                    }
-                }
-                
-                //jos retki ei oo vielä auki
-                if(klikattuRetki.onkoAvattu == false) {
-                    klikattuRetki.piirraReitti(map);
-
-                    var i = 0;
-                    while(i < klikattuRetki.ikonit.length){
-                        klikattuRetki.ikonit[i].setMap(map);
-                        i++;
-                    } 
-                    
-                    klikattuRetki.onkoAvattu = true;
-                } else {
-                    // otetaan reitti pois
-                    klikattuRetki.suljeReitti();
-                    // otetaan ikonit pois
-                    skaalaaIkoneita(35, map, false, true);
-                    klikattuRetki.poistaIkonit();
-                    klikattuRetki.onkoAvattu = false;
-                
-                }
             });
-
+            
             google.maps.event.addListener(retki.ikonit[1], 'click', function() {
                     var klikattuRetki1 = retket[this.retkenNumero];
                     klikattuRetki1.tiedot.avaaInfoWindow(map, klikattuRetki1.ikonit[1]);
@@ -90,9 +57,76 @@
                     klikattuRetki4.kuva.avaaKuvaWindow(map, klikattuRetki4.ikonit[3]);
             });
             
+            
+            google.maps.event.addListener(retki.ikonit[0], 'mouseover', function() {
+                this.setIcon(image2Suuri);
+                
+                var valitturetki = retket[this.retkenNumero];
+                var retkiLista = $(".retki-palkki li");
+                for(var i = 0; i < retkiLista.length; i++){
+                    var tamaRetki = retkiLista[i];
+                    
+                    if($(tamaRetki).attr("nimi") == valitturetki.tiedot.nimi){
+                        $(tamaRetki).css("font-weight", "600");
+                    }
+                }
+            
+            });
+            
+            google.maps.event.addListener(retki.ikonit[0], 'mouseout', function() {
+                this.setIcon(image2);
+                
+                var valitturetki = retket[this.retkenNumero];
+                var retkiLista = $(".retki-palkki li");
+                for(var i = 0; i < retkiLista.length; i++){
+                    var tamaRetki = retkiLista[i];
+                    
+                    if($(tamaRetki).attr("nimi") == valitturetki.tiedot.nimi){
+                        if(!$(tamaRetki).hasClass("bold")){
+                            $(tamaRetki).css("font-weight", "400");
+                        }
+                        
+                    }
+
+                }
+            });
+
+            
+            
+            
+            google.maps.event.addListener(retki.ikonit[1], 'mouseover', function() {
+                this.setIcon(imageinfoSuuri);
+            });
+            
+            google.maps.event.addListener(retki.ikonit[1], 'mouseout', function() {
+                
+                this.setIcon(imageinfo);
+            });
+            
+            google.maps.event.addListener(retki.ikonit[2], 'mouseover', function() {
+                this.setIcon(imagekalenteriSuuri);
+            });
+            
+            google.maps.event.addListener(retki.ikonit[2], 'mouseout', function() {
+                
+                this.setIcon(imagekalenteri);
+            });
+            
+            google.maps.event.addListener(retki.ikonit[3], 'mouseover', function() {
+                this.setIcon(imageSuuri);
+            });
+            
+            google.maps.event.addListener(retki.ikonit[3], 'mouseout', function() {
+                
+                this.setIcon(image);
+            });
+
 
             j++;
         };
+        
+        
+        
         
         
         google.maps.event.addListener(map, 'zoom_changed', function() {
@@ -100,10 +134,8 @@
 
             if(map.getZoom() > zoomNyt){
                 nouseeko = true;
-                console.log('nousee');
             } else {
                 nouseeko = false;
-                console.log('laskee');
             }
             zoomNyt = map.getZoom();
             
@@ -113,10 +145,19 @@
                 while(j < retket.length){
                     var retki = retket[j];
                     if(retki.onkoAvattu){
-                        console.log(retki.reitti2);
                         retki.suljeReitti();
                         retki.poistaIkonit();
                         retki.onkoAvattu = false;
+                        
+                        var retkiLista = $(".retki-palkki li");
+                        for(var i = 0; i < retkiLista.length; i++){
+                            var tamaRetki = retkiLista[i];
+                            if($(tamaRetki).attr("nimi") == retki.tiedot.nimi){
+                                $(tamaRetki).css("font-weight", "400");
+                                $(tamaRetki).removeClass("bold");
+                            }
+                        }
+                        
                     }
                     j++;
                 }
@@ -150,11 +191,68 @@
         });
         
         
+        
+        /******* HTML Dom events ******/
+        
+        
+        /* info ikkunoiden sulje ruksit*/
         var ruksi = document.getElementById("sulje");
         ruksi.addEventListener("click", suljeInfoWindow);
         
         var ruksi2 = document.getElementById("sulje2");
         ruksi2.addEventListener("click", suljeKuvaWindow);
+        
+        var ruksi3 = document.getElementById("sulje3");
+        ruksi3.addEventListener("click", suljeKalenteriWindow);
+        
+        
+        /* retkilistan klikkausten yhdistäminen */
+        
+        var retkiLista = $(".retki-palkki li");
+        for(var i = 0; i < retkiLista.length; i++){
+            var tamaRetki = retkiLista[i];
+            
+            $(tamaRetki).click(function(){
+                for(var j=0; j < retket.length; j++){
+                    var karttaretki = retket[j];
+                    if(karttaretki.tiedot.nimi == $(this).attr("nimi")){
+                        avaaRetki(karttaretki);         
+                        
+                    }
+                }
+                
+                
+            
+            });
+            
+            $(tamaRetki).hover(
+                function(){
+                    if(!$(this).hasClass("header") && !$(this).hasClass("bold")){
+                        $(this).css("font-weight","600");
+                    }
+                },
+                function(){
+                    if(!$(this).hasClass("header") && !$(this).hasClass("bold")){
+                        $(this).css("font-weight","400");
+                    }
+                }
+            );
+        
+            
+        }
+        
+        
+        /* retkipalkin piilottaminen animoidusti  */
+        $(".retki-palkki li.header").click(function(){
+           
+                piilotaRetkiLista(true);
+        });
+        
+        
+        
+        
+        
+        
         
     
     }
@@ -164,7 +262,100 @@
     google.maps.event.addDomListener(window, 'load', initialize);
         
         
+    
+
+
+    function piilotaRetkiLista(avataanko){
         
+            if($(".retki-palkki li.item").hasClass("open")){
+                $(".retki-palkki li.item").slideUp( "slow", function() {
+                    $(this).removeClass("open");
+                    $(this).addClass("closed");
+                });
+               
+            } else if(avataanko) {
+                $(".retki-palkki li.item").slideDown( "slow", function() {
+                    $(this).removeClass("closed");
+                    $(this).addClass("open");
+                });                              
+            }
+    }
+
+
+    function avaaRetki(klikattuRetki){
+        
+                var klikattuRetki = klikattuRetki;
+        
+                //suljetaan muut retket 
+                for(var i = 0; i < retket.length; i++){
+                    var retki2 = retket[i];
+                    if(retki2 != klikattuRetki){
+                        if(retki2.onkoAvattu == true){
+                             // otetaan reitti pois
+                            retki2.suljeReitti();
+                            
+                            var retkiLista = $(".retki-palkki li");
+                            for(var i = 0; i < retkiLista.length; i++){
+                                var tamaRetki = retkiLista[i];
+                                if($(tamaRetki).attr("nimi") == retki2.tiedot.nimi){
+                                    $(tamaRetki).css("font-weight", "400");
+                                    $(tamaRetki).removeClass("bold");
+                                    
+                                }
+                            }    
+                            // otetaan ikonit pois
+                            skaalaaIkoneita(35, map, false, true);
+                            retki2.poistaIkonit();
+                            retki2.onkoAvattu = false;
+                        }
+                    }
+                }
+                
+                //jos retki ei oo vielä auki
+                if(klikattuRetki.onkoAvattu == false) {
+                    piilotaRetkiLista(false);
+                    klikattuRetki.piirraReitti(map);
+
+                    var i = 0;
+                    while(i < klikattuRetki.ikonit.length){
+                        klikattuRetki.ikonit[i].setMap(map);
+                        i++;
+                    }
+                    
+                    
+                    klikattuRetki.onkoAvattu = true;
+                    var retkiLista = $(".retki-palkki li");
+                    for(var i = 0; i < retkiLista.length; i++){
+                        var tamaRetki = retkiLista[i];
+                        if($(tamaRetki).attr("nimi") == klikattuRetki.tiedot.nimi){
+                            $(tamaRetki).css("font-weight", "600");
+                            $(tamaRetki).addClass("bold");
+                            
+                        }
+                    }
+
+                    
+                } else {
+                    // otetaan reitti pois
+                    klikattuRetki.suljeReitti();
+                    // otetaan ikonit pois
+                    skaalaaIkoneita(35, map, false, true);
+                    klikattuRetki.poistaIkonit();
+                    klikattuRetki.onkoAvattu = false;  
+                    var retkiLista = $(".retki-palkki li");
+                    for(var i = 0; i < retkiLista.length; i++){
+                        var tamaRetki = retkiLista[i];
+                        if($(tamaRetki).attr("nimi") == klikattuRetki.tiedot.nimi){
+                            $(tamaRetki).css("font-weight", "400");
+                            $(tamaRetki).removeClass("bold");
+                        }
+                    }
+                }
+    }
+
+
+
+
     
     function suljeInfoWindow(){
         
@@ -186,6 +377,15 @@
             var ikkuna = document.getElementById("kuva-ikkuna");
             $(ikkuna).css("visibility","hidden");
     }
+
+    function suljeKalenteriWindow(){
+            document.getElementById("kalenteri-otsikko").innerHTML="";
+            document.getElementById("kalenteri-sisalto").innerHTML="";
+            
+            var ikkuna = document.getElementById("kalenteri-ikkuna");
+            $(ikkuna).css("visibility","hidden");
+    }
+
 
         
         
@@ -509,39 +709,16 @@
         this.avaaKalenteriWindow = function(map, marker){
             
             
-            var otsikko = document.getElementById("otsikko");
-            var kuvaus = document.getElementById("kuvaus");
-            var kesto = document.getElementById("kesto");
-            var hinta = document.getElementById("hinta");
-            var tarvikkeet = document.getElementById("tarvikkeet");
-            var taso = document.getElementById("taso");
-            var lahto = document.getElementById("lahto");
-            var sis = document.getElementById("sis");
-            var huom = document.getElementById("huom");
-            
-            
-            var otsikkoTeksti = document.createTextNode(this.nimi);
-            var otsikkoTeksti = document.createTextNode(this.nimi);
-            var kuvausTeksti = document.createTextNode(this.kuvaus);
-            var kestoTeksti = document.createTextNode(this.kesto);
-            var hintaTeksti = document.createTextNode(this.hinta);
-            var tarvikkeetTeksti = document.createTextNode(this.tarvikkeet);
-            var tasoTeksti = document.createTextNode(this.taso);
-            var lahtoTeksti = document.createTextNode(this.lahto)
-            var sisTeksti = document.createTextNode(this.sis);
-            var huomTeksti = document.createTextNode(this.huom);
+            var kalenteriotsikko = document.getElementById("kalenteri-otsikko");
+            var kalenterisisalto = document.getElementById("kalenteri-sisalto");
+         
+            var kalenteriotsikkoTeksti = document.createTextNode(this.otsikko);
+            var kalenterisisaltoTeksti = document.createTextNode(this.kuvaus);
 
-            otsikko.appendChild(otsikkoTeksti);
-            kuvaus.appendChild(kuvausTeksti);
-            kesto.appendChild(kestoTeksti);
-            hinta.appendChild(hintaTeksti);
-            tarvikkeet.appendChild(tarvikkeetTeksti);
-            taso.appendChild(tasoTeksti);
-            lahto.appendChild(lahtoTeksti);
-            sis.appendChild(sisTeksti);
-            huom.appendChild(huomTeksti);
+            kalenteriotsikko.appendChild(kalenteriotsikkoTeksti);
+            kalenterisisalto.appendChild(kalenterisisaltoTeksti);
             
-            var ikkuna = document.getElementById("content-ikkunat");
+            var ikkuna = document.getElementById("kalenteri-ikkuna");
             $(ikkuna).css("visibility","visible");
             
             /*
@@ -574,10 +751,19 @@
  /* luodaan google maps kuvaikonit */        
         
     var image = new google.maps.MarkerImage("images/karttaicons/kamera.png", null, null, null, new      google.maps.Size(35, 35));
+    var imageSuuri = new google.maps.MarkerImage("images/karttaicons/kamera.png", null, null, null, new      google.maps.Size(42, 42));
+    
     var image2 = new google.maps.MarkerImage("images/karttaicons/markkeri.png", null, null, null, new      google.maps.Size(54, 84));
+
+    var image2Suuri = new google.maps.MarkerImage("images/karttaicons/markkeri.png", null, null, null, new      google.maps.Size(64, 100));
+
     var imageinfo = new google.maps.MarkerImage("images/karttaicons/info.png", null, null, null, new      google.maps.Size(35, 35));
+    var imageinfoSuuri = new google.maps.MarkerImage("images/karttaicons/info.png", null, null, null, new      google.maps.Size(42, 42));
+
+
     var imagesaa = new google.maps.MarkerImage("images/karttaicons/saa.png", null, null, null, new      google.maps.Size(35, 35));
-    var imagekalenteri = new google.maps.MarkerImage("images/karttaicons/kalenteri.png", null, null, null, new      google.maps.Size(35, 35));        
+    var imagekalenteri = new google.maps.MarkerImage("images/karttaicons/kalenteri.png", null, null, null, new      google.maps.Size(35, 35)); 
+    var imagekalenteriSuuri = new google.maps.MarkerImage("images/karttaicons/kalenteri.png", null, null, null, new      google.maps.Size(42, 42)); 
         
 
         
@@ -636,14 +822,14 @@
         
      /* luodaan retkiä */ 
     var nimi = "Käärmeluodot";
-    var kuvaus = "Tällä retkellä kierrämme kauniin Suinon saaren. Monipuolisen melontareitin varrella pääsee ihastelemaan saaren kaunista luontoa, upeita näkymiä aavalle merelle sekä suloisia saaristohuviloita. Pysähdymme retken aikana luodolle nauttimaan kuumaa juotavaa ja retkieväitä. Jokainen osallistuja saa paikanpäältä lämpimän märkäpuvun ja tossut.";
-    var kesto = '<b>'+"Kesto:"+'</b>'+" n. 3 tuntia (on mahdollista että retken kesto menee yli 3 tunnin).";
-    var hinta = '<b>'+"Hinta:"+'</b>'+" 50€ (Kausikorttilaiset: 25€ ja sarjakorttilaiset: 3 * SUP-vuokra)"; 
-    var tarvikkeet = '<b>'+"Mitä tarvitsen:"+'</b>'+" Kuoritakki/tuulitakki, pipo, ohuet hanskat, pyyhe, kuivat vaatteet, vesipullo, ja retkievästä.";
-    var taso = '<b>'+"Retken taso:"+'</b>'+" Reitin taso on helppo ja melomme rauhallista tahtia osallistujien toiveiden mukaan. Retkelle osallistujilta vaadimme kuitenkin aikaisempaa SUP-melontakokemusta.";
-    var lahto = '<b>'+"Lähtöpaikka:"+'</b>'+" Svinön Uimaranta. Suvisaarentie 9, Espoo. Tapaamme suurella hiekkaparkkipaikalla tien vieressä. Paikalle pääsee linja-autolla 145 sekä omalla autolla.";
-    var sis = '<b>'+"Hintaan sis:"+'</b>'+" Kova sup-melontalauta, mela, pelastusliivit, märkäpuku ja tossut.";
-    var huom = '<b>'+"Muuta huomioitavaa:"+'</b>'+" Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.";
+    var kuvaus = "Kesäretki Käärmeluodoille lähtee Lauttasaaren Kasinorannasta, saaria pujotellen kohti Käärmeluotoja! Ota omat eväät mukaan tai nappaa ne Kahvila Kasinorannasta, sillä nautimme yhdessä eväitä luodoilla merimaisemaa ihaillen."; 
+    var kesto = "n. 3 tuntia";
+    var hinta = " 50€ (Kausikorttilaiset: 25€ ja sarjakorttilaiset: 3 * SUP-vuokra)"; 
+    var tarvikkeet = "Urheilulliset vaatteet sään mukaan, pyyhe, kuivat vaatteet ja vesipullo.";
+    var taso = "Reitin taso on helppo ja melomme rauhallista tahtia osallistujien toiveiden mukaan. Retkelle osallistujilta vaadimme kuitenkin aikaisempaa SUP-melontakokemusta.";
+    var lahto = "Lauttasaaren Kasinoranta";
+    var sis = "kova sup-melontalauta, mela, pelastusliivit";
+    var huom = "Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.";
     var tiedotKaarmeluodot = new tiedot(nimi, kuvaus, kesto, hinta, tarvikkeet, taso, lahto, sis, huom);
     var saaKaarmeluodot = new saa("Sää: Lauttasaari", "Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.<p>Sääpalvelun tarjoaa Foreca</p>");
     var kalenteriKaarmeluodot = new kalenteri("Tulevat retket Käärmeluodoille", "Toistaiseksi ei päivämääriä");
@@ -677,15 +863,15 @@
     
         
     /* luodaan retkiä */ 
-    var nimi = "Midnight SUP / Eira - Töölönlahti";
-    var kuvaus = "Tällä retkellä kierrämme kauniin Suinon saaren. Monipuolisen melontareitin varrella pääsee ihastelemaan saaren kaunista luontoa, upeita näkymiä aavalle merelle sekä suloisia saaristohuviloita. Pysähdymme retken aikana luodolle nauttimaan kuumaa juotavaa ja retkieväitä. Jokainen osallistuja saa paikanpäältä lämpimän märkäpuvun ja tossut.";
-    var kesto = '<b>'+"Kesto:"+'</b>'+" n. 3 tuntia (on mahdollista että retken kesto menee yli 3 tunnin).";
-    var hinta = '<b>'+"Hinta:"+'</b>'+" 50€ (Kausikorttilaiset: 25€ ja sarjakorttilaiset: 3 * SUP-vuokra)"; 
-    var tarvikkeet = '<b>'+"Mitä tarvitsen:"+'</b>'+" Kuoritakki/tuulitakki, pipo, ohuet hanskat, pyyhe, kuivat vaatteet, vesipullo, ja retkievästä.";
-    var taso = '<b>'+"Retken taso:"+'</b>'+" Reitin taso on helppo ja melomme rauhallista tahtia osallistujien toiveiden mukaan. Retkelle osallistujilta vaadimme kuitenkin aikaisempaa SUP-melontakokemusta.";
-    var lahto = '<b>'+"Lähtöpaikka:"+'</b>'+" Svinön Uimaranta. Suvisaarentie 9, Espoo. Tapaamme suurella hiekkaparkkipaikalla tien vieressä. Paikalle pääsee linja-autolla 145 sekä omalla autolla.";
-    var sis = '<b>'+"Hintaan sis:"+'</b>'+" Kova sup-melontalauta, mela, pelastusliivit, märkäpuku ja tossut.";
-    var huom = '<b>'+"Muuta huomioitavaa:"+'</b>'+" Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.";
+    var nimi = "Midnight SUP";
+    var kuvaus = "Tämä SUP seikkailu lähtee Eiranrannasta ja päätyy Helsingin sydämmeen Töölönlahdelle. Retki vie meitä merellisestä ympäristöstä kauppatorin ohi ja jatkuu Katajanokalta kohti urbaanimpaa maisemaa Hakaniemen kautta Töölönlahdelle. Lähdemme matkaan ilta-auringossa ja ihastelemme matkan varrella hämärtyvää kaupunkia ja yöllistä maisemaa. Tulemme myös pitämään tauon Tervasaaressa, jossa teetä ja kevyttä evästä tarjolla retkeläisille. Töölönlahdelta järjestämme autokyydin takaisin lähtöpaikkaan (Eiranrantaan).";
+    var kesto = "n. 3-4 tuntia";
+    var hinta = " 55€ (Kausikorttilaiset: 27.5€ ja sarjakorttilaiset: 3 * SUP-vuokra)"; 
+    var tarvikkeet ="Urheilulliset vaatteet sään mukaan, pyyhe, kuivat vaatteet ja vesipullo.";
+    var taso = " Reitin taso on helppo ja melomme rauhallista tahtia osallistujien toiveiden mukaan. Retkelle osallistujilta vaadimme kuitenkin aikaisempaa SUP-melontakokemusta.";
+    var lahto = "Eiran uimaranta";
+    var sis = "kova sup-melontalauta, mela, pelastusliivit, retkievästä";
+    var huom = " Retkillämme on säävaraus. Ilmoitamme kahta päivää ennen mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.";
     var tiedotMidnight = new tiedot(nimi, kuvaus, kesto, hinta, tarvikkeet, taso, lahto, sis, huom);
     var saaMidnight = new saa("Sää: Etelä-Helsinki", "Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.<p>Sääpalvelun tarjoaa Foreca</p>");
     var kalenteriMidnight = new kalenteri("Tulevat retket: Midnight SUP / Eira - Töölönlahti", "Toistaiseksi ei päivämääriä");
@@ -723,15 +909,15 @@
         
         
     /* luodaan retkiä */ 
-    var nimi = "Villingin kierto";
-    var kuvaus = "Tällä retkellä kierrämme kauniin Suinon saaren. Monipuolisen melontareitin varrella pääsee ihastelemaan saaren kaunista luontoa, upeita näkymiä aavalle merelle sekä suloisia saaristohuviloita. Pysähdymme retken aikana luodolle nauttimaan kuumaa juotavaa ja retkieväitä. Jokainen osallistuja saa paikanpäältä lämpimän märkäpuvun ja tossut.";
-    var kesto = '<b>'+"Kesto:"+'</b>'+" n. 3 tuntia (on mahdollista että retken kesto menee yli 3 tunnin).";
-    var hinta = '<b>'+"Hinta:"+'</b>'+" 50€ (Kausikorttilaiset: 25€ ja sarjakorttilaiset: 3 * SUP-vuokra)"; 
-    var tarvikkeet = '<b>'+"Mitä tarvitsen:"+'</b>'+" Kuoritakki/tuulitakki, pipo, ohuet hanskat, pyyhe, kuivat vaatteet, vesipullo, ja retkievästä.";
-    var taso = '<b>'+"Retken taso:"+'</b>'+" Reitin taso on helppo ja melomme rauhallista tahtia osallistujien toiveiden mukaan. Retkelle osallistujilta vaadimme kuitenkin aikaisempaa SUP-melontakokemusta.";
-    var lahto = '<b>'+"Lähtöpaikka:"+'</b>'+" Svinön Uimaranta. Suvisaarentie 9, Espoo. Tapaamme suurella hiekkaparkkipaikalla tien vieressä. Paikalle pääsee linja-autolla 145 sekä omalla autolla.";
-    var sis = '<b>'+"Hintaan sis:"+'</b>'+" Kova sup-melontalauta, mela, pelastusliivit, märkäpuku ja tossut.";
-    var huom = '<b>'+"Muuta huomioitavaa:"+'</b>'+" Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.";
+    var nimi = "Villinki";
+    var kuvaus = "Tervetuloa nauttimaan Itä-Helsingin kauniista saaristosta aamuauringossa. Lähdemme alkuveryttelyn jälkeen noin kolme ja puoli tuntia kestävälle SUP-melontaretkelle. Kierrämme Villingin saareen sääolosuhteet huomioon ottaen. Maisemana aavaa ulkomerta, kallioita, kapeikkoja ja sisälahtia. Matkan varrella pysähdymme aamuteelle tai -kahville, joten ottakaa aamiasta mukaan retkelle!"
+    var kesto = "n. 3-4 tuntia";
+    var hinta = " 50€ (Kausikorttilaiset: 25€ ja sarjakorttilaiset: 3 * SUP-vuokra)"; 
+    var tarvikkeet = "Urheilulliset vaatteet sään mukaan, pyyhe, kuivat vaatteet ja vesipullo.";
+    var taso = "Reitin taso on helppo ja melomme rauhallista tahtia osallistujien toiveiden mukaan. Retkelle osallistujilta vaadimme kuitenkin aikaisempaa SUP-melontakokemusta.";
+    var lahto = "Kokoonnumme Villinginsalmen yleisen uimarannan parkkipaikalla. (Jollaksentie 66, Helsinki)";
+    var sis = "kova sup-melontalauta, mela, pelastusliivit";
+    var huom = "Retkillämme on säävaraus. Voit tiedustella varauksen yhteydessä kyytiä Munkkiniemestä, ota aamiaista/evästä mukaan retkelle";
     var tiedotVillinki = new tiedot(nimi, kuvaus, kesto, hinta, tarvikkeet, taso, lahto, sis, huom);
     var saaVillinki = new saa("Sää: Etelä-Helsinki", "Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.<p>Sääpalvelun tarjoaa Foreca</p>");
     var kalenteriVillinki = new kalenteri("Tulevat retket: Midnight SUP / Eira - Töölönlahti", "Toistaiseksi ei päivämääriä");
@@ -777,17 +963,17 @@
         
     /* luodaan retkiä */ 
     var nimi = "Porkkala";
-    var kuvaus = "Tällä retkellä kierrämme kauniin Suinon saaren. Monipuolisen melontareitin varrella pääsee ihastelemaan saaren kaunista luontoa, upeita näkymiä aavalle merelle sekä suloisia saaristohuviloita. Pysähdymme retken aikana luodolle nauttimaan kuumaa juotavaa ja retkieväitä. Jokainen osallistuja saa paikanpäältä lämpimän märkäpuvun ja tossut.";
-    var kesto = '<b>'+"Kesto:"+'</b>'+" n. 3 tuntia (on mahdollista että retken kesto menee yli 3 tunnin).";
-    var hinta = '<b>'+"Hinta:"+'</b>'+" 50€ (Kausikorttilaiset: 25€ ja sarjakorttilaiset: 3 * SUP-vuokra)"; 
-    var tarvikkeet = '<b>'+"Mitä tarvitsen:"+'</b>'+" Kuoritakki/tuulitakki, pipo, ohuet hanskat, pyyhe, kuivat vaatteet, vesipullo, ja retkievästä.";
-    var taso = '<b>'+"Retken taso:"+'</b>'+" Reitin taso on helppo ja melomme rauhallista tahtia osallistujien toiveiden mukaan. Retkelle osallistujilta vaadimme kuitenkin aikaisempaa SUP-melontakokemusta.";
-    var lahto = '<b>'+"Lähtöpaikka:"+'</b>'+" Svinön Uimaranta. Suvisaarentie 9, Espoo. Tapaamme suurella hiekkaparkkipaikalla tien vieressä. Paikalle pääsee linja-autolla 145 sekä omalla autolla.";
-    var sis = '<b>'+"Hintaan sis:"+'</b>'+" Kova sup-melontalauta, mela, pelastusliivit, märkäpuku ja tossut.";
-    var huom = '<b>'+"Muuta huomioitavaa:"+'</b>'+" Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.";
+    var kuvaus = "Porkkalan retkellä suuntaamme kohti historiallista ja merellistä Porkkalanniemeä, Kirkkonummella. Matkan varella maisema vaihtuu karusta ja aavasta saaristomaisemasta reheviin kaislikkokapeikkoihin. Eiväitä nautimme myös matkalla, joten pakatkaa iltapäiväherkut matkaan! Retki on erityisen mieluisa, sillä lähtö- ja tulopaikka eivät ole samoja. Järjestämme kaikille autokuljetuksen takaisin retken lähtöpaikkaan."; 
+    var kesto = "n. 3 tuntia (on mahdollista että retken kesto venyy yli 3 tunnin).";
+    var hinta = " 60€ (Kausikorttilaiset: 25€ ja sarjakorttilaiset: 3 * SUP-vuokra)"; 
+    var tarvikkeet = "Urheilulliset vaatteet sään mukaan, pyyhe, kuivat vaatteet, vesipullo, ja retkievästä.";
+    var taso = " Reitin taso on helppo ja melomme rauhallista tahtia osallistujien toiveiden mukaan. Retkelle osallistujilta vaadimme kuitenkin aikaisempaa SUP-melontakokemusta.";
+    var lahto = "Porkkala Marin, Dragetintie 108, 02400 Kirkkonummi (Kysykää meiltä kimppakyyti mahdollisuuksia)";
+    var sis = " Kova sup-melontalauta, mela, pelastusliivit, märkäpuku ja tossut (tarvittaessa).";
+    var huom = " Retkillämme on säävaraus. Ilmoitamme kahta päivää ennen mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.";
     var tiedotPorkkala = new tiedot(nimi, kuvaus, kesto, hinta, tarvikkeet, taso, lahto, sis, huom);
     var saaPorkkala = new saa("Sää: Etelä-Helsinki", "Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.<p>Sääpalvelun tarjoaa Foreca</p>");
-    var kalenteriPorkkala = new kalenteri("Tulevat retket: Midnight SUP / Eira - Töölönlahti", "Toistaiseksi ei päivämääriä");
+    var kalenteriPorkkala = new kalenteri("Tulevat retket: ", "Toistaiseksi ei päivämääriä");
     var kuvaPorkkala = new kuva("Kuvia Midnight-retkiltä", "images/supyoga.jpg");    
     var porkkala = new retki([  
         
@@ -825,15 +1011,15 @@
         
         
      /* luodaan retkiä */ 
-    var nimi = "Itä-Helsingin sisäsaaristo";
+    var nimi = "Tammisalo";
     var kuvaus = "Tällä retkellä kierrämme kauniin Suinon saaren. Monipuolisen melontareitin varrella pääsee ihastelemaan saaren kaunista luontoa, upeita näkymiä aavalle merelle sekä suloisia saaristohuviloita. Pysähdymme retken aikana luodolle nauttimaan kuumaa juotavaa ja retkieväitä. Jokainen osallistuja saa paikanpäältä lämpimän märkäpuvun ja tossut.";
-    var kesto = '<b>'+"Kesto:"+'</b>'+" n. 3 tuntia (on mahdollista että retken kesto menee yli 3 tunnin).";
-    var hinta = '<b>'+"Hinta:"+'</b>'+" 50€ (Kausikorttilaiset: 25€ ja sarjakorttilaiset: 3 * SUP-vuokra)"; 
-    var tarvikkeet = '<b>'+"Mitä tarvitsen:"+'</b>'+" Kuoritakki/tuulitakki, pipo, ohuet hanskat, pyyhe, kuivat vaatteet, vesipullo, ja retkievästä.";
-    var taso = '<b>'+"Retken taso:"+'</b>'+" Reitin taso on helppo ja melomme rauhallista tahtia osallistujien toiveiden mukaan. Retkelle osallistujilta vaadimme kuitenkin aikaisempaa SUP-melontakokemusta.";
-    var lahto = '<b>'+"Lähtöpaikka:"+'</b>'+" Svinön Uimaranta. Suvisaarentie 9, Espoo. Tapaamme suurella hiekkaparkkipaikalla tien vieressä. Paikalle pääsee linja-autolla 145 sekä omalla autolla.";
-    var sis = '<b>'+"Hintaan sis:"+'</b>'+" Kova sup-melontalauta, mela, pelastusliivit, märkäpuku ja tossut.";
-    var huom = '<b>'+"Muuta huomioitavaa:"+'</b>'+" Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.";
+    var kesto = "n. 3 tuntia (on mahdollista että retken kesto menee yli 3 tunnin).";
+    var hinta = "50€ (Kausikorttilaiset: 25€ ja sarjakorttilaiset: 3 * SUP-vuokra)"; 
+    var tarvikkeet = "Kuoritakki/tuulitakki, pipo, ohuet hanskat, pyyhe, kuivat vaatteet, vesipullo, ja retkievästä.";
+    var taso = "Reitin taso on helppo ja melomme rauhallista tahtia osallistujien toiveiden mukaan. Retkelle osallistujilta vaadimme kuitenkin aikaisempaa SUP-melontakokemusta.";
+    var lahto = "Svinön Uimaranta. Suvisaarentie 9, Espoo. Tapaamme suurella hiekkaparkkipaikalla tien vieressä. Paikalle pääsee linja-autolla 145 sekä omalla autolla.";
+    var sis = "Kova sup-melontalauta, mela, pelastusliivit, märkäpuku ja tossut.";
+    var huom = "Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.";
     var tiedotHelsinki = new tiedot(nimi, kuvaus, kesto, hinta, tarvikkeet, taso, lahto, sis, huom);
     var saaHelsinki = new saa("Sää: Etelä-Helsinki", "Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.<p>Sääpalvelun tarjoaa Foreca</p>");
     var kalenteriHelsinki = new kalenteri("Tulevat retket: Midnight SUP / Eira - Töölönlahti", "Toistaiseksi ei päivämääriä");
@@ -873,14 +1059,14 @@
         
         /* luodaan retkiä */ 
     var nimi = "SUP & Breakfast";
-    var kuvaus = "Tällä retkellä kierrämme kauniin Suinon saaren. Monipuolisen melontareitin varrella pääsee ihastelemaan saaren kaunista luontoa, upeita näkymiä aavalle merelle sekä suloisia saaristohuviloita. Pysähdymme retken aikana luodolle nauttimaan kuumaa juotavaa ja retkieväitä. Jokainen osallistuja saa paikanpäältä lämpimän märkäpuvun ja tossut.";
-    var kesto = '<b>'+"Kesto:"+'</b>'+" n. 3 tuntia (on mahdollista että retken kesto menee yli 3 tunnin).";
-    var hinta = '<b>'+"Hinta:"+'</b>'+" 50€ (Kausikorttilaiset: 25€ ja sarjakorttilaiset: 3 * SUP-vuokra)"; 
-    var tarvikkeet = '<b>'+"Mitä tarvitsen:"+'</b>'+" Kuoritakki/tuulitakki, pipo, ohuet hanskat, pyyhe, kuivat vaatteet, vesipullo, ja retkievästä.";
-    var taso = '<b>'+"Retken taso:"+'</b>'+" Reitin taso on helppo ja melomme rauhallista tahtia osallistujien toiveiden mukaan. Retkelle osallistujilta vaadimme kuitenkin aikaisempaa SUP-melontakokemusta.";
-    var lahto = '<b>'+"Lähtöpaikka:"+'</b>'+" Svinön Uimaranta. Suvisaarentie 9, Espoo. Tapaamme suurella hiekkaparkkipaikalla tien vieressä. Paikalle pääsee linja-autolla 145 sekä omalla autolla.";
-    var sis = '<b>'+"Hintaan sis:"+'</b>'+" Kova sup-melontalauta, mela, pelastusliivit, märkäpuku ja tossut.";
-    var huom = '<b>'+"Muuta huomioitavaa:"+'</b>'+" Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.";
+    var kuvaus = "Joka tiistai & torstai 2.6 alkaen klo 7.00 Café Carusellita aloitetamme aamun melomalla Merisataman ja Suomenlinnan merellisessä ympäristössä. Retken (1 tunti) jälkeen nautimme Café Carusellin herkullisesta aamiaisesta!"
+    var kesto = "1.5 tuntia";
+    var hinta = " 35€ (Kausikorttilaiset: 15€)"; 
+    var tarvikkeet = "Urheilulliset vaatteet sään mukaan, pyyhe, kuivat vaatteet ja vesipullo.";
+    var taso = "Reitin taso on helppo ja melomme rauhallista tahtia osallistujien toiveiden mukaan. Retkelle osallistujilta vaadimme kuitenkin aikaisempaa SUP-melontakokemusta.";
+    var lahto = "Cafe Carusel (Kaivopuisto)";
+    var sis = "Aamiainen (arvo 10€), kova sup-melontalauta, mela, pelastusliivit.";
+    var huom = "Retkillämme on säävaraus.";
     var tiedotBreku = new tiedot(nimi, kuvaus, kesto, hinta, tarvikkeet, taso, lahto, sis, huom);
     var saaBreku = new saa("Sää: Etelä-Helsinki", "Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.<p>Sääpalvelun tarjoaa Foreca</p>");
     var kalenteriBreku = new kalenteri("Tulevat retket: Midnight SUP / Eira - Töölönlahti", "Toistaiseksi ei päivämääriä");
@@ -913,6 +1099,79 @@
     retket.push(breku);      
         
         
+
+
+
+        /* luodaan retkiä */ 
+    var nimi = "Siuntio";
+    var kuvaus = "Tällä retkellä suuntaamme kohti historiallisen Siuntionjoen maisemiin. Matkan varrella koemme monimuotoista luontoa, meren kaislikkorantaa, vehreää jokiuomaa sekä järvenselkää. Reitillä on myös mielenkiintoinen historia, josta paikanpäällä enemmän. "
+    var kesto = "n. 4 tuntia";
+    var hinta = "60€ (Kausikorttilaiset: 30€ ja sarjakorttilaiset: 3 * SUP-vuokra)"; 
+    var tarvikkeet = "Urheilulliset vaatteet sään mukaan, pyyhe, kuivat vaatteet, vesipullo, ja retkievästä.";
+    var taso = "Reitin taso on helppo ja melomme rauhallista tahtia osallistujien toiveiden mukaan. Retkelle osallistujilta vaadimme kuitenkin aikaisempaa SUP-melontakokemusta.";
+    var lahto = "Kokoontuminen Pikkalan ST1 huoltamolla klo 13, josta siirrymme lähtöpaikkaan (Kysykää myös kimppakyyti mahdollisuuksia)";
+    var sis = " Kova sup-melontalauta, mela, pelastusliivit, märkäpuku ja tossut (tarvittaessa).";
+    var huom = " Retkillämme on säävaraus. Ilmoitamme kahta päivää ennen mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.";
+    var tiedotSiuntio = new tiedot(nimi, kuvaus, kesto, hinta, tarvikkeet, taso, lahto, sis, huom);
+    var saaSiuntio = new saa("Sää: Etelä-Helsinki", "Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.<p>Sääpalvelun tarjoaa Foreca</p>");
+    var kalenteriSiuntio = new kalenteri("Tulevat retket: Midnight SUP / Eira - Töölönlahti", "Toistaiseksi ei päivämääriä");
+    var kuvaSiuntio = new kuva("Kuvia Midnight-retkiltä", "images/supyoga.jpg");    
+    var siuntio = new retki([  
+        
+        new google.maps.LatLng(60.17605646483715, 24.224252700805664),
+        new google.maps.LatLng(60.174733149283924, 24.226226806640625),
+        new google.maps.LatLng(60.17281211248357, 24.226741790771484),
+        new google.maps.LatLng(60.17084826985591, 24.226655960083008),
+        new google.maps.LatLng(60.16931126764639, 24.225711822509766),
+        new google.maps.LatLng(60.16615164839156, 24.225282669067383),
+        new google.maps.LatLng(60.164998738682264, 24.223651885986328),
+        new google.maps.LatLng(60.16350416589006, 24.225540161132812),
+        new google.maps.LatLng(60.158037720780655, 24.221506118774414),
+        new google.maps.LatLng(60.15252764911909, 24.225711822509766),
+        new google.maps.LatLng(60.148298363065365, 24.223480224609375),
+        new google.maps.LatLng(60.14381216215049, 24.225196838378906),
+        new google.maps.LatLng(60.14218843384977, 24.22811508178711),
+        new google.maps.LatLng(60.14193204836909, 24.233694076538086),
+        new google.maps.LatLng(60.141205611987196, 24.236526489257812),
+        new google.maps.LatLng(60.14201751041804, 24.239444732666016),
+        new google.maps.LatLng(60.141462003130485, 24.24734115600586),
+        new google.maps.LatLng(60.14167566088985, 24.25154685974121),
+        new google.maps.LatLng(60.14026549402943, 24.255151748657227),
+        new google.maps.LatLng(60.14167566088985, 24.25909996032715),
+        new google.maps.LatLng(60.141761123604994, 24.262876510620117),
+        new google.maps.LatLng(60.14018002742816, 24.265108108520508),
+        new google.maps.LatLng(60.13906894140282, 24.266481399536133),
+        new google.maps.LatLng(60.13782960886759, 24.265108108520508),
+        new google.maps.LatLng(60.136376538846946, 24.26579475402832),
+        new google.maps.LatLng(60.134923404643196, 24.268112182617188),
+        new google.maps.LatLng(60.12842625506228, 24.27128791809082),
+        new google.maps.LatLng(60.11820774752369, 24.273090362548828),
+        new google.maps.LatLng(60.11068079310344, 24.284334182739258),
+        new google.maps.LatLng(60.10546223536684, 24.287424087524414),
+        new google.maps.LatLng(60.10319489936693, 24.29128646850586),
+        new google.maps.LatLng(60.10088462293185, 24.293947219848633),
+        new google.maps.LatLng(60.09925877572626, 24.29652214050293),
+        new google.maps.LatLng(60.096777064774926, 24.29875373840332),
+        new google.maps.LatLng(60.09352488472031, 24.30201530456543),
+        new google.maps.LatLng(60.09198426635055, 24.303388595581055),
+        new google.maps.LatLng(60.089673203755524, 24.303388595581055),
+        new google.maps.LatLng(60.08612069898061, 24.30750846862793),
+        new google.maps.LatLng(60.083723611979295, 24.313602447509766),
+        
+        
+    ], tiedotSiuntio, kalenteriSiuntio, kuvaSiuntio, 13);
+        
+    retket.push(siuntio);      
+
+
+
+
+
+
+
+
+
+
     
     // luodaan retkille ikonit
     var k = 0;

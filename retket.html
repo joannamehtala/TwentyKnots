@@ -111,10 +111,14 @@
                       <li class="clear last"><a href="twentyknots"><h4>TwentyKnots</h4></a></li>
                   </ul>
             </div>
-            <div class="sup page_title"></div>
+    
+    
+            <div class="sup page_title black retket">
+                <h1>Retket</h1>
+            </div>
             <div id="map-canvas"></div> 
             <div id="content-ikkunat" class="infobox">
-                    <img id="sulje" class="ruksi" src="images/karttaicons/ruksi.png">
+                    <img id="sulje" class="ruksi" src="images/karttaicons/ruksiwhite.png">
                     <h1 id="otsikko"></h1>
                     <div class="content">
                          <p id="kuvaus"></p>
@@ -128,7 +132,7 @@
                     <div class="wrapper right">
                         <p id="hinta"><b>Hinta: </b></p>
                         <p id="sis"><b>Hintaan sis.: </b></p>
-                        <p id="huom">Muuta huomioitavaa: </p>
+                        <p id="huom"><b>Muuta huomioitavaa: </b></p>
                     </div>
             </div>
             <div id="kuva-ikkuna" class="infobox">
@@ -139,32 +143,25 @@
                 <img class="retken-kuva">
             </div>
             <div id="kalenteri-ikkuna" class="infobox">
+                <img id="sulje3" class="ruksi" src="images/karttaicons/ruksi.png">
                 <h1 id="kalenteri-otsikko"></h1>
                 <div class="content">
                     <p id="kalenteri-sisalto"></p>
-                    <a class="varauslinkki" target="_blank" href="http://www.varaaheti.fi/twentyknots/">'+"www.varaaheti.fi/twentyknots"+'</a>
+                    <a class="varauslinkki" target="_blank" href="http://www.varaaheti.fi/twentyknots/">www.varaaheti.fi/twentyknots</a>
                 </div>
             </div>
     
-    
-            content: '<div class="infobox">'+
-                           '<h1>'+this.otsikko+'</h1>'+
-                           '<div class="content">'+
-                           '<p>'+this.kuvaus+'</p>'+
-                           '<a class="varauslinkki" target="_blank" href="http://www.varaaheti.fi/twentyknots/">'+"www.varaaheti.fi/twentyknots"+'</a>'+
-                           '</div>'+
-                           '</div>'
-    
             <div class="retki-palkki">
                 <ul>
-                    <li>28.05 &nbsp&nbsp Käärmeluodot</li>
-                    <li>02.06 &nbsp&nbsp SUP & Breakfast</li>
-                    <li>03.06 &nbsp&nbsp Tammisalo</li>
-                    <li>15.06 &nbsp&nbsp Porkkala</li>
-                    <li>24.06 &nbsp&nbsp Midnight SUP</li>
-                    <li>01.07 &nbsp&nbsp Suvisaaristo</li>
-                    <li>12.07 &nbsp&nbsp Siuntio</li>
-                    <li>19.07 &nbsp&nbsp Villinki</li>
+                    <li class="header">Tulevat retket: </li>
+                    <li class="item open" nimi="Käärmeluodot" bold="false">28.05 &nbsp&nbsp Käärmeluodot</li>
+                    <li class="item open" nimi="SUP & Breakfast" bold="false">02.06 &nbsp&nbsp SUP & Breakfast</li>
+                    <li class="item open" nimi="Tammisalo" bold="false">03.06 &nbsp&nbsp Tammisalo</li>
+                    <li class="item open" nimi="Porkkala" bold="false">15.06 &nbsp&nbsp Porkkala</li>
+                    <li class="item open" nimi="Midnight SUP" bold="false">24.06 &nbsp&nbsp Midnight SUP</li>
+                    <li class="item open" nimi="Suvisaaristo" bold="false">01.07 &nbsp&nbsp Suvisaaristo</li>
+                    <li class="item open" nimi="Siuntio" bold="false">12.07 &nbsp&nbsp Siuntio</li>
+                    <li class="item open" nimi="Villinki" bold="false">19.07 &nbsp&nbsp Villinki</li>
                 </ul>
             </div>
 </body>

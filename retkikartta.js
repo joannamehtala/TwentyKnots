@@ -621,19 +621,23 @@
  /********************************************************/            
    
         
-    function kuva(otsikko, kuvatiedosto){
+    function kuva(otsikko, kuvatiedosto1, kuvatiedosto2, kuvatiedosto3, kuvatiedosto4){
         this.otsikko = otsikko;
-        this.kuvatiedosto = kuvatiedosto;
+        this.kuvatiedosto1 = kuvatiedosto1;
+        this.kuvatiedosto2 = kuvatiedosto2;
+        this.kuvatiedosto3 = kuvatiedosto3;
+        this.kuvatiedosto4 = kuvatiedosto4;
 
         this.avaaKuvaWindow = function(map, marker){
             
             var ikkuna = document.getElementById("kuva-ikkuna");
-            var kuvat = ikkuna.getElementsByTagName("img");    
-            console.log(kuvat);    
-            for(var i=1; i<kuvat.length; i++){
-                var kuva = kuvat[i];
-                $(kuva).attr(("src"), this.kuvatiedosto);
-            }
+            var kuvat = ikkuna.getElementsByTagName("img");        
+            $(kuvat[1]).attr(("src"), this.kuvatiedosto1);
+            $(kuvat[2]).attr(("src"), this.kuvatiedosto2);
+            $(kuvat[3]).attr(("src"), this.kuvatiedosto3);
+            $(kuvat[4]).attr(("src"), this.kuvatiedosto4);
+            
+           
             
             //$("#pic1").attr("src", searchPic.src);
            
@@ -788,7 +792,7 @@
     var tiedotSuvisaaristo = new tiedot(nimi, kuvaus, kesto, hinta, tarvikkeet, taso, lahto, sis, huom);
     var saaSuvisaaristo = new saa("Sää: Suvisaaristo", "Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.<p>Sääpalvelun tarjoaa Foreca</p>");
     var kalenteriSuvisaaristo = new kalenteri("Tulevat retket Suvisaaristoon", "21.5.2015 klo 17:00-20:00");
-    var kuvaSuvisaaristo = new kuva("Kuvia retkiltä Suvisaaristoon", "images/supyoga.jpg");
+    var kuvaSuvisaaristo = new kuva("Kuvia Siuntiosta", "images/siuntio2.jpg", "images/siuntio3.jpg", "images/siuntio4.jpg", "images/siuntio5.jpg"); 
 
         
     var suvisaaristo = new retki([
@@ -832,8 +836,8 @@
     var huom = "Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.";
     var tiedotKaarmeluodot = new tiedot(nimi, kuvaus, kesto, hinta, tarvikkeet, taso, lahto, sis, huom);
     var saaKaarmeluodot = new saa("Sää: Lauttasaari", "Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.<p>Sääpalvelun tarjoaa Foreca</p>");
-    var kalenteriKaarmeluodot = new kalenteri("Tulevat retket Käärmeluodoille", "Toistaiseksi ei päivämääriä");
-    var kuvaKaarmeluodot = new kuva("Kuvia retkiltä Käärmeluodoille", "images/supyoga.jpg");    
+    var kalenteriKaarmeluodot = new kalenteri("Tulevat retket: ", "Toistaiseksi ei päivämääriä");
+    var kuvaKaarmeluodot = new kuva("Kuvia Siuntiosta", "images/siuntio2.jpg", "images/siuntio3.jpg", "images/siuntio4.jpg", "images/siuntio5.jpg");   
     var kaarmeluodot = new retki([    
     
         new google.maps.LatLng(60.15459937355298, 24.872617721557617),
@@ -874,8 +878,8 @@
     var huom = " Retkillämme on säävaraus. Ilmoitamme kahta päivää ennen mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.";
     var tiedotMidnight = new tiedot(nimi, kuvaus, kesto, hinta, tarvikkeet, taso, lahto, sis, huom);
     var saaMidnight = new saa("Sää: Etelä-Helsinki", "Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.<p>Sääpalvelun tarjoaa Foreca</p>");
-    var kalenteriMidnight = new kalenteri("Tulevat retket: Midnight SUP / Eira - Töölönlahti", "Toistaiseksi ei päivämääriä");
-    var kuvaMidnight = new kuva("Kuvia Midnight-retkiltä", "images/supyoga.jpg");    
+    var kalenteriMidnight = new kalenteri("Tulevat retket: ", "Toistaiseksi ei päivämääriä");
+    var kuvaMidnight = new kuva("Kuvia Siuntiosta", "images/siuntio2.jpg", "images/siuntio3.jpg", "images/siuntio4.jpg", "images/siuntio5.jpg");   
     var midnight = new retki([    
     
         new google.maps.LatLng(60.153809143552216, 24.93570327758789),
@@ -920,8 +924,8 @@
     var huom = "Retkillämme on säävaraus. Voit tiedustella varauksen yhteydessä kyytiä Munkkiniemestä, ota aamiaista/evästä mukaan retkelle";
     var tiedotVillinki = new tiedot(nimi, kuvaus, kesto, hinta, tarvikkeet, taso, lahto, sis, huom);
     var saaVillinki = new saa("Sää: Etelä-Helsinki", "Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.<p>Sääpalvelun tarjoaa Foreca</p>");
-    var kalenteriVillinki = new kalenteri("Tulevat retket: Midnight SUP / Eira - Töölönlahti", "Toistaiseksi ei päivämääriä");
-    var kuvaVillinki = new kuva("Kuvia Midnight-retkiltä", "images/supyoga.jpg");    
+    var kalenteriVillinki = new kalenteri("Tulevat retket: ", "Toistaiseksi ei päivämääriä");
+    var kuvaVillinki = new kuva("Kuvia Siuntiosta", "images/siuntio2.jpg", "images/siuntio3.jpg", "images/siuntio4.jpg", "images/siuntio5.jpg");   
     var villinki = new retki([  
         
         
@@ -974,7 +978,7 @@
     var tiedotPorkkala = new tiedot(nimi, kuvaus, kesto, hinta, tarvikkeet, taso, lahto, sis, huom);
     var saaPorkkala = new saa("Sää: Etelä-Helsinki", "Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.<p>Sääpalvelun tarjoaa Foreca</p>");
     var kalenteriPorkkala = new kalenteri("Tulevat retket: ", "Toistaiseksi ei päivämääriä");
-    var kuvaPorkkala = new kuva("Kuvia Midnight-retkiltä", "images/supyoga.jpg");    
+    var kuvaPorkkala = new kuva("Kuvia Siuntiosta", "images/siuntio2.jpg", "images/siuntio3.jpg", "images/siuntio4.jpg", "images/siuntio5.jpg");  
     var porkkala = new retki([  
         
         
@@ -1022,8 +1026,8 @@
     var huom = "Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.";
     var tiedotHelsinki = new tiedot(nimi, kuvaus, kesto, hinta, tarvikkeet, taso, lahto, sis, huom);
     var saaHelsinki = new saa("Sää: Etelä-Helsinki", "Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.<p>Sääpalvelun tarjoaa Foreca</p>");
-    var kalenteriHelsinki = new kalenteri("Tulevat retket: Midnight SUP / Eira - Töölönlahti", "Toistaiseksi ei päivämääriä");
-    var kuvaHelsinki = new kuva("Kuvia Midnight-retkiltä", "images/supyoga.jpg");    
+    var kalenteriHelsinki = new kalenteri("Tulevat retket: ", "Toistaiseksi ei päivämääriä");
+    var kuvaHelsinki = new kuva("Kuvia Siuntiosta", "images/siuntio2.jpg", "images/siuntio3.jpg", "images/siuntio4.jpg", "images/siuntio5.jpg");   
     var helsinki = new retki([  
         
         
@@ -1069,8 +1073,8 @@
     var huom = "Retkillämme on säävaraus.";
     var tiedotBreku = new tiedot(nimi, kuvaus, kesto, hinta, tarvikkeet, taso, lahto, sis, huom);
     var saaBreku = new saa("Sää: Etelä-Helsinki", "Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.<p>Sääpalvelun tarjoaa Foreca</p>");
-    var kalenteriBreku = new kalenteri("Tulevat retket: Midnight SUP / Eira - Töölönlahti", "Toistaiseksi ei päivämääriä");
-    var kuvaBreku = new kuva("Kuvia Midnight-retkiltä", "images/supyoga.jpg");    
+    var kalenteriBreku = new kalenteri("Tulevat retket: ", "Toistaiseksi ei päivämääriä");
+    var kuvaBreku = new kuva("Kuvia Siuntiosta", "images/siuntio2.jpg", "images/siuntio3.jpg", "images/siuntio4.jpg", "images/siuntio5.jpg");    
     var breku = new retki([  
         
         
@@ -1114,8 +1118,8 @@
     var huom = " Retkillämme on säävaraus. Ilmoitamme kahta päivää ennen mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.";
     var tiedotSiuntio = new tiedot(nimi, kuvaus, kesto, hinta, tarvikkeet, taso, lahto, sis, huom);
     var saaSiuntio = new saa("Sää: Etelä-Helsinki", "Retkillämme on säävaraus. Ilmoitamme edeltävällä viikolla mikäli retki joudutaan perumaan. Retken toteutumiseen tarvitsemme turvalliset sääolosuhteet.<p>Sääpalvelun tarjoaa Foreca</p>");
-    var kalenteriSiuntio = new kalenteri("Tulevat retket: Midnight SUP / Eira - Töölönlahti", "Toistaiseksi ei päivämääriä");
-    var kuvaSiuntio = new kuva("Kuvia Midnight-retkiltä", "images/supyoga.jpg");    
+    var kalenteriSiuntio = new kalenteri("Tulevat retket: ", "Toistaiseksi ei päivämääriä");
+    var kuvaSiuntio = new kuva("Kuvia Siuntiosta", "images/siuntio2.jpg", "images/siuntio3.jpg", "images/siuntio4.jpg", "images/siuntio5.jpg");    
     var siuntio = new retki([  
         
         new google.maps.LatLng(60.17605646483715, 24.224252700805664),

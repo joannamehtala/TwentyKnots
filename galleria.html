@@ -3,49 +3,41 @@
   <html class="ie">
   <script src="dist/html5shiv.js"></script>
 <![endif]-->
-<!--[if gte IE 9]><!--><html class="no-js"><!--<![endif]-->
+<!--[if gte IE 9]><!--><html><!--<![endif]-->
 
 <!--
-  The comment jumble above is handy for targeting old IE with CSS.
-  http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+	The comment jumble above is handy for targeting old IE with CSS.
+	http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
 -->
+	<head>
+		
+            <meta charset="utf-8">
+          <script src="//use.typekit.net/pwf2wwo.js"></script>
+          <script>try{Typekit.load();}catch(e){}</script>
+          <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,700,900italic' rel='stylesheet' type='text/css'>
+          <title>TwentyKnots SUP- ja Purjelautailuelämyksiä</title>
+          <!-- Please don't add "maximum-scale=1" here. It's bad for accessibility. -->
+          <meta name="viewport" content="width=device-width, initial-scale=1"/>
+         <meta name="description" content="TwentyKnots tarjoaa SUP-melonta eli suppaus retkia ja seikkailuja Helsingin ympärillä.">
+           <meta name="keywords" content="SUP, suppaus, retket, seikkailut, SUP-melonta, stand-up-paddling, twentyknots, Helsinki, Espoo, Kirkkonummi, pääkaupunkiseutu"/>
+          <meta name="Author" content="Joanna Mehtälä, Joel Mikkonen, Mira Matilainen">
 
-<head>
-  <meta charset="utf-8">
-  <script src="//use.typekit.net/pwf2wwo.js"></script>
-  <script>try{Typekit.load();}catch(e){}</script>
-  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,700,900italic' rel='stylesheet' type='text/css'>
-  <title>TwentyKnots SUP- ja Purjelautailuelämyksiä</title>
-  <!-- Please don't add "maximum-scale=1" here. It's bad for accessibility. -->
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
- <meta name="description" content="TwentyKnots tarjoaa SUP-melonta eli suppaus retkia ja seikkailuja Helsingin ympärillä.">
-   <meta name="keywords" content="SUP, suppaus, retket, seikkailut, SUP-melonta, stand-up-paddling, twentyknots, Helsinki, Espoo, Kirkkonummi, pääkaupunkiseutu"/>
-  <meta name="Author" content="Joel Mikkonen">
+          <link rel="stylesheet" href="main.css">
+          <link rel="stylesheet" href="kartta_style.css">
+          <link rel="stylesheet" href="instagram.css">
 
-  <link rel="stylesheet" href="main.css">
-  <link rel="stylesheet" href="kartta_style.css">
+          <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+          <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+          <script src="jquery.scrollTo.min.js"></script>
+          <script src="javascript.js"></script> 
+         <script src="instagram.js"></script>
 
-  
-
-  <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-  <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-  <script src="jquery.scrollTo.min.js"></script>
-  <script src="javascript.js"></script>
-  <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1pEM1hGTESl2YoesdrVnhuWfCdBsvJ78&sensor=false&libraries=places,drawing,geometry">
-  </script>
-    <script src="infobubble.js"></script>
-    <script src="retkikartta.js"></script>
-
-  <!--[if lt IE 9]>
-  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
-  
-</head>
-<img class="bg retket" src="images/bg_retket.jpg" alt="sup-melonta retki">
-<body> 
-
-            <div class="sup-main main-navigation black">
+          <!--[if lt IE 9]>
+          <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+          <![endif]-->
+	</head>
+	<body>
+        <div class="sup-main main-navigation retket black">
                       <a href="index"><img id="main-logo" src="images/twentyknotslogo2015.png" alt="TwentyKnots"/></a>
                       <ul>
                         <li class="closed">
@@ -81,7 +73,12 @@
                         </li>
                         <li>
                           <img class="menu_logo" src="images/mobilelogos2015/infologo.png">
-                          <a href="twentyknots"><h4>twentyknots</h4></a>
+                          <h4>twentyknots</h4>
+                           <ul class="submenu">
+                                 <li><a class="page" href="twentyknots"><h4>tiimi</h4></a></li>
+                                 <li><a class="page" id="sup" href="http://blog.twentyknots.fi/"><h4>blogi</h4></a></li>
+                                 <li><a class="page" href="galleria"><h4>galleria</h4></a></li>
+                          </ul>    
                         </li>
                       </ul>
                   </div>
@@ -109,56 +106,21 @@
 
                       </li>
                       <li class="clear"><a href="yhteystiedot"><h4>yhteystiedot</h4></a></li>
-                      <li class="clear last"><a href="twentyknots"><h4>TwentyKnots</h4></a></li>
+                      <li class="clear last">
+                             <h4>TwentyKnots</h4>
+                             <ul class="submenu">
+                                 <li><a class="page" href="twentyknots"><h4>tiimi</h4></a></li>
+                                 <li><a class="page" id="sup" href="http://blog.twentyknots.fi/"><h4>blogi</h4></a></li>
+                                 <li><a class="page" href="galleria"><h4>galleria</h4></a></li>
+                          </ul>
+                      </li>
                   </ul>
             </div>
-            <div class="sup page_title"></div>
-            
-           <div class="sub-navigation retket">
-                        <h1 class="largeOnDesktop">RETKET</h1>
-                        <ul>
-                          <li class="retket">
-                            <img class="menu_logo" src="images/mobilelogos2015/peoplelogo.png">
-                            <h4 class="largeOnDesktop">tulevat retket</h4>
-                          </li>
-                          <li class="vaativuus">
-                            <img class="menu_logo" src="images/mobilelogos2015/sijaintilogo.png">
-                            <h4 class="largeOnDesktop">retkien vaativuus</h4>
-                          </li>
-                           <li class="reitit">
-                            <img class="menu_logo" src="images/mobilelogos2015/infologo.png">
-                            <h4 class="largeOnDesktop">melontareittejä</h4>
-                          </li>
-                        </ul>
+            <div>.</div>
+    
+            <div class="sup page_title black retket">
+                <h1>Retket</h1>
             </div>
-                        <a class="down_logo full scrollto" href="#retket-anchor">
-                            <img src="images/mobilelogos2015/arrowdownlogowhite.png" alt="arrow logo">
-                        </a>
-
-            <div id="retket-anchor" class="content-wrapper content-page retket">
-                        
-                
-                        <div id="map-canvas"></div>
-                        <div class="retket-container">
-                            <h2>KAUDEN 2015 RETKET</h2>
-                            <h3>12.04.2015  Suvisaaristo</h3>
-                            <h3>19.04.2015  Tammisalo</h3>
-                            <h3>19.04.2015  Tammisalo</h3>
-                            <h3>19.04.2015  Tammisalo</h3>
-                            <h3>19.04.2015  Tammisalo</h3>
-                            <h3>19.04.2015  Tammisalo</h3>
-                            <h3>19.04.2015  Tammisalo</h3>
-                        </div>
-            </div>
-
-</body>
+		     <h1 id="testi">Lataa lisää kuvia</h1>
+	</body>
 </html>
-
-
-
-
-
-
-
-
-                 
